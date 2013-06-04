@@ -1,48 +1,302 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
-            </div>
-        </footer>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+    <script src="~/Scripts/siteScripts/ga.js" async="" type="text/javascript"></script>
+    <script src="~/Scripts/siteScripts/cloudflare.js" async=""></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        window.__CF = window.__CF || {}; window.__CF.AJS = { "ga_key": { "ua": "UA-7078796-5", "ga_bs": "2" } };
+        //]]>
+    </script>
+    <script type="text/javascript">
+        //<![CDATA[
+        try { if (!window.CloudFlare) { var CloudFlare = [{ verbose: 0, p: 0, byc: 0, owlid: "cf", mirage: { responsive: 0, lazy: 0 }, oracle: 0, paths: { cloudflare: "/cdn-cgi/nexp/abv=378448694/" }, atok: "22e6218c5a356bb1c6ed455649b6a8c2", zone: "template-help.com", rocket: "0", apps: { "ga_key": { "ua": "UA-7078796-5", "ga_bs": "2" } } }]; var a = document.createElement("script"), b = document.getElementsByTagName("script")[0]; a.async = !0; a.src = "//ajax.cloudflare.com/cdn-cgi/nexp/abv=4035706501/cloudflare.min.js"; b.parentNode.insertBefore(a, b); } } catch (e) { };
+        //]]>
+    </script>
+    <script src="~/Scripts/siteScripts/jquery-1.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        var J = jQuery.noConflict();
+    </script>
+    <script src="~/Scripts/siteScripts/jquery_002.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/siteScripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" language="javascript">
+        J(document).ready(
+        function () {
+            J('.slideshow').before('<div id="pagination">').cycle({
+                fx: 'fade',
+                timeout: 5000,
+                pager: '#pagination'
+            });
+            J('.new_prod_list')
+            .cycle({
+                fx: 'scrollHorz',
+                speed: 'fast',
+                next: '#next2',
+                prev: '#prev2'
 
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </body>
+            });
+        }
+        );
+        J(function () {
+            J("ul#user_interaction").carouFredSel({
+                items: {
+                    visible: 4,
+                    width: 160
+                },
+                scroll: {
+                    items: 1,
+                    duration: 500
+                },
+                pagination: "#foo3_pag"
+            });
+        });
+    </script>
+    <!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = 'http://livedemo00.template-help.com/magento_34403/js/blank.html';
+    var BLANK_IMG = 'http://livedemo00.template-help.com/magento_34403/js/spacer.gif';
+//]]>
+</script>
+<![endif]-->
+    <!--[if lt IE 7]>
+    <div style=' clear: both; text-align:center; position: relative;'>
+        <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0"  alt="" /></a>
+    </div>
+<![endif]-->
+    <link rel="stylesheet" type="text/css" href="~/content/styles.css" media="all">
+    <link rel="stylesheet" type="text/css" href="~/content/widgets.css" media="all">
+    <link rel="stylesheet" type="text/css" href="~/content/print.css" media="print">
+    <script type="text/javascript" src="~/Scripts/siteScripts/prototype.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/ccard.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/validation.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/builder.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/effects.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/dragdrop.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/controls.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/slider.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/js.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/form.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/menu.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/translate.js"></script>
+    <script type="text/javascript" src="~/Scripts/siteScripts/cookies.js"></script>
+    <!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" href="http://livedemo00.template-help.com/magento_34403/skin/frontend/default/theme042k/css/styles-ie.css" media="all" />
+<![endif]-->
+    <!--[if lt IE 7]>
+<script type="text/javascript" src="http://livedemo00.template-help.com/magento_34403/js/lib/ds-sleight.js"></script>
+<script type="text/javascript" src="http://livedemo00.template-help.com/magento_34403/skin/frontend/base/default/js/ie6.js"></script>
+<![endif]-->
+    <script type="text/javascript">
+        //<![CDATA[
+        Mage.Cookies.path = '/magento_34403';
+        Mage.Cookies.domain = '.livedemo00.template-help.com';
+        //]]>
+    </script>
+    <script type="text/javascript">
+        //<![CDATA[
+        optionalZipCountries = [];
+        //]]>
+    </script>
+    <script type="text/javascript">var Translator = new Translate({ "Please use only letters (a-z or A-Z), numbers (0-9) or underscore(_) in this field, first character should be a letter.": "Please use only letters (a-z or A-Z), numbers (0-9) or underscores (_) in this field, first character must be a letter." });</script>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-7078796-5']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        (function (b) { (function (a) { "__CF" in b && "DJS" in b.__CF ? b.__CF.DJS.push(a) : "addEventListener" in b ? b.addEventListener("load", a, !1) : b.attachEvent("onload", a) })(function () { "FB" in b && "Event" in FB && "subscribe" in FB.Event && (FB.Event.subscribe("edge.create", function (a) { _gaq.push(["_trackSocial", "facebook", "like", a]) }), FB.Event.subscribe("edge.remove", function (a) { _gaq.push(["_trackSocial", "facebook", "unlike", a]) }), FB.Event.subscribe("message.send", function (a) { _gaq.push(["_trackSocial", "facebook", "send", a]) })); "twttr" in b && "events" in twttr && "bind" in twttr.events && twttr.events.bind("tweet", function (a) { if (a) { var b; if (a.target && a.target.nodeName == "IFRAME") a: { if (a = a.target.src) { a = a.split("#")[0].match(/[^?=&]+=([^&]*)?/g); b = 0; for (var c; c = a[b]; ++b) if (c.indexOf("url") === 0) { b = unescape(c.split("=")[1]); break a } } b = void 0 } _gaq.push(["_trackSocial", "twitter", "tweet", b]) } }) }) })(window);
+        /* ]]> */
+    </script>
+</head>
+<body class=" cms-index-index cms-home">
+    <div class="wrapper">
+        <noscript>
+            <div class="noscript">
+                <div class="noscript-inner">
+                    <p><strong>JavaScript seem to be disabled in your browser.</strong></p>
+                    <p>You must have JavaScript enabled in your browser to utilize the functionality of this website.</p>
+                </div>
+            </div>
+        </noscript>
+        <div class="page">
+            <div class="header-container">
+                <div class="header">
+                    <h1 class="logo"><strong>Magento Commerce</strong><a href="http://livedemo00.template-help.com/magento_34403/index.php/" title="Magento Commerce"><img src="~/Images/images/logo.gif" alt="Magento Commerce"></a></h1>
+                    <div class="quick-access">
+                        <p class="welcome-msg">Welcome to our online store!</p>
+                        <form id="search_mini_form" action="http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/result/" method="get">
+                            <div class="form-search">
+                                <label for="search">Search:</label>
+                                <input autocomplete="off" id="search" name="q" value="Search entire store here..." class="input-text" type="text">
+                                <button type="submit" title="Search" class="button"><span><span>Search</span></span></button>
+                                <div style="display: none;" id="search_autocomplete" class="search-autocomplete"></div>
+                                <script type="text/javascript">
+                                    //<![CDATA[
+                                    var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Search entire store here...');
+                                    searchForm.initAutocomplete('http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/ajax/suggest/', 'search_autocomplete');
+                                    //]]>
+                                </script>
+                            </div>
+                        </form>
+                        <ul class="links">
+                            <li class="first"><a href="http://livedemo00.template-help.com/magento_34403/index.php/customer/account/" title="My Account">My Account</a></li>
+                            <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/wishlist/" title="My Wishlist">My Wishlist</a></li>
+                            <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/" title="My Cart" class="top-link-cart">My Cart</a></li>
+                            <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/" title="Checkout" class="top-link-checkout">Checkout</a></li>
+                            <li class=" last"><a href="http://livedemo00.template-help.com/magento_34403/index.php/customer/account/login/" title="Log In">Log In</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-container">
+                        <ul id="nav">
+                             <li id="" class="level0 nav-3 level-top">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts" class="level-top">
+                                    <span>Trang chủ</span>
+                                </a>
+                            </li>
+                            <li id="" class="level0 nav-1 level-top first parent">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories" class="level-top">
+                                    <span>Thời trang nữ</span>
+                                </a>
+                                <ul class="level0">
+                                    <li id="" class="level1 nav-1-1 first">
+                                        <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories/bags">
+                                            <span>Váy</span>
+                                        </a>
+                                    </li>
+                                    <li id="" class="level1 nav-1-2">
+                                        <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories/sunglasses">
+                                            <span>Đồ lót</span>
+                                        </a>
+                                    </li>
+                                    <li id="" class="level1 nav-1-3 last">
+                                        <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories/wallets-money-key-organizers">
+                                            <span>Áo thun &amp; Áo kiểu</span>
+                                        </a>
+                                    </li>
+                                    <li id="" class="level1 nav-1-3 last">
+                                        <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories/wallets-money-key-organizers">
+                                            <span>Khác</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="" class="level0 nav-2 level-top parent">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/activewear" class="level-top">
+                                    <span>Thời trang nam</span>
+                                </a>
+                                <ul class="level0">
+                                    <li id="" class="level1 nav-2-1 first">
+                                        <a href="http://livedemo00.template-help.com/magento_34403/index.php/activewear/men">
+                                            <span>Áo</span>
+                                        </a>
+                                    </li>
+                                    <li id="" class="level1 nav-2-2 last">
+                                        <a href="http://livedemo00.template-help.com/magento_34403/index.php/activewear/women">
+                                            <span>Quần</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="" class="level0 nav-3 level-top">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts" class="level-top">
+                                    <span>Phụ kiện</span>
+                                </a>
+                            </li>
+                            <li id="" class="level0 nav-4 level-top">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/outwear" class="level-top">
+                                    <span>Giới thiệu</span>
+                                </a>
+                            </li>
+                            <li id="" class="level0 nav-5 level-top">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/pajamas" class="level-top">
+                                    <span>Liên hệ</span>
+                                </a>
+                            </li>
+                          <li id="" class="level0 nav-6 level-top">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/jeans-pants" class="level-top">
+                                    <span>Thanh toán</span>
+                                </a>
+                            </li>
+                             @* <li id="" class="level0 nav-7 level-top last">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/sweaters" class="level-top">
+                                    <span>Sweaters</span>
+                                </a>
+                            </li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main-container col1-layout">
+                @RenderBody()
+            </div>
+            <div class="footer-container">
+                <div class="footer">
+                    <ul>
+                        <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/about-magento-demo-store">Giới thiệu</a></li>
+                        <li class="last"><a href="http://livedemo00.template-help.com/magento_34403/index.php/customer-service">Dịch vụ khách hàng</a></li>
+                    </ul>
+                    <ul class="links">
+                        <li class="first"><a href="http://livedemo00.template-help.com/magento_34403/index.php/catalog/seo_sitemap/category/" title="Sơ đồ website">Sơ đồ website</a></li>
+                        <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/term/popular/" title="Tìm kiếm theo từ khóa">Tìm kiếm theo từ khóa</a></li>
+                        <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/advanced/" title="Tìm kiếm nâng cao">Tìm kiếm nâng cao</a></li>
+                        <li class=" last"><a href="http://livedemo00.template-help.com/magento_34403/index.php/contacts/" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <address>
+                        © 2013 Bản quyền lacashop.vn<br>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+            </div>
+        </div>
+    </footer>*@
+
+  @*  @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)*@
+</body>
 </html>

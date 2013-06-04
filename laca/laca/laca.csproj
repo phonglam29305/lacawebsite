@@ -191,6 +191,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\print.css" />
+    <Content Include="Content\styles.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -245,9 +247,53 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\widgets.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\images\banner_sale.jpg" />
+    <Content Include="Images\images\bg.jpg" />
+    <Content Include="Images\images\bg_new_products.jpg" />
+    <Content Include="Images\images\bg_welcome.png" />
+    <Content Include="Images\images\bkg_rating.gif" />
+    <Content Include="Images\images\block-subscribe.gif" />
+    <Content Include="Images\images\block_bg1.gif" />
+    <Content Include="Images\images\block_bg2.gif" />
+    <Content Include="Images\images\btn_edit.gif" />
+    <Content Include="Images\images\btn_remove2.gif" />
+    <Content Include="Images\images\btn_search.gif" />
+    <Content Include="Images\images\btn_shop_now.png" />
+    <Content Include="Images\images\btn_sign_up.gif" />
+    <Content Include="Images\images\btn_trash.gif" />
+    <Content Include="Images\images\button_purple.gif" />
+    <Content Include="Images\images\header.png" />
+    <Content Include="Images\images\icon_link.png" />
+    <Content Include="Images\images\i_availability_only_arrow.gif" />
+    <Content Include="Images\images\i_notice.gif" />
+    <Content Include="Images\images\logo.gif" />
+    <Content Include="Images\images\magnifier_handle.gif" />
+    <Content Include="Images\images\msp1.gif" />
+    <Content Include="Images\images\nav.gif" />
+    <Content Include="Images\images\next.png" />
+    <Content Include="Images\images\pagination.png" />
+    <Content Include="Images\images\pic1.jpg" />
+    <Content Include="Images\images\pic2.jpg" />
+    <Content Include="Images\images\pic3.jpg" />
+    <Content Include="Images\images\pic4.jpg" />
+    <Content Include="Images\images\popular_sm1.jpg" />
+    <Content Include="Images\images\popular_sm2.jpg" />
+    <Content Include="Images\images\popular_sm3.jpg" />
+    <Content Include="Images\images\popular_sm4.jpg" />
+    <Content Include="Images\images\prev.png" />
+    <Content Include="Images\images\price.png" />
+    <Content Include="Images\images\slider_bg.gif" />
+    <Content Include="Images\images\slider_pic1.png" />
+    <Content Include="Images\images\slider_pic2.png" />
+    <Content Include="Images\images\slider_pic3.png" />
+    <Content Include="Images\images\submenu.png" />
+    <Content Include="Images\images\title_new_products.gif" />
+    <Content Include="Images\images\title_popular.gif" />
+    <Content Include="Images\images\top_sp.gif" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -262,6 +308,24 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\siteScripts\builder.js" />
+    <Content Include="Scripts\siteScripts\ccard.js" />
+    <Content Include="Scripts\siteScripts\cloudflare.js" />
+    <Content Include="Scripts\siteScripts\controls.js" />
+    <Content Include="Scripts\siteScripts\cookies.js" />
+    <Content Include="Scripts\siteScripts\dragdrop.js" />
+    <Content Include="Scripts\siteScripts\effects.js" />
+    <Content Include="Scripts\siteScripts\form.js" />
+    <Content Include="Scripts\siteScripts\ga.js" />
+    <Content Include="Scripts\siteScripts\jquery-1.js" />
+    <Content Include="Scripts\siteScripts\jquery.js" />
+    <Content Include="Scripts\siteScripts\jquery_002.js" />
+    <Content Include="Scripts\siteScripts\js.js" />
+    <Content Include="Scripts\siteScripts\menu.js" />
+    <Content Include="Scripts\siteScripts\prototype.js" />
+    <Content Include="Scripts\siteScripts\slider.js" />
+    <Content Include="Scripts\siteScripts\translate.js" />
+    <Content Include="Scripts\siteScripts\validation.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -269,7 +333,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
+    <None Include="Content\Site.css.xx" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />

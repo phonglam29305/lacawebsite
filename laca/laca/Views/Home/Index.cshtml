@@ -1,45 +1,241 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+﻿<div class="main">
+    <div class="col-main">
+        <div class="std">
+            <div class="two_scrollers_block">
+                <div class="big_slideshow_position">
+                    <div id="pagination"><a class="activeSlide" href="#">1</a><a class="" href="#">2</a><a class="" href="#">3</a></div>
+                    <div style="position: relative; width: 761px; height: 561px;" class="slideshow">
+                        <div style="position: absolute; top: 0px; left: 0px; display: block; z-index: 4; opacity: 1; width: 761px; height: 561px;" class="sl_block slide_pic1"><a href="http://livedemo00.template-help.com/magento_34403/index.php/pajamas">&nbsp;</a></div>
+                        <div style="position: absolute; top: 0px; left: 0px; display: none; z-index: 3; opacity: 0; width: 761px; height: 561px;" class="sl_block slide_pic2"><a href="http://livedemo00.template-help.com/magento_34403/index.php/outwear">&nbsp;</a></div>
+                        <div style="position: absolute; top: 0px; left: 0px; display: none; z-index: 3; opacity: 0; width: 761px; height: 561px;" class="sl_block slide_pic3"><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts">&nbsp;</a></div>
+                    </div>
+                </div>
+                <div class="new_products_block">
+                    <h2><span>New Products</span></h2>
+                    <a href="#" id="prev2"></a>
+                    <a href="#" id="next2"></a>
+                    <div style="position: relative; width: 250px; height: 477px; overflow: hidden;" class="new_prod_list">
+                        <div style="position: absolute; top: 0px; left: -250px; display: none; z-index: 4; opacity: 1; width: 250px; height: 477px;" class="listed_new_product">
+                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade.html" title="kate spade" class="product-image">
+                                <img src="~/Images/images/pic1.jpg" alt="kate spade" height="336" width="236"></a>
+                            <h3 class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade.html" title="kate spade">kate spade</a></h3>
+                            <div class="descr">New York 'elenore' fringe trim dupioni sheath dress</div>
+                            <div class="new_pr_btn">
+                                <button type="button" title="Add to Cart" class="button btn-cart" onclick="setLocation('http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy8,/product/42/')"><span><span>Add to Cart</span></span></button>
+                            </div>
+                        </div>
+                        <div style="position: absolute; top: 0px; left: -250px; display: none; z-index: 4; opacity: 1; width: 250px; height: 477px;" class="listed_new_product">
+                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade-1.html" title="kate spade" class="product-image">
+                                <img src="~/Images/images/pic2.jpg" alt="kate spade" height="336" width="236"></a>
+                            <h3 class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade-1.html" title="kate spade">kate spade</a></h3>
+                            <div class="descr">new york 'jillian' bow front dress</div>
+                            <div class="new_pr_btn">
+                                <button type="button" title="Add to Cart" class="button btn-cart" onclick="setLocation('http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy8,/product/43/')"><span><span>Add to Cart</span></span></button>
+                            </div>
+                        </div>
+                        <div style="position: absolute; top: 0px; left: -250px; display: none; z-index: 4; opacity: 1; width: 250px; height: 477px;" class="listed_new_product">
+                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade-2.html" title="kate spade" class="product-image">
+                                <img src="~/Images/images/pic3.jpg" alt="kate spade" height="336" width="236"></a>
+                            <h3 class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade-2.html" title="kate spade">kate spade</a></h3>
+                            <div class="descr">new york 'melody' dress</div>
+                            <div class="new_pr_btn">
+                                <button type="button" title="Add to Cart" class="button btn-cart" onclick="setLocation('http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy8,/product/44/')"><span><span>Add to Cart</span></span></button>
+                            </div>
+                        </div>
+                        <div style="position: absolute; top: 0px; left: 0px; display: block; z-index: 5; opacity: 1; width: 250px; height: 477px;" class="listed_new_product">
+                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/js-boutique.html" title="JS Boutique" class="product-image">
+                                <img src="~/Images/images/pic4.jpg" alt="JS Boutique" height="336" width="236"></a>
+                            <h3 class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/js-boutique.html" title="JS Boutique">JS Boutique</a></h3>
+                            <div class="descr">Strapless Dupioni Dress</div>
+                            <div class="new_pr_btn">
+                                <button type="button" title="Add to Cart" class="button btn-cart" onclick="setLocation('http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy8,/product/45/')"><span><span>Add to Cart</span></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom_block">
+                <div class="bottom_left">
+                    <h2 class="title_popular">Sản phẩm bán chạy nhất</h2>
+                    <div class="list_carousel">
+                        <div class="pagination_carousel" id="foo3_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
+                        <div style="position: relative; overflow: hidden; margin: 0px; width: 640px; height: 252px;" class="caroufredsel_wrapper">
+                            <ul style="margin: 0px; float: none; position: absolute; top: 0px; left: 0px; width: 3840px; height: 252px;" id="user_interaction">
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">Ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">Set dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">Lorem ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">Set ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">Ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">Set dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">Lorem ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">Set ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">Ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">Set dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">Lorem ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">Set ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="bottom_left">
+                    <h2 class="title_popular">Sản phẩm mới nhất</h2>
+                    <div class="list_carousel">
+                        <div class="pagination_carousel" id="foo4_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
+                        <div style="position: relative; overflow: hidden; margin: 0px; width: 640px; height: 252px;" class="caroufredsel_wrapper">
+                            <ul style="margin: 0px; float: none; position: absolute; top: 0px; left: 0px; width: 3840px; height: 252px;" id="user_interaction">
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">Ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">Set dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">Lorem ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">Set ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">Ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">Set dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">Lorem ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">Set ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/ipsum-dolor-sit-amet-consectetur.html">Ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-dolor-sit-amet-consectetur.html">Set dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/lorem-ipsum-dolor-sit-amet-consectetur.html">Lorem ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                                <li style="margin-right: 0px;">
+                                    <div class="pop_price">$ 245.89</div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">
+                                        <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="http://livedemo00.template-help.com/magento_34403/index.php/casual-shirts/set-ipsum-dolor-sit-amet-consectetur.html">Set ipsum dolor sit amet, consectetur.</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="bottom_right" style="border: 2px dashed red">
+                    <div class="banner_sale">
+                        <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories/bags">
+                            <img src="~/Images/images/banner_sale.jpg" alt=""></a>
+                    </div>
+                    <div class="banner_sale">
+                        <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories/bags">
+                            <img src="~/Images/images/banner_sale.jpg" alt=""></a>
+                    </div>
+                    <div class="banner_sale">
+                        <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories/bags">
+                            <img src="~/Images/images/banner_sale.jpg" alt=""></a>
+                    </div>
+                    <div class="block-subscribe">
+                        <div class="subs_slogan">
+                            Want to be the first to know<br>
+                            about our amazing special offers?
+                        </div>
+                        <div class="subs_title">Sign up to our newsletter!</div>
+                        <form action="http://livedemo00.template-help.com/magento_34403/index.php/newsletter/subscriber/new/" method="post" id="newsletter-validate-detail">
+                            <div class="block-content">
+                                <label for="newsletter">E-mail address</label>
+                                <div class="input-box">
+                                    <input name="email" id="newsletter" title="Sign up for our newsletter" class="input-text required-entry validate-email" type="text">
+                                </div>
+                                <div class="actions">
+                                    <button type="submit" title="Subscribe" class="button"><span><span>Subscribe</span></span></button>
+                                </div>
+                            </div>
+                        </form>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+                            //]]>
+                        </script>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
+    </div>
+</div>
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
-
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
