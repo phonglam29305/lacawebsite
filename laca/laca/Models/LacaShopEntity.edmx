@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LacaShopModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="LacaShopModelStoreContainer">
+          <EntitySet Name="tbl_Customers" EntityType="LacaShopModel.Store.tbl_Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_ImportDetail" EntityType="LacaShopModel.Store.tbl_ImportDetail" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Imports" EntityType="LacaShopModel.Store.tbl_Imports" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_ItemGroup" EntityType="LacaShopModel.Store.tbl_ItemGroup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Items" EntityType="LacaShopModel.Store.tbl_Items" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_ItemType" EntityType="LacaShopModel.Store.tbl_ItemType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_OrderDetail" EntityType="LacaShopModel.Store.tbl_OrderDetail" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Orders" EntityType="LacaShopModel.Store.tbl_Orders" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_SystemContent" EntityType="LacaShopModel.Store.tbl_SystemContent" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_tbl_ImportDetail_tbl_Imports" Association="LacaShopModel.Store.FK_tbl_ImportDetail_tbl_Imports">
+            <End Role="tbl_Imports" EntitySet="tbl_Imports" />
+            <End Role="tbl_ImportDetail" EntitySet="tbl_ImportDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImportDetail_tbl_Items" Association="LacaShopModel.Store.FK_tbl_ImportDetail_tbl_Items">
+            <End Role="tbl_Items" EntitySet="tbl_Items" />
+            <End Role="tbl_ImportDetail" EntitySet="tbl_ImportDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ItemGroup_tbl_ItemType" Association="LacaShopModel.Store.FK_tbl_ItemGroup_tbl_ItemType">
+            <End Role="tbl_ItemType" EntitySet="tbl_ItemType" />
+            <End Role="tbl_ItemGroup" EntitySet="tbl_ItemGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Items_tbl_ItemGroup" Association="LacaShopModel.Store.FK_tbl_Items_tbl_ItemGroup">
+            <End Role="tbl_ItemGroup" EntitySet="tbl_ItemGroup" />
+            <End Role="tbl_Items" EntitySet="tbl_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OrderDetail_tbl_Items" Association="LacaShopModel.Store.FK_tbl_OrderDetail_tbl_Items">
+            <End Role="tbl_Items" EntitySet="tbl_Items" />
+            <End Role="tbl_OrderDetail" EntitySet="tbl_OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OrderDetail_tbl_Orders" Association="LacaShopModel.Store.FK_tbl_OrderDetail_tbl_Orders">
+            <End Role="tbl_Orders" EntitySet="tbl_Orders" />
+            <End Role="tbl_OrderDetail" EntitySet="tbl_OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Orders_tbl_Customers" Association="LacaShopModel.Store.FK_tbl_Orders_tbl_Customers">
+            <End Role="tbl_Customers" EntitySet="tbl_Customers" />
+            <End Role="tbl_Orders" EntitySet="tbl_Orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Address" Type="nvarchar" MaxLength="550" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="CardID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthDay" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_ImportDetail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ImportID" Type="int" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="Price" Type="decimal" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="29" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tbl_Imports">
+          <Key>
+            <PropertyRef Name="ImportID" />
+          </Key>
+          <Property Name="ImportID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="250" />
+          <Property Name="Supplier" Type="nvarchar" MaxLength="250" />
+          <Property Name="ImportUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImportDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_ItemGroup">
+          <Key>
+            <PropertyRef Name="ItemGroupID" />
+          </Key>
+          <Property Name="ItemGroupID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ItemGroupName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar" MaxLength="550" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="ItemTypeID" Type="int" />
+          <Property Name="IsShow" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Items">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ItemGroupID" Type="int" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="Images" Type="nvarchar(max)" />
+          <Property Name="ViewCount" Type="decimal" />
+          <Property Name="Price" Type="decimal" />
+          <Property Name="DiscountPrice" Type="decimal" />
+          <Property Name="SearchKey" Type="nvarchar" MaxLength="550" />
+          <Property Name="Color" Type="nvarchar" MaxLength="550" />
+          <Property Name="Material" Type="nvarchar" MaxLength="550" />
+          <Property Name="Style" Type="nvarchar" MaxLength="550" />
+          <Property Name="IsHot" Type="bit" />
+          <Property Name="IsShow" Type="bit" Nullable="false" />
+          <Property Name="ItemCount" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_ItemType">
+          <Key>
+            <PropertyRef Name="ItemTypeID" />
+          </Key>
+          <Property Name="ItemTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ItemTypeName" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar" MaxLength="550" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="IsShow" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_OrderDetail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="Price" Type="decimal" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="29" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tbl_Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="DeliveryDate" Type="date" />
+          <Property Name="TotalValue" Type="decimal" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_SystemContent">
+          <Key>
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="PropertyID" Type="int" Nullable="false" />
+          <Property Name="PropertyContent" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_tbl_ImportDetail_tbl_Imports">
+          <End Role="tbl_Imports" Type="LacaShopModel.Store.tbl_Imports" Multiplicity="0..1" />
+          <End Role="tbl_ImportDetail" Type="LacaShopModel.Store.tbl_ImportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Imports">
+              <PropertyRef Name="ImportID" />
+            </Principal>
+            <Dependent Role="tbl_ImportDetail">
+              <PropertyRef Name="ImportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImportDetail_tbl_Items">
+          <End Role="tbl_Items" Type="LacaShopModel.Store.tbl_Items" Multiplicity="0..1" />
+          <End Role="tbl_ImportDetail" Type="LacaShopModel.Store.tbl_ImportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Items">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="tbl_ImportDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ItemGroup_tbl_ItemType">
+          <End Role="tbl_ItemType" Type="LacaShopModel.Store.tbl_ItemType" Multiplicity="0..1" />
+          <End Role="tbl_ItemGroup" Type="LacaShopModel.Store.tbl_ItemGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ItemType">
+              <PropertyRef Name="ItemTypeID" />
+            </Principal>
+            <Dependent Role="tbl_ItemGroup">
+              <PropertyRef Name="ItemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Items_tbl_ItemGroup">
+          <End Role="tbl_ItemGroup" Type="LacaShopModel.Store.tbl_ItemGroup" Multiplicity="0..1" />
+          <End Role="tbl_Items" Type="LacaShopModel.Store.tbl_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ItemGroup">
+              <PropertyRef Name="ItemGroupID" />
+            </Principal>
+            <Dependent Role="tbl_Items">
+              <PropertyRef Name="ItemGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OrderDetail_tbl_Items">
+          <End Role="tbl_Items" Type="LacaShopModel.Store.tbl_Items" Multiplicity="0..1" />
+          <End Role="tbl_OrderDetail" Type="LacaShopModel.Store.tbl_OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Items">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="tbl_OrderDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OrderDetail_tbl_Orders">
+          <End Role="tbl_Orders" Type="LacaShopModel.Store.tbl_Orders" Multiplicity="0..1" />
+          <End Role="tbl_OrderDetail" Type="LacaShopModel.Store.tbl_OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="tbl_OrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Orders_tbl_Customers">
+          <End Role="tbl_Customers" Type="LacaShopModel.Store.tbl_Customers" Multiplicity="0..1" />
+          <End Role="tbl_Orders" Type="LacaShopModel.Store.tbl_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="tbl_Orders">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LacaShopModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="lacashop_dbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Customers" EntityType="LacaShopModel.tbl_Customers" />
+          <EntitySet Name="tbl_ImportDetail" EntityType="LacaShopModel.tbl_ImportDetail" />
+          <EntitySet Name="tbl_Imports" EntityType="LacaShopModel.tbl_Imports" />
+          <EntitySet Name="tbl_ItemGroup" EntityType="LacaShopModel.tbl_ItemGroup" />
+          <EntitySet Name="tbl_Items" EntityType="LacaShopModel.tbl_Items" />
+          <EntitySet Name="tbl_ItemType" EntityType="LacaShopModel.tbl_ItemType" />
+          <EntitySet Name="tbl_OrderDetail" EntityType="LacaShopModel.tbl_OrderDetail" />
+          <EntitySet Name="tbl_Orders" EntityType="LacaShopModel.tbl_Orders" />
+          <AssociationSet Name="FK_tbl_Orders_tbl_Customers" Association="LacaShopModel.FK_tbl_Orders_tbl_Customers">
+            <End Role="tbl_Customers" EntitySet="tbl_Customers" />
+            <End Role="tbl_Orders" EntitySet="tbl_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImportDetail_tbl_Imports" Association="LacaShopModel.FK_tbl_ImportDetail_tbl_Imports">
+            <End Role="tbl_Imports" EntitySet="tbl_Imports" />
+            <End Role="tbl_ImportDetail" EntitySet="tbl_ImportDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ImportDetail_tbl_Items" Association="LacaShopModel.FK_tbl_ImportDetail_tbl_Items">
+            <End Role="tbl_Items" EntitySet="tbl_Items" />
+            <End Role="tbl_ImportDetail" EntitySet="tbl_ImportDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ItemGroup_tbl_ItemType" Association="LacaShopModel.FK_tbl_ItemGroup_tbl_ItemType">
+            <End Role="tbl_ItemType" EntitySet="tbl_ItemType" />
+            <End Role="tbl_ItemGroup" EntitySet="tbl_ItemGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Items_tbl_ItemGroup" Association="LacaShopModel.FK_tbl_Items_tbl_ItemGroup">
+            <End Role="tbl_ItemGroup" EntitySet="tbl_ItemGroup" />
+            <End Role="tbl_Items" EntitySet="tbl_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OrderDetail_tbl_Items" Association="LacaShopModel.FK_tbl_OrderDetail_tbl_Items">
+            <End Role="tbl_Items" EntitySet="tbl_Items" />
+            <End Role="tbl_OrderDetail" EntitySet="tbl_OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OrderDetail_tbl_Orders" Association="LacaShopModel.FK_tbl_OrderDetail_tbl_Orders">
+            <End Role="tbl_Orders" EntitySet="tbl_Orders" />
+            <End Role="tbl_OrderDetail" EntitySet="tbl_OrderDetail" />
+          </AssociationSet>
+          <EntitySet Name="tbl_SystemContent" EntityType="LacaShopModel.tbl_SystemContent" />
+        </EntityContainer>
+        <EntityType Name="tbl_Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CardID" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="BirthDay" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbl_Orders" Relationship="LacaShopModel.FK_tbl_Orders_tbl_Customers" FromRole="tbl_Customers" ToRole="tbl_Orders" />
+        </EntityType>
+        <EntityType Name="tbl_ImportDetail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ImportID" Type="Int32" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="29" Scale="0" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tbl_Imports" Relationship="LacaShopModel.FK_tbl_ImportDetail_tbl_Imports" FromRole="tbl_ImportDetail" ToRole="tbl_Imports" />
+          <NavigationProperty Name="tbl_Items" Relationship="LacaShopModel.FK_tbl_ImportDetail_tbl_Items" FromRole="tbl_ImportDetail" ToRole="tbl_Items" />
+        </EntityType>
+        <EntityType Name="tbl_Imports">
+          <Key>
+            <PropertyRef Name="ImportID" />
+          </Key>
+          <Property Name="ImportID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Notes" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Supplier" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="ImportUser" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ImportDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_ImportDetail" Relationship="LacaShopModel.FK_tbl_ImportDetail_tbl_Imports" FromRole="tbl_Imports" ToRole="tbl_ImportDetail" />
+        </EntityType>
+        <EntityType Name="tbl_ItemGroup">
+          <Key>
+            <PropertyRef Name="ItemGroupID" />
+          </Key>
+          <Property Name="ItemGroupID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemGroupName" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+          <Property Name="OrderID" Type="Int32" DefaultValue="0" />
+          <Property Name="ItemTypeID" Type="Int32" />
+          <NavigationProperty Name="tbl_ItemType" Relationship="LacaShopModel.FK_tbl_ItemGroup_tbl_ItemType" FromRole="tbl_ItemGroup" ToRole="tbl_ItemType" />
+          <NavigationProperty Name="tbl_Items" Relationship="LacaShopModel.FK_tbl_Items_tbl_ItemGroup" FromRole="tbl_ItemGroup" ToRole="tbl_Items" />
+          <Property Type="Boolean" Name="IsShow" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Items">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ItemGroupID" Type="Int32" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="Images" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ViewCount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SearchKey" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+          <Property Name="Color" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+          <Property Name="Material" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+          <Property Name="Style" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+          <Property Name="IsHot" Type="Boolean" />
+          <NavigationProperty Name="tbl_ImportDetail" Relationship="LacaShopModel.FK_tbl_ImportDetail_tbl_Items" FromRole="tbl_Items" ToRole="tbl_ImportDetail" />
+          <NavigationProperty Name="tbl_ItemGroup" Relationship="LacaShopModel.FK_tbl_Items_tbl_ItemGroup" FromRole="tbl_Items" ToRole="tbl_ItemGroup" />
+          <NavigationProperty Name="tbl_OrderDetail" Relationship="LacaShopModel.FK_tbl_OrderDetail_tbl_Items" FromRole="tbl_Items" ToRole="tbl_OrderDetail" />
+          <Property Type="Boolean" Name="IsShow" Nullable="false" />
+          <Property Type="Int32" Name="ItemCount" />
+        </EntityType>
+        <EntityType Name="tbl_ItemType">
+          <Key>
+            <PropertyRef Name="ItemTypeID" />
+          </Key>
+          <Property Name="ItemTypeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemTypeName" Type="String" MaxLength="250" Unicode="true" FixedLength="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_ItemGroup" Relationship="LacaShopModel.FK_tbl_ItemGroup_tbl_ItemType" FromRole="tbl_ItemType" ToRole="tbl_ItemGroup" />
+          <Property Type="Boolean" Name="IsShow" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_OrderDetail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="29" Scale="0" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tbl_Items" Relationship="LacaShopModel.FK_tbl_OrderDetail_tbl_Items" FromRole="tbl_OrderDetail" ToRole="tbl_Items" />
+          <NavigationProperty Name="tbl_Orders" Relationship="LacaShopModel.FK_tbl_OrderDetail_tbl_Orders" FromRole="tbl_OrderDetail" ToRole="tbl_Orders" />
+        </EntityType>
+        <EntityType Name="tbl_Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+          <Property Name="TotalValue" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Status" Type="LacaShopModel.OrderStatus" />
+          <NavigationProperty Name="tbl_Customers" Relationship="LacaShopModel.FK_tbl_Orders_tbl_Customers" FromRole="tbl_Orders" ToRole="tbl_Customers" />
+          <NavigationProperty Name="tbl_OrderDetail" Relationship="LacaShopModel.FK_tbl_OrderDetail_tbl_Orders" FromRole="tbl_Orders" ToRole="tbl_OrderDetail" />
+        </EntityType>
+        <Association Name="FK_tbl_Orders_tbl_Customers">
+          <End Type="LacaShopModel.tbl_Customers" Role="tbl_Customers" Multiplicity="0..1" />
+          <End Type="LacaShopModel.tbl_Orders" Role="tbl_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="tbl_Orders">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImportDetail_tbl_Imports">
+          <End Type="LacaShopModel.tbl_Imports" Role="tbl_Imports" Multiplicity="0..1" />
+          <End Type="LacaShopModel.tbl_ImportDetail" Role="tbl_ImportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Imports">
+              <PropertyRef Name="ImportID" />
+            </Principal>
+            <Dependent Role="tbl_ImportDetail">
+              <PropertyRef Name="ImportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ImportDetail_tbl_Items">
+          <End Type="LacaShopModel.tbl_Items" Role="tbl_Items" Multiplicity="0..1" />
+          <End Type="LacaShopModel.tbl_ImportDetail" Role="tbl_ImportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Items">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="tbl_ImportDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ItemGroup_tbl_ItemType">
+          <End Type="LacaShopModel.tbl_ItemType" Role="tbl_ItemType" Multiplicity="0..1" />
+          <End Type="LacaShopModel.tbl_ItemGroup" Role="tbl_ItemGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ItemType">
+              <PropertyRef Name="ItemTypeID" />
+            </Principal>
+            <Dependent Role="tbl_ItemGroup">
+              <PropertyRef Name="ItemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Items_tbl_ItemGroup">
+          <End Type="LacaShopModel.tbl_ItemGroup" Role="tbl_ItemGroup" Multiplicity="0..1" />
+          <End Type="LacaShopModel.tbl_Items" Role="tbl_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ItemGroup">
+              <PropertyRef Name="ItemGroupID" />
+            </Principal>
+            <Dependent Role="tbl_Items">
+              <PropertyRef Name="ItemGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OrderDetail_tbl_Items">
+          <End Type="LacaShopModel.tbl_Items" Role="tbl_Items" Multiplicity="0..1" />
+          <End Type="LacaShopModel.tbl_OrderDetail" Role="tbl_OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Items">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="tbl_OrderDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OrderDetail_tbl_Orders">
+          <End Type="LacaShopModel.tbl_Orders" Role="tbl_Orders" Multiplicity="0..1" />
+          <End Type="LacaShopModel.tbl_OrderDetail" Role="tbl_OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="tbl_OrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="OrderStatus">
+          <Member Name="Order" Value="1" />
+          <Member Name="Cancel" Value="2" />
+          <Member Name="Delivery" Value="3" />
+        </EnumType>
+        <EnumType Name="SytemContent">
+          <Member Name="About" Value="1" />
+          <Member Name="Contact" Value="2" />
+          <Member Name="DeliveryAndPayment" Value="3" />
+          <Member Name="CustomerServices" Value="4" />
+        </EnumType>
+        <EntityType Name="tbl_SystemContent">
+          <Key>
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Type="LacaShopModel.SytemContent" Name="PropertyID" Nullable="false" />
+          <Property Type="String" Name="PropertyContent" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LacaShopModelStoreContainer" CdmEntityContainer="lacashop_dbEntities">
+          <EntitySetMapping Name="tbl_Customers">
+            <EntityTypeMapping TypeName="LacaShopModel.tbl_Customers">
+              <MappingFragment StoreEntitySet="tbl_Customers">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CardID" ColumnName="CardID" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ImportDetail">
+            <EntityTypeMapping TypeName="LacaShopModel.tbl_ImportDetail">
+              <MappingFragment StoreEntitySet="tbl_ImportDetail">
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+                <ScalarProperty Name="ImportID" ColumnName="ImportID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Imports">
+            <EntityTypeMapping TypeName="LacaShopModel.tbl_Imports">
+              <MappingFragment StoreEntitySet="tbl_Imports">
+                <ScalarProperty Name="ImportID" ColumnName="ImportID" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="ImportUser" ColumnName="ImportUser" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ItemGroup">
+            <EntityTypeMapping TypeName="LacaShopModel.tbl_ItemGroup">
+              <MappingFragment StoreEntitySet="tbl_ItemGroup">
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="ItemGroupID" ColumnName="ItemGroupID" />
+                <ScalarProperty Name="ItemGroupName" ColumnName="ItemGroupName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ItemTypeID" ColumnName="ItemTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Items">
+            <EntityTypeMapping TypeName="LacaShopModel.tbl_Items">
+              <MappingFragment StoreEntitySet="tbl_Items">
+                <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ItemGroupID" ColumnName="ItemGroupID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+                <ScalarProperty Name="SearchKey" ColumnName="SearchKey" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="Style" ColumnName="Style" />
+                <ScalarProperty Name="IsHot" ColumnName="IsHot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ItemType">
+            <EntityTypeMapping TypeName="LacaShopModel.tbl_ItemType">
+              <MappingFragment StoreEntitySet="tbl_ItemType">
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="ItemTypeID" ColumnName="ItemTypeID" />
+                <ScalarProperty Name="ItemTypeName" ColumnName="ItemTypeName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_OrderDetail">
+            <EntityTypeMapping TypeName="LacaShopModel.tbl_OrderDetail">
+              <MappingFragment StoreEntitySet="tbl_OrderDetail">
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Orders">
+            <EntityTypeMapping TypeName="LacaShopModel.tbl_Orders">
+              <MappingFragment StoreEntitySet="tbl_Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SystemContent">
+            <EntityTypeMapping TypeName="LacaShopModel.tbl_SystemContent">
+              <MappingFragment StoreEntitySet="tbl_SystemContent">
+                <ScalarProperty Name="PropertyContent" ColumnName="PropertyContent" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,156 @@
+﻿@model laca.Models.tbl_Items
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tbl_Items</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemID)
+            @Html.ValidationMessageFor(model => model.ItemID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemName)
+            @Html.ValidationMessageFor(model => model.ItemName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemGroupID, "tbl_ItemGroup")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ItemGroupID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ItemGroupID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderID)
+            @Html.ValidationMessageFor(model => model.OrderID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Images)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Images)
+            @Html.ValidationMessageFor(model => model.Images)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ViewCount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ViewCount)
+            @Html.ValidationMessageFor(model => model.ViewCount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DiscountPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DiscountPrice)
+            @Html.ValidationMessageFor(model => model.DiscountPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SearchKey)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SearchKey)
+            @Html.ValidationMessageFor(model => model.SearchKey)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Color)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Color)
+            @Html.ValidationMessageFor(model => model.Color)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Material)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Material)
+            @Html.ValidationMessageFor(model => model.Material)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Style)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Style)
+            @Html.ValidationMessageFor(model => model.Style)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsHot)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsHot)
+            @Html.ValidationMessageFor(model => model.IsHot)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsShow)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsShow)
+            @Html.ValidationMessageFor(model => model.IsShow)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemCount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemCount)
+            @Html.ValidationMessageFor(model => model.ItemCount)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,54 @@
+﻿@model laca.Models.tbl_ItemType
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tbl_ItemType</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemTypeID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemTypeID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemTypeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemTypeName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsShow)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsShow)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

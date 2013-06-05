@@ -5120,7 +5120,7 @@ tr.summary-details-excluded
 .bottom_left
 {
     float: left;
-    width: 630px;
+    width: 100%;
     position: relative;
 }
 
@@ -5131,7 +5131,7 @@ tr.summary-details-excluded
 
 .title_popular
 {
-    background: url(../Images/images/title_popular.gif) no-repeat;
+    background: url(../Images/images/title_popular.gif) repeat-x;
     font-size: 18px;
     color: #000;
     padding: 11px 0 11px 20px;

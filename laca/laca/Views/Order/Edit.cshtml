@@ -1,0 +1,68 @@
+﻿@model laca.Models.tbl_Orders
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tbl_Orders</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderID)
+            @Html.ValidationMessageFor(model => model.OrderID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CustomerID, "tbl_Customers")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CustomerID", String.Empty)
+            @Html.ValidationMessageFor(model => model.CustomerID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateDate)
+            @Html.ValidationMessageFor(model => model.CreateDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DeliveryDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DeliveryDate)
+            @Html.ValidationMessageFor(model => model.DeliveryDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TotalValue)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TotalValue)
+            @Html.ValidationMessageFor(model => model.TotalValue)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

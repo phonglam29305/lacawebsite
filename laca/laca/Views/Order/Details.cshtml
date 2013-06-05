@@ -1,0 +1,50 @@
+﻿@model laca.Models.tbl_Orders
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_Orders</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tbl_Customers.CustomerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tbl_Customers.CustomerName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DeliveryDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeliveryDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TotalValue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalValue)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

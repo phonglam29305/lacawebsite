@@ -1,0 +1,57 @@
+﻿@model laca.Models.tbl_ItemGroup
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_ItemGroup</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemGroupID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemGroupID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemGroupName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemGroupName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tbl_ItemType.ItemTypeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tbl_ItemType.ItemTypeName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsShow)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsShow)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

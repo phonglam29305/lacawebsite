@@ -1,0 +1,23 @@
+﻿@model laca.Models.tbl_SystemContent
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.TextAreaFor(model => model.PropertyContent, new { @id = "PropertyContent" })
+    <script type="text/javascript">
+        CKEDITOR.replace("PropertyContent");
+    </script>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
