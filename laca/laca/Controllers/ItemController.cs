@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using laca.Models;
+using System.Configuration;
+using laca.Utils;
+using System.IO;
 
 namespace laca.Controllers
 {
@@ -49,12 +52,30 @@ namespace laca.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(tbl_Items tbl_items)
+        public ActionResult Create(tbl_Items tbl_items, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                string filesPath = "", full_path = "";
+                if (file != null)
+                {
+                    char DirSeparator = System.IO.Path.DirectorySeparatorChar;
+                    filesPath = ConfigurationManager.AppSettings["ItemImages"];
+                    full_path = Server.MapPath(filesPath).Replace("Item", "");
+                    tbl_items.Images = FileUpload.UploadFile(file, full_path);
+                }
+
                 db.tbl_Items.Add(tbl_items);
                 db.SaveChanges();
+
+                if (file != null)
+                {
+                    string filename = tbl_items.ItemID + "_" + file.FileName.Replace(" ", "_").Replace("-", "_");
+                    tbl_items.Images = FileUpload.UploadFile(file, filename, full_path);
+                    db.Entry(tbl_items).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -117,6 +138,66 @@ namespace laca.Controllers
             db.tbl_Items.Remove(tbl_items);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ViewResult ImageList(int id)
+        {
+            tbl_Items item = db.tbl_Items.Find(id);
+            string path = "~/Images/uploads/"+item.ItemID;
+            path = Server.MapPath(path);
+            List<string> list = new List<string>();
+            if (Directory.Exists(path))
+            {
+                string[] files = Directory.GetFiles(path);
+
+                foreach (string s in files)
+                {
+                    string filename = Path.GetFileName(s);
+                    System.IO.File.Move(s, s.Replace(" ", "_").Replace("-", "_"));
+                    if (filename.ToLower().IndexOf(".jpg") >= 0 || filename.ToLower().IndexOf(".png") >= 0 || filename.ToLower().IndexOf(".gif") >= 0)
+                        list.Add("../../images/uploads/" + item.ItemID + "/" + filename.Replace(" ", "_").Replace("-", "_"));
+
+                }
+            }
+            ViewBag.ImageList = list;
+            return View(item);
+        }
+        //[Authorize]
+        public PartialViewResult AddImages(int id)
+        {
+            var item = db.tbl_Items.Find(id);
+            ViewBag.IDHangHoa = id;
+            return PartialView(item);
+        }
+        [HttpPost]
+        //[Authorize]
+        public ActionResult AddImages(int id, HttpPostedFileBase file)
+        {
+            var item = db.tbl_Items.Find(id);
+            if (ModelState.IsValid)
+            {
+                //HttpPostedFileBase hpf = Request.Files[0] as HttpPostedFileBase;
+
+                if (file != null)
+                {
+                    char DirSeparator = System.IO.Path.DirectorySeparatorChar;
+                    string FilesPath = ConfigurationManager.AppSettings["ItemImages"];
+                    string full_path = Server.MapPath(FilesPath).Replace("Item", "").Replace("AddImages","").Replace(" ", "_").Replace("-", "_")+"\\"+item.ItemID;
+                    FileUpload.UploadFile(file, full_path);
+                }
+                return RedirectToAction("ImageList", new { id = item.ItemID });
+            }
+            return View(item);
+        }
+        //[Authorize]
+        public ActionResult DeleteImage(int id, string image)
+        {
+            string file = Server.MapPath(image.Replace("-", " "));
+            if (System.IO.File.Exists(file))
+                System.IO.File.Delete(file);
+            var item = db.tbl_Items.Find(id);
+            return RedirectToAction("ImageList", new { id = item.ItemID });
+
         }
 
         protected override void Dispose(bool disposing)

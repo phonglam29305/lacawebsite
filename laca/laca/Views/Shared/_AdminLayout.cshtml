@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    @*<script src="~/Scripts/siteScripts/ga.js" async="" type="text/javascript"></script>
+    <script src="~/Scripts/siteScripts/cloudflare.js" async=""></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        window.__CF = window.__CF || {}; window.__CF.AJS = { "ga_key": { "ua": "UA-7078796-5", "ga_bs": "2" } };
+        //]]>
+    </script>
+    <script type="text/javascript">
+        //<![CDATA[
+        try { if (!window.CloudFlare) { var CloudFlare = [{ verbose: 0, p: 0, byc: 0, owlid: "cf", mirage: { responsive: 0, lazy: 0 }, oracle: 0, paths: { cloudflare: "/cdn-cgi/nexp/abv=378448694/" }, atok: "22e6218c5a356bb1c6ed455649b6a8c2", zone: "template-help.com", rocket: "0", apps: { "ga_key": { "ua": "UA-7078796-5", "ga_bs": "2" } } }]; var a = document.createElement("script"), b = document.getElementsByTagName("script")[0]; a.async = !0; a.src = "//ajax.cloudflare.com/cdn-cgi/nexp/abv=4035706501/cloudflare.min.js"; b.parentNode.insertBefore(a, b); } } catch (e) { };
+        //]]>
+    </script>
+    <script src="~/Scripts/siteScripts/jquery-1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/siteScripts/jquery_002.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/siteScripts/jquery.js" type="text/javascript" charset="utf-8"></script>*@
+    <script type="text/javascript" charset="utf-8">
+        var J = jQuery.noConflict();
+    </script>
+    <script type="text/javascript" language="javascript">
+        J(document).ready(
+        function () {
+            J('.slideshow').before('<div id="pagination">').cycle({
+                fx: 'fade',
+                timeout: 5000,
+                pager: '#pagination'
+            });
+            J('.new_prod_list')
+            .cycle({
+                fx: 'scrollHorz',
+                speed: 'fast',
+                next: '#next2',
+                prev: '#prev2'
+
+            });
+        }
+        );
+        J(function () {
+            J("ul#user_interaction1").carouFredSel({
+                items: {
+                    visible: 6,
+                    width: 160
+                },
+                scroll: {
+                    items: 1,
+                    duration: 500
+                },
+                pagination: "#foo1_pag"
+            });
+            J("ul#user_interaction2").carouFredSel({
+                items: {
+                    visible: 6,
+                    width: 160
+                },
+                scroll: {
+                    items: 1,
+                    duration: 500
+                },
+                pagination: "#foo2_pag"
+            });
+            J("ul#user_interaction3").carouFredSel({
+                items: {
+                    visible: 6,
+                    width: 160
+                },
+                scroll: {
+                    items: 1,
+                    duration: 500
+                },
+                pagination: "#foo3_pag"
+            });
+        });
+    </script>
+    <!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = 'http://livedemo00.template-help.com/magento_34403/js/blank.html';
+    var BLANK_IMG = 'http://livedemo00.template-help.com/magento_34403/js/spacer.gif';
+//]]>
+</script>
+<![endif]-->
+    <!--[if lt IE 7]>
+    <div style=' clear: both; text-align:center; position: relative;'>
+        <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0"  alt="" /></a>
+    </div>
+<![endif]-->
+    <link rel="stylesheet" type="text/css" href="~/content/styles.css" media="all">
+    <link rel="stylesheet" type="text/css" href="~/content/widgets.css" media="all">
+    <link rel="stylesheet" type="text/css" href="~/content/print.css" media="print">
+    <script type="text/javascript" src="~/Scripts/SiteScripts/prototype.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/ccard.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/validation.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/builder.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/effects.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/dragdrop.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/controls.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/slider.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScriptsn/js.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/form.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/menu.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/translate.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/cookies.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/product.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/configurable.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/calendar.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/calendar-setup.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" href="http://livedemo00.template-help.com/magento_34403/skin/frontend/default/theme042k/css/styles-ie.css" media="all" />
+<![endif]-->
+    <!--[if lt IE 7]>
+<script type="text/javascript" src="http://livedemo00.template-help.com/magento_34403/js/lib/ds-sleight.js"></script>
+<script type="text/javascript" src="http://livedemo00.template-help.com/magento_34403/skin/frontend/base/default/js/ie6.js"></script>
+<![endif]-->
+    
+</head>
+<body class="catalog-product-view catalog-product-view product-kate-spade">
+    <div class="wrapper">
+        <noscript>
+            <div class="noscript">
+                <div class="noscript-inner">
+                    <p><strong>JavaScript seem to be disabled in your browser.</strong></p>
+                    <p>You must have JavaScript enabled in your browser to utilize the functionality of this website.</p>
+                </div>
+            </div>
+        </noscript>
+        <div class="page">
+            <div class="header-container">
+                <div class="header">
+                    <h1 class="logo"><strong>Magento Commerce</strong><a href="http://livedemo00.template-help.com/magento_34403/index.php/" title="Magento Commerce"><img src="~/Images/images/logo.gif" alt="Magento Commerce"></a></h1>
+                    <div class="quick-access">
+                        <p class="welcome-msg">Chào mừng bạn đến với laca shop!</p>
+                        <form id="search_mini_form" action="http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/result/" method="get">
+                            <div class="form-search">
+                                <label for="search">Tìm kiếm:</label>
+                                <input autocomplete="off" id="search" name="q" value="Tìm kiếm sản phẩm..." class="input-text" type="text">
+                                <button type="submit" title="Tìm kiếm" class="button"><span><span>Tìm kiếm</span></span></button>
+                                <div style="display: none;" id="search_autocomplete" class="search-autocomplete"></div>
+                                <script type="text/javascript">
+                                    //<![CDATA[
+                                    var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Tìm kiếm sản phẩm...');
+                                    searchForm.initAutocomplete('http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/ajax/suggest/', 'search_autocomplete');
+                                    //]]>
+                                </script>
+                            </div>
+                        </form>
+                        <ul class="links">
+                            @*<li class="first"><a href="http://livedemo00.template-help.com/magento_34403/index.php/customer/account/" title="My Account">My Account</a></li>
+                            <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/wishlist/" title="My Wishlist">My Wishlist</a></li>*@
+                            <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/" title="My Cart" class="top-link-cart">Giỏ hàng</a></li>
+                            <li><a href="~/Account/Logout" title="Checkout" class="top-link-checkout">Thoát</a></li>
+                            <li class=" last"><a href="~/Account/Login" title="Log In">Đăng nhập</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-container">
+                        <ul id="nav">
+                            <li id="" class="level0 nav-3 level-top">
+                                <a href="~/" class="level-top">
+                                    <span>Trang chủ</span>
+                                </a>
+                            </li>
+                            <li id="" class="level0 nav-3 level-top">
+                                <a href="~/ItemType" class="level-top">
+                                    <span>Loại sản phẩm</span>
+                                </a>
+                            </li>
+                            <li id="" class="level0 nav-3 level-top">
+                                <a href="~/ItemGroup" class="level-top">
+                                    <span>Nhóm sản phẩm</span>
+                                </a>
+                            </li>
+                            <li id="" class="level0 nav-3 level-top">
+                                <a href="~/Item" class="level-top">
+                                    <span>Sản phẩm</span>
+                                </a>
+                            </li>
+                            <li id="" class="level0 nav-3 level-top">
+                                <a href="~/Order" class="level-top">
+                                    <span>Đơn hàng</span>
+                                </a>
+                            </li>
+                            <li id="" class="level0 nav-3 level-top">
+                                <a href="~/Import" class="level-top">
+                                    <span>Nhập hàng</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main-container col2-right-layout">
+                @RenderBody()
+            </div>
+            <div class="footer-container">
+                <div class="footer">
+                    <ul>
+                        <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/about-magento-demo-store">Giới thiệu</a></li>
+                        <li class="last"><a href="http://livedemo00.template-help.com/magento_34403/index.php/customer-service">Dịch vụ khách hàng</a></li>
+                    </ul>
+                    <ul class="links">
+                        <li class="first"><a href="http://livedemo00.template-help.com/magento_34403/index.php/catalog/seo_sitemap/category/" title="Sơ đồ website">Sơ đồ website</a></li>
+                        <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/term/popular/" title="Tìm kiếm theo từ khóa">Tìm kiếm theo từ khóa</a></li>
+                        <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/advanced/" title="Tìm kiếm nâng cao">Tìm kiếm nâng cao</a></li>
+                        <li class=" last"><a href="http://livedemo00.template-help.com/magento_34403/index.php/contacts/" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <address>
+                        © 2013 Bản quyền lacashop.vn<br>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

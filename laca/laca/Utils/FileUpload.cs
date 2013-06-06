@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 
 
 
-namespace fqtd.Utils
+namespace laca.Utils
 {
     public static class FileUpload
     {

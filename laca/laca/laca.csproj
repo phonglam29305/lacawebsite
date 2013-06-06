@@ -676,8 +676,11 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\siteScripts\builder.js" />
+    <Content Include="Scripts\siteScripts\calendar-setup.js" />
+    <Content Include="Scripts\siteScripts\calendar.js" />
     <Content Include="Scripts\siteScripts\ccard.js" />
     <Content Include="Scripts\siteScripts\cloudflare.js" />
+    <Content Include="Scripts\siteScripts\configurable.js" />
     <Content Include="Scripts\siteScripts\controls.js" />
     <Content Include="Scripts\siteScripts\cookies.js" />
     <Content Include="Scripts\siteScripts\dragdrop.js" />
@@ -689,6 +692,7 @@
     <Content Include="Scripts\siteScripts\jquery_002.js" />
     <Content Include="Scripts\siteScripts\js.js" />
     <Content Include="Scripts\siteScripts\menu.js" />
+    <Content Include="Scripts\siteScripts\product.js" />
     <Content Include="Scripts\siteScripts\prototype.js" />
     <Content Include="Scripts\siteScripts\slider.js" />
     <Content Include="Scripts\siteScripts\translate.js" />
@@ -700,7 +704,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <None Include="Content\Site.css.xx" />
+    <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
@@ -754,9 +758,12 @@
     <Content Include="Views\Order\Edit.cshtml" />
     <Content Include="Views\Order\Delete.cshtml" />
     <Content Include="Views\SystemContent\Edit.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Item\ImageList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

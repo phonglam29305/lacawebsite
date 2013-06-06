@@ -2,24 +2,17 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = "../shared/_AdminLayout.cshtml";
 }
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Create", "Item", FormMethod.Post, new { enctype = "multipart/form-data" })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>tbl_Items</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ItemID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ItemID)
-            @Html.ValidationMessageFor(model => model.ItemID)
-        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ItemName)
@@ -57,7 +50,7 @@
             @Html.LabelFor(model => model.Images)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Images)
+            <input type="file" name="file" />
             @Html.ValidationMessageFor(model => model.Images)
         </div>
 

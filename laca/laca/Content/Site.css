@@ -1,0 +1,66 @@
+﻿
+#giohang
+{
+    font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#giohang th
+{
+    background-color: #5d8711;
+    border: 1px solid #ffffff;
+    padding: 3px 3px 2px 3px;
+    color: White;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+}
+#giohang th a
+{
+    color: Navy;
+    text-decoration: none;
+}
+#giohang th a hover
+{
+    color: red;
+    text-decoration: underline;
+}
+#giohang td
+{
+    font-size: 12px;
+    border: 1px solid #5d8711;
+    padding: 3px 3px 2px 3px;
+    color: #5d8711;
+    line-height: 10px;
+    height: 25px;
+}
+.editor-label
+{
+    float: left;
+    min-height: 30px;
+    width: 20%;
+}
+.editor-field
+{
+    float: left;
+    min-height: 30px;
+    width: 80%;
+}
+.editor-field-htmleditor
+{
+    float: left;
+    min-height: 30px;
+    width: 80%;
+}
+.display-label
+{
+    float: left;
+    min-height: 30px;
+    width: 20%;
+}
+.display-field
+{
+    min-height: 30px;
+    width: 80%;
+}
