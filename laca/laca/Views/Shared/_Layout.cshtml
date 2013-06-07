@@ -52,7 +52,7 @@
                     width: 160
                 },
                 scroll: {
-                    items: 1,
+                    items: 2,
                     duration: 500
                 },
                 pagination: "#foo1_pag"
@@ -63,7 +63,7 @@
                     width: 160
                 },
                 scroll: {
-                    items: 1,
+                    items: 4,
                     duration: 500
                 },
                 pagination: "#foo2_pag"
@@ -74,7 +74,7 @@
                     width: 160
                 },
                 scroll: {
-                    items: 1,
+                    items: 6,
                     duration: 500
                 },
                 pagination: "#foo3_pag"
@@ -94,22 +94,26 @@
         <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0"  alt="" /></a>
     </div>
 <![endif]-->
-    <link rel="stylesheet" type="text/css" href="~/content/styles.css" media="all">
+  <link rel="stylesheet" type="text/css" href="~/content/styles.css" media="all">
     <link rel="stylesheet" type="text/css" href="~/content/widgets.css" media="all">
     <link rel="stylesheet" type="text/css" href="~/content/print.css" media="print">
-    <script type="text/javascript" src="~/Scripts/siteScripts/prototype.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/ccard.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/validation.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/builder.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/effects.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/dragdrop.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/controls.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/slider.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/js.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/form.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/menu.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/translate.js"></script>
-    <script type="text/javascript" src="~/Scripts/siteScripts/cookies.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/prototype.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/ccard.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/validation.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/builder.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/effects.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/dragdrop.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/controls.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/slider.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScriptsn/js.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/form.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/menu.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/translate.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/cookies.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/product.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/configurable.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/calendar.js"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/calendar-setup.js"></script>
     <script src="~/ckeditor/ckeditor.js"></script>
     <!--[if lt IE 8]>
 <link rel="stylesheet" type="text/css" href="http://livedemo00.template-help.com/magento_34403/skin/frontend/default/theme042k/css/styles-ie.css" media="all" />
@@ -221,9 +225,11 @@
                     </div>
                 </div>
             </div>
-            <div class="main-container col1-layout">
+            
+            @*main-container col1-layout<div class="main-container col2-right-layout">*@
                 @RenderBody()
-            </div>
+           
+            
             <div class="footer-container">
                 <div class="footer">
                     <ul>

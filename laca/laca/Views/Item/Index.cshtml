@@ -97,9 +97,10 @@
             @Html.DisplayFor(modelItem => item.ItemCount)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) <br />
+            @Html.ActionLink("Details", "Details", new { id=item.ItemID }) <br />
+            @Html.ActionLink("Delete", "Delete", new { id=item.ItemID })<br />
+            @Html.ActionLink("Images", "ImageList", new { id=item.ItemID })
         </td>
     </tr>
 }

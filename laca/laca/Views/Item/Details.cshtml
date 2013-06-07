@@ -2,29 +2,33 @@
 
 @{
     ViewBag.Title = Model.ItemName;
-    Layout = "../shared/_AdminLayout.cshtml";
+    if (User.Identity.IsAuthenticated)
+    {
+        Layout = "../shared/_AdminLayout.cshtml";
+    }
+    laca.Models.lacashop_dbEntities db = new laca.Models.lacashop_dbEntities();
 }
-
-<div class="main">
-    <div class="breadcrumbs">
-        <ul>
-            <li class="product">
-                <a href="~/" title="Trang chủ">Trang chủ</a>
-                <span>&gt; </span>
-            </li>
-            <li class="product">
-                 <a href="~/Item/ItemByType/@Model.tbl_ItemGroup.ItemTypeID" title="@Model.tbl_ItemGroup.tbl_ItemType.ItemTypeName"><strong>@Model.tbl_ItemGroup.tbl_ItemType.ItemTypeName</strong></a>
-                <span>&gt; </span>
-            </li>
-             <li class="product">
-                 <a href="~/Item/ItemByType/@Model.ItemGroupID" title="@Model.tbl_ItemGroup.ItemGroupName"><strong>@Model.tbl_ItemGroup.ItemGroupName</strong></a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-main">
-        <div id="messages_product_view"></div>
-        <div class="product-view">
-            <div class="product-essential">
+<div class="main-container col2-right-layout">
+    <div class="main">
+        <div class="breadcrumbs">
+            <ul>
+                <li class="product">
+                    <a href="~/" title="Trang chủ">Trang chủ</a>
+                    <span>&gt; </span>
+                </li>
+                <li class="product">
+                    <a href="~/Item/ItemByType/@Model.tbl_ItemGroup.ItemTypeID" title="@Model.tbl_ItemGroup.tbl_ItemType.ItemTypeName"><strong>@Model.tbl_ItemGroup.tbl_ItemType.ItemTypeName</strong></a>
+                    <span>&gt; </span>
+                </li>
+                <li class="product">
+                    <a href="~/Item/ItemByType/@Model.ItemGroupID" title="@Model.tbl_ItemGroup.ItemGroupName"><strong>@Model.tbl_ItemGroup.ItemGroupName</strong></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-main">
+            <div id="messages_product_view"></div>
+            <div class="product-view">
+                <div class="product-essential">
                     <div class="no-display">
                         <input name="product" value="43" type="hidden">
                         <input name="related_product" id="related-products-field" value="" type="hidden">
@@ -34,20 +38,24 @@
                             <h1>@Model.ItemName</h1>
                         </div>
                         <p class="email-friend"><a href="">Chia sẽ trên Facebook</a></p>
-                        
+
                         <div class="price-box">
                             <span class="regular-price" id="product-price-43">
                                 <span class="price">@Model.Price.Value.ToString("###,#")</span> </span>
                         </div>
-                        <p class="availability in-stock">Trạng thái: 
+                        <p class="availability in-stock">
+                            Trạng thái: 
                             @{
-                                if (Model.ItemCount > 0){
-                                    <span>Còn hàng</span>
-                            }
-                                else{
-                                    <span>Hết hàng</span>
+                                if (Model.ItemCount > 0)
+                                {
+                                <span>Còn hàng</span>
                                 }
-                            }</span></p>
+                                else
+                                {
+                                <span>Hết hàng</span>
+                                }
+                            }</span>
+                        </p>
                         <div class="clear"></div>
                         <div class="add-to-box">
                             <div class="add-to-cart">
@@ -55,7 +63,7 @@
                                 <input name="qty" id="qty" maxlength="12" value="1" title="Qty" class="input-text qty" type="text">
                                 <button type="button" title="Thêm vào giỏ hàng" style="background-color: black" class="button btn-cart" onclick=""><span><span>Thêm vào giỏ hàng</span></span></button>
                             </div>
-                           @* <span class="or">OR</span>
+                            @* <span class="or">OR</span>
                             <ul class="add-to-links">
                                 <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/wishlist/index/add/product/43/" onclick="productAddToCartForm.submitLight(this, 'http://livedemo00.template-help.com/magento_34403/index.php/wishlist/index/add/product/43/'); return false;" class="link-wishlist">Add to Wishlist</a></li>
                                 <li><span class="separator">|</span> <a href="http://livedemo00.template-help.com/magento_34403/index.php/catalog/product_compare/add/product/43/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy9pbmRleC5waHAva2F0ZS1zcGFkZS0xLmh0bWw,/" class="link-compare">Add to Compare</a></li>
@@ -70,7 +78,7 @@
                         <p class="product-image product-image-zoom">
                             <img style="width: 265px; left: 0px; top: 0px;" id="image" src="~/Images/Uploads/@Model.Images" alt="kate spade" title="kate spade">
                         </p>
-                        <p class="zoom-notice" id="track_hint">Double click on above image to view full picture</p>
+                        <p class="zoom-notice" id="track_hint">Nhấn chuột 2 lần để xem hình lớn hơn</p>
                         <div class="zoom">
                             <img id="zoom_out" src="~/Images/Images/slider_btn_zoom_out.gif" alt="Zoom Out" title="Zoom Out" class="btn-zoom-out">
                             <div id="track">
@@ -86,7 +94,7 @@
                             });
                             //]]>
                         </script>
-                        <div class="more-views">
+                        @*<div class="more-views">
                             <h2>Xem thêm</h2>
                             <ul>
                                 <li>
@@ -94,323 +102,188 @@
                                         <img src="kate%20spade_files/pic2_002.jpg" alt="" height="68" width="68"></a>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="clearer"></div>
-                
-            </div>
-            <div class="product-collateral">
-                <div class="box-collateral box-description">
-                    <h2>Chi tiết sản phẩm</h2>
-                    <div class="std">
-                        @Model.Description
-                    </div>
-                </div>
-                <div class="box-collateral box-additional">
-                    <h2>Thông tin thêm</h2>
-                    <table class="data-table" id="product-attribute-specs-table">
-                        <colgroup>
-                            <col width="25%">
-                            <col>
-                        </colgroup>
-                        <tbody>
-                            <tr class="first last odd">
-                                <th class="label">Kiểu dáng</th>
-                                <td class="data last">@Model.Style</td>
-                            </tr>
-                            <tr class="first last odd">
-                                <th class="label">Chất liệu</th>
-                                <td class="data last">@Model.Material</td>
-                            </tr>
-                            <tr class="first last odd">
-                                <th class="label">Màu sắc</th>
-                                <td class="data last">@Model.Color</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
-                </div>
-                <div class="box-collateral box-up-sell">
-                    <h2>You may also be interested in the following product(s)</h2>
-                    <ul class="products-grid" id="upsell-product-table">
-                        <li class="item">
-                            <div class="price-box">
-                                <span class="regular-price" id="product-price-42-upsell">
-                                    <span class="price">$299.00</span> </span>
+                        </div>*@
+                        @{
+                            string path = "~/Images/uploads/" + Model.ItemID;
+                            path = Server.MapPath(path);
+                            List<string> list = new List<string>();
+                            if (Directory.Exists(path))
+                            {
+                                string[] files = Directory.GetFiles(path);
+
+                                foreach (string s in files)
+                                {
+                                    string filename = Path.GetFileName(s);
+                                    System.IO.File.Move(s, s.Replace(" ", "_").Replace("-", "_"));
+                                    if (filename.ToLower().IndexOf(".jpg") >= 0 || filename.ToLower().IndexOf(".png") >= 0 || filename.ToLower().IndexOf(".gif") >= 0)
+                                    {
+                                        list.Add("../../images/uploads/" + Model.ItemID + "/" + filename.Replace(" ", "_").Replace("-", "_"));
+                                    }
+                                }
+                                if (list.Count > 0)
+                                {
+                            <div class="more-views">
+                                <h2>Xem thêm</h2>
+                                <ul>
+                                    @foreach (var image in list)
+                                    {
+                                        <li>
+                                            <a href="#" onclick="', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="">
+                                                <img src="@image" alt="" height="68" width="68"></a>
+                                        </li>
+                                    }
+
+                                </ul>
                             </div>
-                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade.html" title="kate spade" class="product-image">
-                                <img src="kate%20spade_files/pic1.jpg" alt="kate spade" height="197" width="150"></a>
-                            <h3 class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade.html" title="kate spade">kate spade</a></h3>
-                        </li>
-                        <li class="item">
-                            <div class="price-box">
-                                <span class="regular-price" id="product-price-44-upsell">
-                                    <span class="price">$159.00</span> </span>
-                            </div>
-                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade-2.html" title="kate spade" class="product-image">
-                                <img src="kate%20spade_files/pic3_002.jpg" alt="kate spade" height="197" width="150"></a>
-                            <h3 class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade-2.html" title="kate spade">kate spade</a></h3>
-                        </li>
-                        <li class="item">
-                            <div class="price-box">
-                                <span class="regular-price" id="product-price-45-upsell">
-                                    <span class="price">$399.00</span> </span>
-                            </div>
-                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/js-boutique.html" title="JS Boutique" class="product-image">
-                                <img src="kate%20spade_files/pic4_002.jpg" alt="JS Boutique" height="197" width="150"></a>
-                            <h3 class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/js-boutique.html" title="JS Boutique">JS Boutique</a></h3>
-                        </li>
-                        <li class="empty">&nbsp;</li>
-                    </ul>
-                    <script type="text/javascript">decorateTable('upsell-product-table')</script>
-                </div>
-                <div class="box-collateral box-tags">
-                    <h2>Product Tags</h2>
-                    <form id="addTagForm" action="http://livedemo00.template-help.com/magento_34403/index.php/tag/index/save/product/43/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy9pbmRleC5waHAva2F0ZS1zcGFkZS0xLmh0bWw,/" method="get">
-                        <div class="form-add">
-                            <label for="productTagName">Add Your Tags:</label>
-                            <div class="input-box">
-                                <input class="input-text required-entry" name="productTagName" id="productTagName" type="text">
-                            </div>
-                            <button type="button" title="Add Tags" class="button" onclick="submitTagForm()">
-                                <span>
-                                    <span>Add Tags</span>
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                    <p class="note">Use spaces to separate tags. Use single quotes (') for phrases.</p>
-                    <script type="text/javascript">
-                        //<![CDATA[
-                        var addTagFormJs = new VarienForm('addTagForm');
-                        function submitTagForm() {
-                            if (addTagFormJs.validator.validate()) {
-                                addTagFormJs.form.submit();
+                                }
                             }
                         }
-                        //]]>
-                    </script>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            Mage.Cookies.set('external_no_cache', 1);
-        </script>
-    </div>
-    <div class="col-right sidebar">
-        <div class="block block-related">
-            <div class="block-title">
-                <strong><span>Related Products</span></strong>
-            </div>
-            <div class="block-content">
-                <p class="block-subtitle">Check items to add to the cart or&nbsp;<a href="#" onclick="selectAllRelated(this); return false;">select all</a></p>
-                <ol class="mini-products-list" id="block-related">
-                    <li class="item odd">
-                        <input class="checkbox related-checkbox" id="related-checkbox42" name="related_products[]" value="42" type="checkbox">
-                        <div class="product">
-                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade.html" title="kate spade" class="product-image">
-                                <img src="kate%20spade_files/pic1_002.jpg" alt="kate spade" height="130" width="100"></a>
-                            <div class="product-details">
-                                <p class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade.html">kate spade</a></p>
-                                <div class="price-box">
-                                    <span class="regular-price" id="product-price-42-related">
-                                        <span class="price">$299.00</span> </span>
-                                </div>
-                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/wishlist/index/add/product/42/" class="link-wishlist">Add to Wishlist</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="item even">
-                        <input class="checkbox related-checkbox" id="related-checkbox44" name="related_products[]" value="44" type="checkbox">
-                        <div class="product">
-                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade-2.html" title="kate spade" class="product-image">
-                                <img src="kate%20spade_files/pic3.jpg" alt="kate spade" height="130" width="100"></a>
-                            <div class="product-details">
-                                <p class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/kate-spade-2.html">kate spade</a></p>
-                                <div class="price-box">
-                                    <span class="regular-price" id="product-price-44-related">
-                                        <span class="price">$159.00</span> </span>
-                                </div>
-                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/wishlist/index/add/product/44/" class="link-wishlist">Add to Wishlist</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="item last odd">
-                        <input class="checkbox related-checkbox" id="related-checkbox45" name="related_products[]" value="45" type="checkbox">
-                        <div class="product">
-                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/js-boutique.html" title="JS Boutique" class="product-image">
-                                <img src="kate%20spade_files/pic4.jpg" alt="JS Boutique" height="130" width="100"></a>
-                            <div class="product-details">
-                                <p class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/js-boutique.html">JS Boutique</a></p>
-                                <div class="price-box">
-                                    <span class="regular-price" id="product-price-45-related">
-                                        <span class="price">$399.00</span> </span>
-                                </div>
-                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/wishlist/index/add/product/45/" class="link-wishlist">Add to Wishlist</a>
-                            </div>
-                        </div>
-                    </li>
-                </ol>
-                <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
-            </div>
-            <script type="text/javascript">
-                //<![CDATA[
-                $$('.related-checkbox').each(function (elem) {
-                    Event.observe(elem, 'click', addRelatedToProduct)
-                });
-
-                var relatedProductsCheckFlag = false;
-                function selectAllRelated(txt) {
-                    if (relatedProductsCheckFlag == false) {
-                        $$('.related-checkbox').each(function (elem) {
-                            elem.checked = true;
-                        });
-                        relatedProductsCheckFlag = true;
-                        txt.innerHTML = "unselect all";
-                    } else {
-                        $$('.related-checkbox').each(function (elem) {
-                            elem.checked = false;
-                        });
-                        relatedProductsCheckFlag = false;
-                        txt.innerHTML = "select all";
-                    }
-                    addRelatedToProduct();
-                }
-
-                function addRelatedToProduct() {
-                    var checkboxes = $$('.related-checkbox');
-                    var values = [];
-                    for (var i = 0; i < checkboxes.length; i++) {
-                        if (checkboxes[i].checked) values.push(checkboxes[i].value);
-                    }
-                    if ($('related-products-field')) {
-                        $('related-products-field').value = values.join(',');
-                    }
-                }
-                //]]>
-            </script>
-        </div>
-        <div class="block block-cart">
-            <div class="block-title">
-                <strong><span>My Cart</span></strong>
-            </div>
-            <div class="block-content">
-                <p class="empty">You have no items in your shopping cart.</p>
-            </div>
-        </div>
-        <div class="block block-list block-compare">
-            <div class="block-title">
-                <strong><span>Compare Products </span></strong>
-            </div>
-            <div class="block-content">
-                <p class="empty">You have no items to compare.</p>
-            </div>
-        </div>
-        <script type="text/javascript">
-            //<![CDATA[
-            function validatePollAnswerIsSelected() {
-                var options = $$('input.poll_vote');
-                for (i in options) {
-                    if (options[i].checked == true) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            //]]>
-        </script>
-        <div class="block block-poll">
-            <div class="block-title">
-                <strong><span>Community Poll</span></strong>
-            </div>
-            <form id="pollForm" action="http://livedemo00.template-help.com/magento_34403/index.php/poll/vote/add/poll_id/1/" method="post" onsubmit="return validatePollAnswerIsSelected();">
-                <div class="block-content">
-                    <p class="block-subtitle">What is the main reason for you to purchase products online? </p>
-                    <ul id="poll-answers">
-                        <li class="odd">
-                            <input name="vote" class="radio poll_vote" id="vote_1" value="1" type="radio">
-                            <span class="label">
-                                <label for="vote_1">More convenient shipping and delivery </label>
-                            </span>
-                        </li>
-                        <li class="even">
-                            <input name="vote" class="radio poll_vote" id="vote_2" value="2" type="radio">
-                            <span class="label">
-                                <label for="vote_2">Lower price</label></span>
-                        </li>
-                        <li class="odd">
-                            <input name="vote" class="radio poll_vote" id="vote_3" value="3" type="radio">
-                            <span class="label">
-                                <label for="vote_3">Bigger choice</label></span>
-                        </li>
-                        <li class="even">
-                            <input name="vote" class="radio poll_vote" id="vote_4" value="4" type="radio">
-                            <span class="label">
-                                <label for="vote_4">Centralized product search procedure (without having to leave your home)</label></span>
-                        </li>
-                        <li class="odd">
-                            <input name="vote" class="radio poll_vote" id="vote_5" value="5" type="radio">
-                            <span class="label">
-                                <label for="vote_5">Payments security</label></span>
-                        </li>
-                        <li class="even">
-                            <input name="vote" class="radio poll_vote" id="vote_6" value="6" type="radio">
-                            <span class="label">
-                                <label for="vote_6">30-day Money Back Guarantee</label></span>
-                        </li>
-                        <li class="last odd">
-                            <input name="vote" class="radio poll_vote" id="vote_7" value="7" type="radio">
-                            <span class="label">
-                                <label for="vote_7">Other</label></span>
-                        </li>
-                    </ul>
-                    <script type="text/javascript">decorateList('poll-answers');</script>
-                    <div class="actions">
-                        <button type="submit" title="Vote" class="button"><span><span>Vote</span></span></button>
                     </div>
+                    <div class="clearer"></div>
+
                 </div>
-            </form>
-        </div>
-        <div class="block block-tags">
-            <div class="block-title">
-                <strong><span>Popular Tags</span></strong>
-            </div>
-            <div class="block-content">
-                <ul class="tags-list">
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/58/" style="font-size: 98.333333333333%;">actual</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/57/" style="font-size: 75%;">adorable</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/47/" style="font-size: 121.66666666667%;">amaze</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/32/" style="font-size: 98.333333333333%;">change</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/40/" style="font-size: 145%;">consider</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/52/" style="font-size: 75%;">delivery</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/43/" style="font-size: 121.66666666667%;">flexibility</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/39/" style="font-size: 98.333333333333%;">gives</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/48/" style="font-size: 121.66666666667%;">good</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/61/" style="font-size: 75%;">indifferent</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/21/" style="font-size: 98.333333333333%;">keep</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/38/" style="font-size: 121.66666666667%;">made</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/51/" style="font-size: 75%;">phenomenon</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/50/" style="font-size: 75%;">professionally</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/49/" style="font-size: 121.66666666667%;">quality</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/30/" style="font-size: 121.66666666667%;">shows</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/29/" style="font-size: 121.66666666667%;">suit</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/60/" style="font-size: 75%;">things</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/22/" style="font-size: 121.66666666667%;">try</a></li>
-                    <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/product/list/tagId/59/" style="font-size: 75%;">universal</a></li>
-                </ul>
-                <div class="actions">
-                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/tag/list/">View All Tags</a>
+                <div class="product-collateral">
+                    <div class="box-collateral box-description">
+                        <h2>Chi tiết sản phẩm</h2>
+                        <div class="std">
+                            @Model.Description
+                        </div>
+                    </div>
+                    <div class="box-collateral box-additional">
+                        <h2>Thông tin thêm</h2>
+                        <table class="data-table" id="product-attribute-specs-table">
+                            <colgroup>
+                                <col width="25%">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                                <tr class="first last odd">
+                                    <th class="label">Kiểu dáng</th>
+                                    <td class="data last">@Model.Style</td>
+                                </tr>
+                                <tr class="first last odd">
+                                    <th class="label">Chất liệu</th>
+                                    <td class="data last">@Model.Material</td>
+                                </tr>
+                                <tr class="first last odd">
+                                    <th class="label">Màu sắc</th>
+                                    <td class="data last">@Model.Color</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+                    </div>
+                    <div class="box-collateral box-up-sell">
+                        <h2>Sản phẩm cùng loại</h2>
+                        <ul class="products-grid" id="upsell-product-table">
+                            @{
+                                var groupitems = db.tbl_Items.Where(a => a.IsShow && a.ItemGroupID == Model.ItemGroupID).OrderBy(t => Guid.NewGuid()).Take(4);
+                                foreach (var item in groupitems)
+                                {
+                                <li class="item">
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-42-upsell">
+                                            <span class="price">@item.Price.Value.ToString("#,###")</span> </span>
+                                    </div>
+                                    <a href="~/item/details/@item.ItemID" title="@item.ItemName" class="product-image">
+                                        <img src="~/images/uploads/@item.Images" alt="@item.ItemName" height="197" width="150"></a>
+                                    <h3 class="product-name"><a href="~/item/details/@item.ItemID" title="@item.ItemName">@item.ItemName</a></h3>
+                                </li>
+                                }
+                            }
+
+                            <li class="empty">&nbsp;</li>
+                        </ul>
+                        <script type="text/javascript">decorateTable('upsell-product-table')</script>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <div class="paypal-logo">
-            <a href="#" title="Additional Options" onclick="javascript:window.open('https://www.paypal.com/us/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','paypal','width=600,height=350,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;">
-                <img src="kate%20spade_files/bnr_nowAccepting_150x60.gif" alt="Additional Options"></a>
+        <div class="col-right sidebar">
+            <div class="block block-related">
+                <div class="block-title">
+                    <strong><span>Sản phẩm cùng giá</span></strong>
+                </div>
+                <div class="block-content">
+                    <p class="block-subtitle">Chọn sản phẩm để thêm vào giỏ hàng hoặc&nbsp;<a href="#" onclick="selectAllRelated(this); return false;">Chọn tất cả</a></p>
+                    <ol class="mini-products-list" id="block-related">
+                        @{
+                            var items = db.tbl_Items.Where(a => a.IsShow && a.Price >= Model.Price - 50000 && a.Price <= a.Price + 50000).OrderBy(t => Guid.NewGuid()).Take(3);
+                            foreach (var item in items)
+                            {
+                            <li class="item odd">
+                                <input class="checkbox related-checkbox" id="related-checkbox42" name="related_products[]" value="42" type="checkbox">
+                                <div class="product">
+                                    <a href="~/item/details/@item.ItemID" title="@item.ItemName" class="product-image">
+                                        <img src="~/images/uploads/@item.Images" alt="@item.ItemName" height="130" width="100"></a>
+                                    <div class="product-details">
+                                        <p class="product-name"><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
+                                        <div class="price-box">
+                                            <span class="regular-price" id="product-price-42-related">
+                                                <span class="price">@item.Price.Value.ToString("#,###")</span> </span>
+                                        </div>
+                                        <a onclick="addToCard(@item.ItemID)" class="Thêm vào giỏ hàng">Thêm vào giỏ hàng</a>
+                                    </div>
+                                </div>
+                            </li>
+                            }
+                        }
+
+                    </ol>
+                    <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+                </div>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    $$('.related-checkbox').each(function (elem) {
+                        Event.observe(elem, 'click', addRelatedToProduct)
+                    });
+
+                    var relatedProductsCheckFlag = false;
+                    function selectAllRelated(txt) {
+                        if (relatedProductsCheckFlag == false) {
+                            $$('.related-checkbox').each(function (elem) {
+                                elem.checked = true;
+                            });
+                            relatedProductsCheckFlag = true;
+                            txt.innerHTML = "Bỏ chọn tất cả";
+                        } else {
+                            $$('.related-checkbox').each(function (elem) {
+                                elem.checked = false;
+                            });
+                            relatedProductsCheckFlag = false;
+                            txt.innerHTML = "Chọn tất cả";
+                        }
+                        addRelatedToProduct();
+                    }
+
+                    function addRelatedToProduct() {
+                        var checkboxes = $$('.related-checkbox');
+                        var values = [];
+                        for (var i = 0; i < checkboxes.length; i++) {
+                            if (checkboxes[i].checked) values.push(checkboxes[i].value);
+                        }
+                        if ($('related-products-field')) {
+                            $('related-products-field').value = values.join(',');
+                        }
+                    }
+                    //]]>
+                </script>
+            </div>
+            <div class="block block-cart">
+                <div class="block-title">
+                    <strong><span>My Cart</span></strong>
+                </div>
+                <div class="block-content">
+                    <p class="empty">You have no items in your shopping cart.</p>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemID }) |
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ItemID }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+    </p>
+</div>
