@@ -41,16 +41,17 @@ namespace laca.Utils
                 file.SaveAs(Path.Combine(full_path, fileName));
 
                 // Save our thumbnail as well
-                //ResizeImage(file, 150, 100, full_path);
+                //ResizeImage(file, 150, 200, full_path, "list_");
+                //ResizeImage(file, 250, 350, full_path, "hot_");
             }
-            catch (Exception e) { fileName = "Khong dc upload nua roi"+e.Message + "-----" + full_path; }
+            catch (Exception e) { fileName = "Khong dc upload nua roi" + e.Message + "-----" + full_path; }
             // Return the filename
             return fileName;
         }
         public static string UploadFile(HttpPostedFileBase file, string file_name, string full_path)
         {
             //string full_path = "";
-            
+
             try
             {
                 // Check if we have a file
@@ -104,7 +105,7 @@ namespace laca.Utils
             }
         }
 
-        public static void ResizeImage(HttpPostedFileBase file, int width, int height, string full_path)
+        public static void ResizeImage(HttpPostedFileBase file, int width, int height, string full_path, string prefix)
         {
             string thumbnailDirectory = String.Format(@"{0}{1}{2}", full_path, DirSeparator, "Thumbnails");
 
@@ -116,7 +117,7 @@ namespace laca.Utils
             }
 
             // Final path we will save our thumbnail
-            string imagePath = String.Format(@"{0}{1}{2}", thumbnailDirectory, DirSeparator, file.FileName);
+            string imagePath = String.Format(@"{0}{1}{2}", thumbnailDirectory, DirSeparator, prefix + file.FileName);
             // Create a stream to save the file to when we're done resizing
             FileStream stream = new FileStream(imagePath, FileMode.OpenOrCreate);
 

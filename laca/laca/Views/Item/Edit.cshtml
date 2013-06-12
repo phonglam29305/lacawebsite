@@ -5,23 +5,20 @@
     Layout = "../shared/_AdminLayout.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="main-container col2-right-layout">
+    <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @using (Html.BeginForm("Edit", "Item", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(a => a.ItemID)
+        @Html.HiddenFor(a => a.Images)
+        @Html.HiddenFor(a => a.ViewCount)
+        @Html.HiddenFor(a => a.ItemCount)
 
-    <fieldset>
-        <legend>tbl_Items</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ItemID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ItemID)
-            @Html.ValidationMessageFor(model => model.ItemID)
-        </div>
-
+        
         <div class="editor-label">
             @Html.LabelFor(model => model.ItemName)
         </div>
@@ -58,16 +55,8 @@
             @Html.LabelFor(model => model.Images)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Images)
+            <input type="file" name="file" />
             @Html.ValidationMessageFor(model => model.Images)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ViewCount)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ViewCount)
-            @Html.ValidationMessageFor(model => model.ViewCount)
         </div>
 
         <div class="editor-label">
@@ -119,11 +108,25 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IsHot)
+            Sản phẩm hot
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.IsHot)
             @Html.ValidationMessageFor(model => model.IsHot)
+        </div>
+        <div class="editor-label">
+            Sản phẩm mới
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsNew)
+            @Html.ValidationMessageFor(model => model.IsNew)
+        </div>
+        <div class="editor-label">
+            Sản phẩm bán chạy
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsHotDeal)
+            @Html.ValidationMessageFor(model => model.IsHotDeal)
         </div>
 
         <div class="editor-label">
@@ -134,24 +137,17 @@
             @Html.ValidationMessageFor(model => model.IsShow)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ItemCount)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ItemCount)
-            @Html.ValidationMessageFor(model => model.ItemCount)
-        </div>
-
         <p>
             <input type="submit" value="Save" />
         </p>
-    </fieldset>
-}
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

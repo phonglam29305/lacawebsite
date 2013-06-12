@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace TheGioiCover.Utils
+namespace laca.Utils
 {
     public static class QueryExtention
     {

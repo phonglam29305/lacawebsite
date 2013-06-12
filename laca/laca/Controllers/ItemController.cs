@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq.Dynamic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ using laca.Models;
 using System.Configuration;
 using laca.Utils;
 using System.IO;
+using PagedList;
 
 namespace laca.Controllers
 {
@@ -19,11 +21,124 @@ namespace laca.Controllers
         //
         // GET: /Item/
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string Keyword, int? ItemTypeID, int? ItemGroupID, bool? IsHot, bool? IsDiscount, bool? IsNew, bool? IsHotDeal, int page = 1)
         {
-            var tbl_items = db.tbl_Items.Include(t => t.tbl_ItemGroup);
-            return View(tbl_items.ToList());
+            ViewBag.ItemName = (sortOrder == "ItemName") ? "ItemName desc" : "ItemName";
+            ViewBag.ItemTypeName = (sortOrder == "ItemTypeName") ? "ItemTypeName desc" : "ItemTypeName";
+            ViewBag.ItemGroupName = (sortOrder == "ItemGroupName") ? "ItemGroupName desc" : "ItemGroupName";
+            ViewBag.ViewCount = (sortOrder == "ViewCount") ? "ViewCount desc" : "ViewCount";
+            ViewBag.ItemCount = (sortOrder == "ItemCount") ? "ItemCount desc" : "ItemCount";
+
+            if (string.IsNullOrWhiteSpace(sortOrder))
+                sortOrder = "OrderID";
+            ViewBag.CurrentSortOrder = sortOrder;
+
+            var result = from b in db.tbl_Items select b;
+            if (!String.IsNullOrEmpty(Keyword))
+            {
+                result = result.Where(b => b.IsShow && b.ItemName.ToUpper().Contains(Keyword.ToUpper()));
+            }
+            ViewBag.CurrentKeyword = String.IsNullOrEmpty(Keyword) ? "" : Keyword;
+
+            if (ItemTypeID != null)
+                result = result.Where(a => a.tbl_ItemGroup.ItemTypeID == ItemTypeID.Value);
+
+            if (ItemGroupID != null)
+                result = result.Where(a => a.ItemGroupID == ItemGroupID.Value);
+
+            ViewBag.ItemTypeID = db.tbl_ItemType.ToSelectList("ItemTypeID", "ItemTypeName", ItemTypeID);
+            ViewBag.ItemGroupID = db.tbl_ItemGroup.ToSelectList("ItemGroupID", "ItemGroupName", ItemGroupID);
+
+            ViewBag.TypeID = ItemTypeID;
+            ViewBag.GroupID = ItemGroupID;
+
+            if (IsHot != null && IsHot.Value)
+                result = result.Where(a => a.IsHot);
+
+            if (IsNew != null && IsNew.Value)
+                result = result.Where(a => a.IsHot);
+
+            if (IsHotDeal != null && IsHotDeal.Value)
+                result = result.Where(a => a.IsHot);
+
+            if (IsDiscount != null && IsDiscount.Value)
+                result = result.Where(a => a.DiscountPrice > 0);
+
+            ViewBag.IsHot = IsHot;
+            ViewBag.IsDiscount = IsDiscount;
+            ViewBag.IsNew = IsNew;
+            ViewBag.IsHotDeal = IsHotDeal;
+
+            result = result.OrderBy(sortOrder);
+            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["ListItemCount"]);
+            int currentPage = page;
+            ViewBag.CurrentPage = page;
+
+            return View(result.ToPagedList(currentPage, maxRecords));
         }
+
+        public ActionResult ItemByItemType(int id = 0, int page = 1)
+        {
+            var tbl_items = db.tbl_Items.Where(a => a.IsShow && a.tbl_ItemGroup.ItemTypeID == id);
+            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
+            int currentPage = page;
+            ViewBag.CurrentPage = page;
+            tbl_items = tbl_items.OrderBy("OrderID");
+            return View(tbl_items.ToPagedList(currentPage, maxRecords));
+        }
+
+        public ActionResult ItemByItemGroup(int id = 0, int page = 1)
+        {
+            var tbl_items = db.tbl_Items.Where(a => a.IsShow && a.ItemGroupID == id);
+            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
+            tbl_items = tbl_items.OrderBy("OrderID");
+            int currentPage = page;
+            ViewBag.CurrentPage = page;
+            return View(tbl_items.ToPagedList(currentPage, maxRecords));
+        }
+
+        public ActionResult ItemByProperties(string key, int ItemGroupID, int m0_s1_c2 = 0, int page = 1)
+        {
+            IEnumerable<tbl_Items> tbl_items = db.tbl_Items.Where(a => a.IsShow && a.Material.Contains(key));
+            if(m0_s1_c2==1)
+                tbl_items = db.tbl_Items.Where(a => a.IsShow && a.ItemGroupID == ItemGroupID && a.Style.Contains(key));
+            else
+                if (m0_s1_c2 == 2)
+                    tbl_items = db.tbl_Items.Where(a => a.IsShow && a.Color.Contains(key));
+            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
+            tbl_items = tbl_items.OrderBy(a=>a.OrderID);
+            int currentPage = page;
+            ViewBag.CurrentPage = page;
+            switch (m0_s1_c2)
+            {
+                case 0: ViewBag.Title = "Sản phẩm theo chất liệu: "+key; break;
+                case 1: ViewBag.Title = "Sản phẩm theo kiểu dáng: " + key; break;
+                case 2: ViewBag.Title = "Sản phẩm theo màu sắc: " + key; break;
+            }
+            return View(tbl_items.ToPagedList(currentPage, maxRecords));
+        }
+
+        public ActionResult ItemByStyle(string style, int page = 1)
+        {
+            var tbl_items = db.tbl_Items.Where(a => a.IsShow && a.Style.Contains(style));
+            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
+            tbl_items = tbl_items.OrderBy("OrderID");
+            int currentPage = page;
+            ViewBag.CurrentPage = page;
+            return View(tbl_items.ToPagedList(currentPage, maxRecords));
+        }
+
+        public ActionResult ItemByColor(string color, int page = 1)
+        {
+            var tbl_items = db.tbl_Items.Where(a => a.IsShow && a.Color.Contains(color));
+            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
+            tbl_items = tbl_items.OrderBy("OrderID");
+            int currentPage = page;
+            ViewBag.CurrentPage = page;
+            return View(tbl_items.ToPagedList(currentPage, maxRecords));
+        }
+
+
 
         //
         // GET: /Item/Details/5
@@ -102,10 +217,21 @@ namespace laca.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(tbl_Items tbl_items)
+        public ActionResult Edit(tbl_Items tbl_items, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    char DirSeparator = System.IO.Path.DirectorySeparatorChar;
+                    string FilesPath = ConfigurationManager.AppSettings["ItemImages"];
+                    string full_path = Server.MapPath(FilesPath).Replace("Item", "").Replace("Edit", "");
+                    if (tbl_items.Images + "" != "")
+                        FileUpload.DeleteFile(tbl_items.Images, full_path);
+
+                    tbl_items.Images = FileUpload.UploadFile(file, full_path);
+                }
+
                 db.Entry(tbl_items).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -143,7 +269,7 @@ namespace laca.Controllers
         public ViewResult ImageList(int id)
         {
             tbl_Items item = db.tbl_Items.Find(id);
-            string path = "~/Images/uploads/"+item.ItemID;
+            string path = "~/Images/uploads/" + item.ItemID;
             path = Server.MapPath(path);
             List<string> list = new List<string>();
             if (Directory.Exists(path))
@@ -182,7 +308,7 @@ namespace laca.Controllers
                 {
                     char DirSeparator = System.IO.Path.DirectorySeparatorChar;
                     string FilesPath = ConfigurationManager.AppSettings["ItemImages"];
-                    string full_path = Server.MapPath(FilesPath).Replace("Item", "").Replace("AddImages","").Replace(" ", "_").Replace("-", "_")+"\\"+item.ItemID;
+                    string full_path = Server.MapPath(FilesPath).Replace("Item", "").Replace("AddImages", "").Replace(" ", "_").Replace("-", "_") + "\\" + item.ItemID;
                     FileUpload.UploadFile(file, full_path);
                 }
                 return RedirectToAction("ImageList", new { id = item.ItemID });

@@ -5,104 +5,139 @@
     Layout = "../shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="main-container col2-right-layout">
+    <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table id="giohang">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbl_ItemGroup.ItemGroupName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Images)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ViewCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiscountPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SearchKey)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Material)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Style)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemCount)
-        </th>
-        <th>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    @using (Ajax.BeginForm("Index", new
+    {
+        page = ViewBag.CurrentPage,
+        sortOrder = ViewBag.CurrentSortOrder,
+        Keyword = ViewBag.CurrentKeyword
+        ,
+        TypeID = ViewBag.TypeID
+        ,
+        GroupID = ViewBag.GroupID
+        ,
+        IsHot = ViewBag.IsHot
+        ,
+        IsDiscount = ViewBag.IsDiscount
+        ,
+        IsNew = ViewBag.IsNew
+        ,
+        IsHotDeal = ViewBag.IsHotDeal
+    }, new AjaxOptions { UpdateTargetId = "main" }))
+    {
+        <table id="giohang">
+            <tr>
+                <td style="text-align: right">Từ khóa:
+                </td>
+                <td>@Html.TextBox("Keyword", (string)ViewBag.CurrentKeyword, new { id = "KeywordSearch" })
+                </td>
+                <td style="text-align: right">Loại sản phẩm:
+                </td>
+                <td>@Html.DropDownList("ItemTypeID", "-- tất cả --")
+                </td>
+                <td style="text-align: right">Nhà sản xuất:
+                </td>
+                <td>@Html.DropDownList("ItemGroupID", "-- tất cả --")
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">Sản phẩm hot: @Html.CheckBox("IsHot", false)
+                    <br />
+                    Sản phẩm khuyến mãi: @Html.CheckBox("IsDiscount", false)
+                    <br />
+                    Sản phẩm mới: @Html.CheckBox("IsNew", false)
+                    <br />
+                    Sản phẩm bán chạy: @Html.CheckBox("IsHotDeal", false)</td>
+                <td>
+                    <input type="submit" value="Tìm kiếm" />
+                </td>
+            </tr>
+        </table>
+    
+    }
+    <table id="giohang">
+        <tr>
+            <th>
+                @Ajax.ActionLink("Tên sản phẩm", "Index", new { page = ViewBag.CurrentPage, sortOrder = ViewBag.ItemName, Keyword = ViewBag.CurrentKeyword, ItemTypeID = ViewBag.TypeID, ItemGroupID = ViewBag.GroupID, IsHot = ViewBag.IsHot, IsDiscount = ViewBag.IsDiscount, IsNew = ViewBag.IsNew, IsHotDeal = ViewBag.IsHotDeal }, new AjaxOptions { UpdateTargetId = "main" })
+            </th>
+            <th>Nhóm sản phẩm
+            </th>
+            <th>Thứ tự hiển thị
+            </th>
+            <th>Hình ảnh
+            </th>
+            <th>Tổng số lần xem
+            </th>
+            <th>Giá bán
+            </th>
+            <th>Giá khuyến mãi
+            </th>
+            <th>Màu sắc
+            </th>
+            <th>Chất liệu
+            </th>
+            <th>Kiểu dáng
+            </th>
+            <th>Tồn kho
+            </th>
+            <th></th>
+        </tr>
 
-        </th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
 
-@foreach (var item in Model) {
-    <tr>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbl_ItemGroup.ItemGroupName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderID)
-        </td>
-        <td>
-            <img src="~/images/uploads/@item.Images" style="width: 100px;"/>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ViewCount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiscountPrice)
-        </td>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.Color)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Material)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Style)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemCount)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) <br />
-            @Html.ActionLink("Details", "Details", new { id=item.ItemID }) <br />
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemID })<br />
-            @Html.ActionLink("Images", "ImageList", new { id=item.ItemID })
-        </td>
-    </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_ItemGroup.ItemGroupName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderID)
+                </td>
+                <td>
+                    <img src="~/images/uploads/@item.Images" style="width: 100px;"/>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ViewCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiscountPrice)
+                </td>
 
-</table>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Style)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemCount)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
+                    <br />
+                    @Html.ActionLink("Details", "Details", new { id = item.ItemID })
+                    <br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })<br />
+                    @Html.ActionLink("Images", "ImageList", new { id = item.ItemID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @Html.Partial("_Paging")
+</div>

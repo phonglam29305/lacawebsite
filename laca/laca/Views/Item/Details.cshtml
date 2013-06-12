@@ -2,12 +2,47 @@
 
 @{
     ViewBag.Title = Model.ItemName;
+    if (Model.DiscountPrice.Value > 0) { Model.Price = Model.DiscountPrice.Value; }
     if (User.Identity.IsAuthenticated)
     {
         Layout = "../shared/_AdminLayout.cshtml";
     }
     laca.Models.lacashop_dbEntities db = new laca.Models.lacashop_dbEntities();
 }
+<link rel="stylesheet" href="~/Content/multizoom.css" type="text/css" />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+<script type="text/javascript" src="~/Scripts/siteScripts/multizoom.js"></script>
+
+<script type="text/javascript">
+    function resetImage(imageUrl) {
+        jQuery(document).ready(function ($) {
+
+            $('#image').addimagezoom({ // single image zoom
+                zoomrange: [3, 10],
+                magnifiersize: [300, 300],
+                magnifierpos: 'right',
+                cursorshade: true,
+                largeimage: $('#image').src
+            });
+        });
+    }
+    jQuery(document).ready(function ($) {
+
+        $('#image').addimagezoom({ // single image zoom
+            zoomrange: [3, 10],
+            magnifiersize: [300, 300],
+            magnifierpos: 'right',
+            cursorshade: true,
+            largeimage: $('#image').src
+        });
+    });
+    function addItem(id, price) {
+        var url = "../../order/additem?itemid=" + id + "&price=" + price + "&qtty=" + $("quantity").value;
+        window.location.href = url;
+    }
+</script>
 <div class="main-container col2-right-layout">
     <div class="main">
         <div class="breadcrumbs">
@@ -17,11 +52,11 @@
                     <span>&gt; </span>
                 </li>
                 <li class="product">
-                    <a href="~/Item/ItemByType/@Model.tbl_ItemGroup.ItemTypeID" title="@Model.tbl_ItemGroup.tbl_ItemType.ItemTypeName"><strong>@Model.tbl_ItemGroup.tbl_ItemType.ItemTypeName</strong></a>
+                    <a href="~/Item/ItemByItemType/@Model.tbl_ItemGroup.ItemTypeID" title="@Model.tbl_ItemGroup.tbl_ItemType.ItemTypeName"><strong>@Model.tbl_ItemGroup.tbl_ItemType.ItemTypeName</strong></a>
                     <span>&gt; </span>
                 </li>
                 <li class="product">
-                    <a href="~/Item/ItemByType/@Model.ItemGroupID" title="@Model.tbl_ItemGroup.ItemGroupName"><strong>@Model.tbl_ItemGroup.ItemGroupName</strong></a>
+                    <a href="~/Item/ItemByItemGroup/@Model.ItemGroupID" title="@Model.tbl_ItemGroup.ItemGroupName"><strong>@Model.tbl_ItemGroup.ItemGroupName</strong></a>
                 </li>
             </ul>
         </div>
@@ -41,68 +76,26 @@
 
                         <div class="price-box">
                             <span class="regular-price" id="product-price-43">
-                                <span class="price">@Model.Price.Value.ToString("###,#")</span> </span>
+                                <span class="price">@Model.Price.ToString("###,#")</span> </span>
                         </div>
-                        <p class="availability in-stock">
-                            Trạng thái: 
-                            @{
-                                if (Model.ItemCount > 0)
-                                {
-                                <span>Còn hàng</span>
-                                }
-                                else
-                                {
-                                <span>Hết hàng</span>
-                                }
-                            }</span>
-                        </p>
+
                         <div class="clear"></div>
                         <div class="add-to-box">
                             <div class="add-to-cart">
                                 <label for="qty">Số lượng:</label>
-                                <input name="qty" id="qty" maxlength="12" value="1" title="Qty" class="input-text qty" type="text">
-                                <button type="button" title="Thêm vào giỏ hàng" style="background-color: black" class="button btn-cart" onclick=""><span><span>Thêm vào giỏ hàng</span></span></button>
+                                <input name="qty" id="quantity" maxlength="12" value="1" title="Qty" class="input-text qty" type="text">
+                                <button type="button" title="Thêm vào giỏ hàng" style="background-color: black" class="button btn-cart" onclick="addItem(@Model.ItemID, @Model.Price)"><span><span>Thêm vào giỏ hàng</span></span></button>
+
                             </div>
-                            @* <span class="or">OR</span>
-                            <ul class="add-to-links">
-                                <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/wishlist/index/add/product/43/" onclick="productAddToCartForm.submitLight(this, 'http://livedemo00.template-help.com/magento_34403/index.php/wishlist/index/add/product/43/'); return false;" class="link-wishlist">Add to Wishlist</a></li>
-                                <li><span class="separator">|</span> <a href="http://livedemo00.template-help.com/magento_34403/index.php/catalog/product_compare/add/product/43/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy9pbmRleC5waHAva2F0ZS1zcGFkZS0xLmh0bWw,/" class="link-compare">Add to Compare</a></li>
-                            </ul>*@
+
                         </div>
-                        @*<div class="short-description">
-                            <h2>Quick Overview</h2>
-                            <div class="std">new york 'jillian' bow front dress</div>
-                        </div>*@
+
                     </div>
                     <div class="product-img-box">
-                        <p class="product-image product-image-zoom">
+                        <p class="product-image">
                             <img style="width: 265px; left: 0px; top: 0px;" id="image" src="~/Images/Uploads/@Model.Images" alt="kate spade" title="kate spade">
                         </p>
-                        <p class="zoom-notice" id="track_hint">Nhấn chuột 2 lần để xem hình lớn hơn</p>
-                        <div class="zoom">
-                            <img id="zoom_out" src="~/Images/Images/slider_btn_zoom_out.gif" alt="Zoom Out" title="Zoom Out" class="btn-zoom-out">
-                            <div id="track">
-                                <div style="left: 0px;" class="selected" id="handle"></div>
-                            </div>
-                            <img id="zoom_in" src="~/Images/Images/slider_btn_zoom_in.gif" alt="Zoom In" title="Zoom In" class="btn-zoom-in">
-                        </div>
-                        <script type="text/javascript">
-                            //<![CDATA[
-                            Event.observe(window, 'load', function () {
-                                //alert('cuc gach');
-                                product_zoom = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint');
-                            });
-                            //]]>
-                        </script>
-                        @*<div class="more-views">
-                            <h2>Xem thêm</h2>
-                            <ul>
-                                <li>
-                                    <a href="#" onclick="popWin('http://livedemo00.template-help.com/magento_34403/index.php/catalog/product/gallery/id/43/image/123/', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="">
-                                        <img src="kate%20spade_files/pic2_002.jpg" alt="" height="68" width="68"></a>
-                                </li>
-                            </ul>
-                        </div>*@
+
                         @{
                             string path = "~/Images/uploads/" + Model.ItemID;
                             path = Server.MapPath(path);
@@ -125,10 +118,14 @@
                             <div class="more-views">
                                 <h2>Xem thêm</h2>
                                 <ul>
+                                    <li>
+                                        <a href="#" onclick="$('image').src='@Model.Images'; resetImage('@Model.Images');return false;" title="">
+                                            <img src="@Model.Images" alt="" height="68" width="68"></a>
+                                    </li>
                                     @foreach (var image in list)
                                     {
                                         <li>
-                                            <a href="#" onclick="', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="">
+                                            <a href="#" onclick="$('image').src='@image'; resetImage('@image');return false;" title="">
                                                 <img src="@image" alt="" height="68" width="68"></a>
                                         </li>
                                     }
@@ -159,15 +156,15 @@
                             <tbody>
                                 <tr class="first last odd">
                                     <th class="label">Kiểu dáng</th>
-                                    <td class="data last">@Model.Style</td>
+                                    <td class="data last">@Html.ActionLink(Model.Style, "ItemByProperties", new { key = Model.Style, ItemGroupID = Model.ItemGroupID, m0_s1_c2 = 1 })</td>
                                 </tr>
                                 <tr class="first last odd">
                                     <th class="label">Chất liệu</th>
-                                    <td class="data last">@Model.Material</td>
+                                    <td class="data last">@Html.ActionLink(Model.Material, "ItemByProperties", new { key = Model.Material, ItemGroupID = Model.ItemGroupID, m0_s1_c2 = 0 })</td>
                                 </tr>
                                 <tr class="first last odd">
                                     <th class="label">Màu sắc</th>
-                                    <td class="data last">@Model.Color</td>
+                                    <td class="data last">@Html.ActionLink(Model.Color, "ItemByProperties", new { key = Model.Color, ItemGroupID = Model.ItemGroupID, m0_s1_c2 = 2 })</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -183,7 +180,7 @@
                                 <li class="item">
                                     <div class="price-box">
                                         <span class="regular-price" id="product-price-42-upsell">
-                                            <span class="price">@item.Price.Value.ToString("#,###")</span> </span>
+                                            <span class="price">@item.Price.ToString("#,###")</span> </span>
                                     </div>
                                     <a href="~/item/details/@item.ItemID" title="@item.ItemName" class="product-image">
                                         <img src="~/images/uploads/@item.Images" alt="@item.ItemName" height="197" width="150"></a>
@@ -194,7 +191,14 @@
 
                             <li class="empty">&nbsp;</li>
                         </ul>
-                        <script type="text/javascript">decorateTable('upsell-product-table')</script>
+                        <script type="text/javascript">
+                            function addItem(id, price) {
+                                var url = "../../order/additem?itemid=" + id + "&price=" + price + "&qtty=1";
+                                //alert(url);
+                                window.location.href = url;
+                            }
+
+                        </script>
                     </div>
 
                 </div>
@@ -206,14 +210,14 @@
                     <strong><span>Sản phẩm cùng giá</span></strong>
                 </div>
                 <div class="block-content">
-                    <p class="block-subtitle">Chọn sản phẩm để thêm vào giỏ hàng hoặc&nbsp;<a href="#" onclick="selectAllRelated(this); return false;">Chọn tất cả</a></p>
+                    @*<p class="block-subtitle">Chọn sản phẩm để thêm vào giỏ hàng hoặc&nbsp;<a href="#" onclick="selectAllRelated(this); return false;">Chọn tất cả</a></p>*@
                     <ol class="mini-products-list" id="block-related">
                         @{
                             var items = db.tbl_Items.Where(a => a.IsShow && a.Price >= Model.Price - 50000 && a.Price <= a.Price + 50000).OrderBy(t => Guid.NewGuid()).Take(3);
                             foreach (var item in items)
                             {
                             <li class="item odd">
-                                <input class="checkbox related-checkbox" id="related-checkbox42" name="related_products[]" value="42" type="checkbox">
+                                @*<input class="checkbox related-checkbox" id="related-checkbox42" name="related_products[]" value="42" type="checkbox">*@
                                 <div class="product">
                                     <a href="~/item/details/@item.ItemID" title="@item.ItemName" class="product-image">
                                         <img src="~/images/uploads/@item.Images" alt="@item.ItemName" height="130" width="100"></a>
@@ -221,9 +225,24 @@
                                         <p class="product-name"><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
                                         <div class="price-box">
                                             <span class="regular-price" id="product-price-42-related">
-                                                <span class="price">@item.Price.Value.ToString("#,###")</span> </span>
+                                                @if (item.DiscountPrice.Value > 0)
+                                                {
+                                                    <span class="price">@item.DiscountPrice.Value.ToString("#,###")</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="price">@item.Price.ToString("#,###")</span>
+                                                }
+                                            </span>
                                         </div>
-                                        <a onclick="addToCard(@item.ItemID)" class="Thêm vào giỏ hàng">Thêm vào giỏ hàng</a>
+                                        @*@if (item.DiscountPrice.Value > 0)
+                                        {
+                                            <a onclick="addItem(@item.ItemID, @item.DiscountPrice.Value)" class="Thêm vào giỏ hàng">Thêm vào giỏ hàng</a>
+                                        }
+                                        else
+                                        {
+                                            <a onclick="addItem(@item.ItemID, @item.Price)" class="Thêm vào giỏ hàng">Thêm vào giỏ hàng</a>
+                                        }*@
                                     </div>
                                 </div>
                             </li>
@@ -270,20 +289,87 @@
                     //]]>
                 </script>
             </div>
-            <div class="block block-cart">
+            @* <div class="block block-cart">
                 <div class="block-title">
                     <strong><span>My Cart</span></strong>
                 </div>
                 <div class="block-content">
                     <p class="empty">You have no items in your shopping cart.</p>
                 </div>
+            </div>*@
+            <div class="block block-cart">
+                <div class="block-title">
+                    <strong><span>Giỏ hàng</span></strong>
+                </div>
+                <div class="block-content">
+                    <div class="summary">
+                        <p class="amount">There are <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/">2 items</a> in your cart.</p>
+                        <p class="subtotal">
+                            <span class="label">Cart Subtotal:</span> <span class="price">$370.00</span>
+                        </p>
+                    </div>
+                    <div class="actions">
+                        <button type="button" title="Checkout" class="button" onclick="setLocation(&#39;http://livedemo00.template-help.com/magento_34403/index.php/checkout/onepage/&#39;)"><span><span>Checkout</span></span></button>
+                    </div>
+                    <p class="block-subtitle">Recently added item(s)</p>
+                    <ol id="cart-sidebar" class="mini-products-list">
+                        <li class="item odd">
+                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/carhartt-thermal-lined-hooded-pullover-sweatshirt.html" title="Carhartt  Thermal - Lined Hooded Pullover Sweatshirt" class="product-image">
+                                <img src="./Accessories_files/file_1_17.jpg" width="100" height="130" alt="Carhartt  Thermal - Lined Hooded Pullover Sweatshirt"></a>
+                            <div class="product-details">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/delete/id/998/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy9pbmRleC5waHAvYWNjZXNzb3JpZXM,/" title="Remove This Item" onclick="return confirm(&#39;Are you sure you would like to remove this item from the shopping cart?&#39;);" class="btn-remove">Remove This Item</a>
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/configure/id/998/" title="Edit item" class="btn-edit">Edit item</a>
+                                <p class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/carhartt-thermal-lined-hooded-pullover-sweatshirt.html">Carhartt Thermal - Lined Hooded Pullover Sweatshirt</a></p>
+                                <strong>1</strong> x
+                                            <span class="price">$120.00</span>
+                                <div class="truncated" id="">
+                                    <div class="truncated_full_value">
+                                        <dl class="item-options">
+                                            <dt>Color</dt>
+                                            <dd>black </dd>
+                                            <dt>Manufactures</dt>
+                                            <dd>Adidas </dd>
+                                            <dt>Size</dt>
+                                            <dd>Small </dd>
+                                        </dl>
+                                    </div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories#" onclick="return false;" class="details">Details</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item last even">
+                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/oversized-jetset-tote.html" title="Oversized  Jetset Tote" class="product-image">
+                                <img src="./Accessories_files/file_1_6(1).jpg" width="100" height="130" alt="Oversized  Jetset Tote"></a>
+                            <div class="product-details">
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/delete/id/997/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy9pbmRleC5waHAvYWNjZXNzb3JpZXM,/" title="Remove This Item" onclick="return confirm(&#39;Are you sure you would like to remove this item from the shopping cart?&#39;);" class="btn-remove">Remove This Item</a>
+                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/configure/id/997/" title="Edit item" class="btn-edit">Edit item</a>
+                                <p class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/oversized-jetset-tote.html">Oversized Jetset Tote</a></p>
+                                <strong>1</strong> x
+                                            <span class="price">$250.00</span>
+                                <div class="truncated">
+                                    <div class="truncated_full_value">
+                                        <dl class="item-options">
+                                            <dt>Color</dt>
+                                            <dd>black </dd>
+                                            <dt>Manufactures</dt>
+                                            <dd>Adidas </dd>
+                                            <dt>Size </dt>
+                                            <dd>Large </dd>
+                                        </dl>
+                                    </div>
+                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories#" onclick="return false;" class="details">Details</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                    <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
+                </div>
             </div>
-
         </div>
     </div>
 
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ItemID }) |
-    @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index")
     </p>
 </div>

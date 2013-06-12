@@ -2,14 +2,17 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "../shared/_AdminLayout.cshtml";
 }
+
+<div class="main-container col2-right-layout">
 
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
+<table id="giohang">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ItemTypeID)
@@ -55,3 +58,4 @@
 }
 
 </table>
+</div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <title>@ViewBag.Title - lacashop.vn - trung tâm thời trang và phụ kiện</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
@@ -94,7 +94,8 @@
         <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0"  alt="" /></a>
     </div>
 <![endif]-->
-  <link rel="stylesheet" type="text/css" href="~/content/styles.css" media="all">
+    @* <link media="all" href="http://livedemo00.template-help.com/magento_34403/skin/frontend/default/theme042k/css/styles.css" type="text/css" rel="stylesheet">
+ *@<link rel="stylesheet" type="text/css" href="~/content/styles.css" media="all">
     <link rel="stylesheet" type="text/css" href="~/content/widgets.css" media="all">
     <link rel="stylesheet" type="text/css" href="~/content/print.css" media="print">
     <script type="text/javascript" src="~/Scripts/SiteScripts/prototype.js"></script>
@@ -163,10 +164,9 @@
         <div class="page">
             <div class="header-container">
                 <div class="header">
-                    <h1 class="logo"><strong>Magento Commerce</strong><a href="http://livedemo00.template-help.com/magento_34403/index.php/" title="Magento Commerce"><img src="~/Images/images/logo.gif" alt="Magento Commerce"></a></h1>
+                    <h1 class="logo"><strong>lacashopv.vn</strong><a href="~/" title="Magento Commerce"><img src="~/Images/images/logo.gif" alt="Magento Commerce"></a></h1>
                     <div class="quick-access">
                         <p class="welcome-msg">Chào mừng bạn đến với laca shop!</p>
-                        <form id="search_mini_form" action="http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/result/" method="get">
                             <div class="form-search">
                                 <label for="search">Tìm kiếm:</label>
                                 <input autocomplete="off" id="search" name="q" value="Tìm kiếm sản phẩm..." class="input-text" type="text">
@@ -179,12 +179,10 @@
                                     //]]>
                                 </script>
                             </div>
-                        </form>
+                       
                         <ul class="links">
-                            @*<li class="first"><a href="http://livedemo00.template-help.com/magento_34403/index.php/customer/account/" title="My Account">My Account</a></li>
-                            <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/wishlist/" title="My Wishlist">My Wishlist</a></li>*@
-                            <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/" title="My Cart" class="top-link-cart">Giỏ hàng</a></li>
-                            <li><a href="~/Account/Logout" title="Checkout" class="top-link-checkout">Thoát</a></li>
+                            <li><a href="~/" title="My Cart" class="top-link-cart">Giỏ hàng</a></li>
+                            @*<li><a href="~/Account/Logout" title="Checkout" class="top-link-checkout">Thoát</a></li>*@
                             <li class=" last"><a href="~/Account/Login" title="Log In">Đăng nhập</a></li>
                         </ul>
                     </div>
@@ -201,7 +199,7 @@
                                 foreach (var item in itemtype)
                                 {
                                 <li id="" class="level0 nav-1 level-top first parent">
-                                    <a href="~/ItemType/Detail/@item.ItemTypeID" class="level-top">
+                                    <a href="~/Item/ItemByItemType/@item.ItemTypeID" class="level-top">
                                         <span>@item.ItemTypeName</span>
                                     </a>
                                     @{
@@ -210,7 +208,7 @@
                                     {
                                         <ul class="level0">
                                             <li id="" class="level1 nav-1-1 first">
-                                                <a href="~/ItemGroup/Detail/@group.ItemGroupID">
+                                                <a href="~/Item/ItemByItemGroup/@group.ItemGroupID">
                                                     <span>@group.ItemGroupName</span>
                                                 </a>
                                             </li>
@@ -233,14 +231,13 @@
             <div class="footer-container">
                 <div class="footer">
                     <ul>
-                        <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/about-magento-demo-store">Giới thiệu</a></li>
-                        <li class="last"><a href="http://livedemo00.template-help.com/magento_34403/index.php/customer-service">Dịch vụ khách hàng</a></li>
+                        <li><a href="~/home/systemcontent/1">Giới thiệu</a></li>
+                        <li class="last"><a href="~/home/systemcontent/4">Dịch vụ khách hàng</a></li>
                     </ul>
                     <ul class="links">
-                        <li class="first"><a href="http://livedemo00.template-help.com/magento_34403/index.php/catalog/seo_sitemap/category/" title="Sơ đồ website">Sơ đồ website</a></li>
-                        <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/term/popular/" title="Tìm kiếm theo từ khóa">Tìm kiếm theo từ khóa</a></li>
-                        <li><a href="http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/advanced/" title="Tìm kiếm nâng cao">Tìm kiếm nâng cao</a></li>
-                        <li class=" last"><a href="http://livedemo00.template-help.com/magento_34403/index.php/contacts/" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
+                        <li class="first"><a href="~/home/systemcontent/3" title="Sơ đồ website">Thanh toán</a></li>
+                        <li><a href="~/item/search" title="Tìm kiếm nâng cao">Tìm kiếm nâng cao</a></li>
+                        <li class=" last"><a href="~/home/systemcontent/2" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
                     </ul>
                     <div class="clear"></div>
                     <address>

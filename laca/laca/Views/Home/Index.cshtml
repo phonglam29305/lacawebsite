@@ -1,4 +1,5 @@
-﻿<div class="main-container col1-layout">
+﻿@{ViewBag.Title = "Trang chủ";}
+<div class="main-container col1-layout">
     <div class="main">
         <div class="col-main">
             <div class="std">
@@ -11,278 +12,151 @@
                             <div style="position: absolute; top: 0px; left: 0px; display: none; z-index: 3; opacity: 0; width: 761px; height: 561px;" class="sl_block slide_pic3"><a href="">&nbsp;</a></div>
                         </div>
                     </div>
-                    <div class="new_products_block">
-                        <h2><span>Sản phẩm mới</span></h2>
-                        <a href="#" id="prev2"></a>
-                        <a href="#" id="next2"></a>
-                        <div style="position: relative; width: 250px; height: 477px; overflow: hidden;" class="new_prod_list">
-                            <div style="position: absolute; top: 0px; left: -250px; display: none; z-index: 4; opacity: 1; width: 250px; height: 477px;" class="listed_new_product">
-                                <a href="~/item/details/3" title="kate spade" class="product-image">
-                                    <img src="~/Images/images/pic1.jpg" alt="kate spade" height="336" width="236"></a>
-                                <h3 class="product-name"><a href="~/item/details/3" title="kate spade">kate spade</a></h3>
-                                <div class="descr">New York 'elenore' fringe trim dupioni sheath dress</div>
-                                <div class="new_pr_btn">
-                                    <button type="button" title="Add to Cart" class="button btn-cart" onclick="setLocation('http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy8,/product/42/')"><span><span>Add to Cart</span></span></button>
-                                </div>
-                            </div>
-                            <div style="position: absolute; top: 0px; left: -250px; display: none; z-index: 4; opacity: 1; width: 250px; height: 477px;" class="listed_new_product">
-                                <a href="~/item/details/3" title="kate spade" class="product-image">
-                                    <img src="~/Images/images/pic2.jpg" alt="kate spade" height="336" width="236"></a>
-                                <h3 class="product-name"><a href="~/item/details/3" title="kate spade">kate spade</a></h3>
-                                <div class="descr">new york 'jillian' bow front dress</div>
-                                <div class="new_pr_btn">
-                                    <button type="button" title="Add to Cart" class="button btn-cart" onclick="setLocation('http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy8,/product/43/')"><span><span>Add to Cart</span></span></button>
-                                </div>
-                            </div>
-                            <div style="position: absolute; top: 0px; left: -250px; display: none; z-index: 4; opacity: 1; width: 250px; height: 477px;" class="listed_new_product">
-                                <a href="~/item/details/3" title="kate spade" class="product-image">
-                                    <img src="~/Images/images/pic3.jpg" alt="kate spade" height="336" width="236"></a>
-                                <h3 class="product-name"><a href="~/item/details/3" title="kate spade">kate spade</a></h3>
-                                <div class="descr">new york 'melody' dress</div>
-                                <div class="new_pr_btn">
-                                    <button type="button" title="Add to Cart" class="button btn-cart" onclick="setLocation('http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy8,/product/44/')"><span><span>Add to Cart</span></span></button>
-                                </div>
-                            </div>
-                            <div style="position: absolute; top: 0px; left: 0px; display: block; z-index: 5; opacity: 1; width: 250px; height: 477px;" class="listed_new_product">
-                                <a href="~/item/details/3" title="JS Boutique" class="product-image">
-                                    <img src="~/Images/images/pic4.jpg" alt="JS Boutique" height="336" width="236"></a>
-                                <h3 class="product-name"><a href="~/item/details/3" title="JS Boutique">JS Boutique</a></h3>
-                                <div class="descr">Strapless Dupioni Dress</div>
-                                <div class="new_pr_btn">
-                                    <button type="button" title="Add to Cart" class="button btn-cart" onclick="setLocation('http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy8,/product/45/')"><span><span>Add to Cart</span></span></button>
-                                </div>
+                    @{
+                        laca.Models.lacashop_dbEntities db = new laca.Models.lacashop_dbEntities();
+                        var items = db.tbl_Items.Where(a => a.IsShow && a.IsHot).Take(12).OrderBy(t => Guid.NewGuid());
+                        if (items.Count() > 0)
+                        {
+                        <div class="new_products_block">
+                            <h2><span>Sản phẩm mới</span></h2>
+                            <a href="#" id="prev2"></a>
+                            <a href="#" id="next2"></a>
+                            <div style="position: relative; width: 250px; height: 477px; overflow: hidden;" class="new_prod_list">
+                                @foreach (var item in items)
+                                {
+                                    <div style="position: absolute; top: 0px; left: -250px; display: none; z-index: 4; opacity: 1; width: 250px; height: 477px;" class="listed_new_product">
+                                        <a href="~/item/details/@item.ItemID" title="@item.ItemName" class="product-image">
+                                            <img src="~/Images/uploads/@item.Images" alt="@item.ItemName" height="336" width="236"></a>
+                                        <h3 class="product-name"><a href="~/item/details/@item.ItemID" title="@item.ItemName">@item.ItemName</a></h3>
+                                        <div class="descr"></div>
+                                        <div class="new_pr_btn">
+                                            <button type="button" title="Add to Cart" class="button btn-cart" onclick=""><span><span>Add to Cart</span></span></button>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
-                    </div>
+                        }
+                    }
                 </div>
                 <div class="bottom_block">
-                    <div class="bottom_left">
-                        <h2 class="title_popular">Sản phẩm bán chạy nhất</h2>
-                        <div class="list_carousel">
-                            <div class="pagination_carousel" id="foo1_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
-                            <div style="position: relative; overflow: hidden; margin: 0px; width: 100%; height: 252px;" class="caroufredsel_wrapper">
-                                <ul style="margin: 0px; float: none; position: absolute; top: 0px; left: 0px; width: 3840px; height: 252px;" id="user_interaction1">
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="~/item/details/3">Ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="~/item/details/3">Set dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="~/item/details/3">Lorem ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="~/item/details/3">Set ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="~/item/details/3">Ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="~/item/details/3">Set dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="~/item/details/3">Lorem ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="~/item/details/3">Set ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="~/item/details/3">Ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="~/item/details/3">Set dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="~/item/details/3">Lorem ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="~/item/details/3">Set ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                    <div class="bottom_left">
-                        <h2 class="title_popular">Sản phẩm mới nhất</h2>
-                        <div class="list_carousel">
-                            <div class="pagination_carousel" id="foo2_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
-                            <div style="position: relative; overflow: hidden; margin: 0px; width: 100%; height: 252px;" class="caroufredsel_wrapper">
-                                <ul style="margin: 0px; float: none; position: absolute; top: 0px; left: 0px; width: 3840px; height: 252px;" id="user_interaction2">
-                                    @{
-                                        
-                                        laca.Models.lacashop_dbEntities db = new laca.Models.lacashop_dbEntities();
-                                        var groupitems = db.tbl_Items.Where(a => a.IsShow).OrderByDescending(a=>a.ItemID).Take(12).OrderBy(t => Guid.NewGuid());
-                                        foreach (var item in groupitems)
+                    @{             
+                        var hotdealitems = db.tbl_Items.Where(a => a.IsShow && a.DiscountPrice > 0).OrderByDescending(a => a.OrderID).Take(12).OrderBy(t => Guid.NewGuid());
+                        if (hotdealitems.Count() > 0)
+                        {
+                        <div class="bottom_left">
+                            <h2 class="title_popular">Sản phẩm bán chạy nhất</h2>
+                            <div class="list_carousel">
+                                <div class="pagination_carousel" id="foo1_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
+                                <div style="position: relative; overflow: hidden; margin: 0px; width: 100%; height: 252px;" class="caroufredsel_wrapper">
+                                    <ul style="margin: 0px; float: none; position: absolute; top: 0px; left: 0px; width: 3840px; height: 252px;" id="user_interaction2">
+                                        @foreach (var item in hotdealitems)
                                         {
+                                            if (item.DiscountPrice > 0)
+                                            {
+                                            <li style="margin-right: 0px;">
+                                                <div class="pop_price" style="float: left; text-decoration: line-through">@item.Price.ToString("#,###")</div>
+                                                <div class="pop_price_discount">@item.DiscountPrice.Value.ToString("#,###")</div>
+                                                <a href="~/item/details/@item.ItemID">
+                                                    <img src="~/images/uploads/@item.Images" alt="@item.ItemName" style="width: 140px"></a><p><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
+                                            </li>
+                                            }
+                                            else
+                                            {
                                         
-                                        <li style="margin-right: 0px;">
-                                            <div class="pop_price">@item.Price.Value.ToString("#,###")</div>
-                                            <a href="~/item/details/@item.ItemID">
-                                                <img src="~/images/uploads/@item.Images" alt="@item.ItemName" style="width: 150px"></a><p><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
-                                        </li>
+                                            <li style="margin-right: 0px; ">
+                                                <div class="pop_price">@item.Price.ToString("#,###")</div>
+                                                <a href="~/item/details/@item.ItemID">
+                                                    <img src="~/images/uploads/@item.Images" alt="@item.ItemName" style="width: 140px"></a><p><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
+                                            </li>
+                                            }
                                         }
-                                    }
-                                    @*<li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="~/item/details/3">Ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="~/item/details/3">Set dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="~/item/details/3">Lorem ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="~/item/details/3">Set ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="~/item/details/3">Ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="~/item/details/3">Set dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="~/item/details/3">Lorem ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="~/item/details/3">Set ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="~/item/details/3">Ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="~/item/details/3">Set dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="~/item/details/3">Lorem ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="~/item/details/3">Set ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>*@
-                                </ul>
+
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
                             </div>
-                            <div class="clear"></div>
                         </div>
-                    </div>
-                    <div class="bottom_left">
-                        <h2 class="title_popular">Sản phẩm khuyến mãi</h2>
-                        <div class="list_carousel">
-                            <div class="pagination_carousel" id="foo3_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
-                            <div style="position: relative; overflow: hidden; margin: 0px; width: 100%; height: 252px;" class="caroufredsel_wrapper">
-                                <ul style="margin: 0px; float: none; position: absolute; top: 0px; left: 0px; width: 3840px; height: 252px;" id="user_interaction3">
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="~/item/details/3">Ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="~/item/details/3">Set dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="~/item/details/3">Lorem ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="~/item/details/3">Set ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="~/item/details/3">Ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="~/item/details/3">Set dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="~/item/details/3">Lorem ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="~/item/details/3">Set ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm3.jpg" alt=""></a><p><a href="~/item/details/3">Ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm4.jpg" alt=""></a><p><a href="~/item/details/3">Set dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm1.jpg" alt=""></a><p><a href="~/item/details/3">Lorem ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                    <li style="margin-right: 0px;">
-                                        <div class="pop_price">đ 245.89</div>
-                                        <a href="~/item/details/3">
-                                            <img src="~/Images/images/popular_sm2.jpg" alt=""></a><p><a href="~/item/details/3">Set ipsum dolor sit amet, consectetur.</a></p>
-                                    </li>
-                                </ul>
+                        }
+                    }
+                    @{             
+                        var groupitems = db.tbl_Items.Where(a => a.IsShow && a.IsNew).OrderByDescending(a => a.OrderID).Take(12).OrderBy(t => Guid.NewGuid());
+                        if (groupitems.Count() > 0)
+                        {
+                        <div class="bottom_left">
+                            <h2 class="title_popular">Sản phẩm mới nhất</h2>
+                            <div class="list_carousel">
+                                <div class="pagination_carousel" id="foo2_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
+                                <div style="position: relative; overflow: hidden; margin: 0px; width: 100%; height: 252px;" class="caroufredsel_wrapper">
+                                    <ul style="margin: 0px; float: none; position: absolute; top: 0px; left: 0px; width: 3840px; height: 252px;" id="user_interaction2">
+                                        @foreach (var item in groupitems)
+                                        {
+                                            if (item.DiscountPrice > 0)
+                                            {
+                                            <li style="margin-right: 0px;">
+                                                <div class="pop_price" style="float: left; text-decoration: line-through">@item.Price.ToString("#,###")</div>
+                                                <div class="pop_price_discount">@item.DiscountPrice.Value.ToString("#,###")</div>
+                                                <a href="~/item/details/@item.ItemID">
+                                                    <img src="~/images/uploads/@item.Images" alt="@item.ItemName" style="width: 140px"></a><p><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
+                                            </li>
+                                            }
+                                            else
+                                            {
+                                        
+                                            <li style="margin-right: 0px;">
+                                                <div class="pop_price">@item.Price.ToString("#,###")</div>
+                                                <a href="~/item/details/@item.ItemID">
+                                                    <img src="~/images/uploads/@item.Images" alt="@item.ItemName" style="width: 140px"></a><p><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
+                                            </li>
+                                            }
+                                        }
+
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
                             </div>
-                            <div class="clear"></div>
                         </div>
-                    </div>
+                        }
+                    }
+                    @{             
+                        var discountitems = db.tbl_Items.Where(a => a.IsShow && a.DiscountPrice > 0).OrderByDescending(a => a.OrderID).Take(12).OrderBy(t => Guid.NewGuid());
+                        if (discountitems.Count() > 0)
+                        {
+                        <div class="bottom_left">
+                            <h2 class="title_popular">Sản phẩm khuyến mãi</h2>
+                            <div class="list_carousel">
+                                <div class="pagination_carousel" id="foo3_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
+                                <div style="position: relative; overflow: hidden; margin: 0px; width: 100%; height: 252px;" class="caroufredsel_wrapper">
+                                    <ul style="margin: 0px; float: none; position: absolute; top: 0px; left: 0px; width: 3840px; height: 252px;" id="user_interaction2">
+                                        @foreach (var item in discountitems)
+                                        {
+                                            if (item.DiscountPrice > 0)
+                                            {
+                                            <li style="margin-right: 0px;">
+                                                <div class="pop_price" style="float: left; text-decoration: line-through">@item.Price.ToString("#,###")</div>
+                                                <div class="pop_price_discount">@item.DiscountPrice.Value.ToString("#,###")</div>
+                                                <a href="~/item/details/@item.ItemID">
+                                                    <img src="~/images/uploads/@item.Images" alt="@item.ItemName" style="width: 140px"></a><p><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
+                                            </li>
+                                            }
+                                            else
+                                            {
+                                        
+                                            <li style="margin-right: 0px;">
+                                                <div class="pop_price">@item.Price.ToString("#,###")</div>
+                                                <a href="~/item/details/@item.ItemID">
+                                                    <img src="~/images/uploads/@item.Images" alt="@item.ItemName" style="width: 140px"></a><p><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
+                                            </li>
+                                            }
+                                        }
+
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        }
+                    }
 
                 </div>
             </div>

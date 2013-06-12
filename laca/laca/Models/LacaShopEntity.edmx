@@ -97,17 +97,19 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="ItemGroupID" Type="int" />
           <Property Name="OrderID" Type="int" />
-          <Property Name="Images" Type="nvarchar(max)" />
+          <Property Name="Images" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ViewCount" Type="decimal" />
-          <Property Name="Price" Type="decimal" />
+          <Property Name="Price" Type="decimal" Nullable="false" />
           <Property Name="DiscountPrice" Type="decimal" />
           <Property Name="SearchKey" Type="nvarchar" MaxLength="550" />
           <Property Name="Color" Type="nvarchar" MaxLength="550" />
           <Property Name="Material" Type="nvarchar" MaxLength="550" />
           <Property Name="Style" Type="nvarchar" MaxLength="550" />
-          <Property Name="IsHot" Type="bit" />
+          <Property Name="IsHot" Type="bit" Nullable="false" />
           <Property Name="IsShow" Type="bit" Nullable="false" />
-          <Property Name="ItemCount" Type="int" />
+          <Property Name="ItemCount" Type="int" Nullable="false" />
+          <Property Name="IsNew" Type="bit" Nullable="false" />
+          <Property Name="IsHotDeal" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_ItemType">
           <Key>
@@ -334,20 +336,22 @@
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="ItemGroupID" Type="Int32" />
           <Property Name="OrderID" Type="Int32" />
-          <Property Name="Images" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Images" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="ViewCount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="DiscountPrice" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="SearchKey" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
           <Property Name="Color" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
           <Property Name="Material" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
           <Property Name="Style" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
-          <Property Name="IsHot" Type="Boolean" />
+          <Property Name="IsHot" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbl_ImportDetail" Relationship="LacaShopModel.FK_tbl_ImportDetail_tbl_Items" FromRole="tbl_Items" ToRole="tbl_ImportDetail" />
           <NavigationProperty Name="tbl_ItemGroup" Relationship="LacaShopModel.FK_tbl_Items_tbl_ItemGroup" FromRole="tbl_Items" ToRole="tbl_ItemGroup" />
           <NavigationProperty Name="tbl_OrderDetail" Relationship="LacaShopModel.FK_tbl_OrderDetail_tbl_Items" FromRole="tbl_Items" ToRole="tbl_OrderDetail" />
           <Property Type="Boolean" Name="IsShow" Nullable="false" />
-          <Property Type="Int32" Name="ItemCount" />
+          <Property Type="Int32" Name="ItemCount" Nullable="false" />
+          <Property Type="Boolean" Name="IsNew" Nullable="false" />
+          <Property Type="Boolean" Name="IsHotDeal" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_ItemType">
           <Key>
@@ -474,6 +478,7 @@
           <Member Name="Order" Value="1" />
           <Member Name="Cancel" Value="2" />
           <Member Name="Delivery" Value="3" />
+          <Member Name="Creating" Value="4" />
         </EnumType>
         <EnumType Name="SytemContent">
           <Member Name="About" Value="1" />
@@ -545,6 +550,8 @@
           <EntitySetMapping Name="tbl_Items">
             <EntityTypeMapping TypeName="LacaShopModel.tbl_Items">
               <MappingFragment StoreEntitySet="tbl_Items">
+                <ScalarProperty Name="IsHotDeal" ColumnName="IsHotDeal" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
                 <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
                 <ScalarProperty Name="IsShow" ColumnName="IsShow" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />

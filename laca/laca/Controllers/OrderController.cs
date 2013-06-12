@@ -13,7 +13,7 @@ namespace laca.Controllers
     {
         private lacashop_dbEntities db = new lacashop_dbEntities();
 
-        
+
         //
         // GET: /Order/
 
@@ -31,11 +31,113 @@ namespace laca.Controllers
             tbl_Orders tbl_orders = db.tbl_Orders.Find(id);
             if (tbl_orders == null)
             {
-                return HttpNotFound();
+                if (Session[Session.SessionID] == null)
+                    Session[Session.SessionID] = new List<tbl_OrderDetail>();
+
+                List<tbl_OrderDetail> list = Session[Session.SessionID] as List<tbl_OrderDetail>;
+                return View(list);
             }
-            return View(tbl_orders);
+            return View(tbl_orders.tbl_OrderDetail.ToList());
         }
 
+
+        //[HttpPost]
+        public RedirectToRouteResult AddItem(int ItemID, decimal Price, int Qtty = 1)
+        {
+            //int Qtty = 0;
+            //int.TryParse(Request.Form["quantity"] + "", out Qtty);
+            if (Session[Session.SessionID] == null)
+                Session[Session.SessionID] = new List<tbl_OrderDetail>();
+
+            List<tbl_OrderDetail> list = Session[Session.SessionID] as List<tbl_OrderDetail>;
+            if (list.Find(a => a.ItemID == ItemID) != null)
+            {
+                var item = list.Find(a => a.ItemID == ItemID);
+                item.Qty += Qtty;
+                item.Amount = item.Qty * item.Price;
+            }
+            else
+            {
+                tbl_OrderDetail ct = new tbl_OrderDetail();
+                ct.ItemID = ItemID;
+                ct.tbl_Items = db.tbl_Items.Find(ItemID);
+                ct.Qty = Qtty;
+                ct.Price = Price;
+                ct.Amount = Qtty * Price;
+                list.Add(ct);
+
+            }
+            TempData[Session.SessionID] = list;
+            return RedirectToAction("Details", "Order");
+        }
+        public RedirectToRouteResult RemoveItem(int ItemID)
+        {
+            //int Qtty = 0;
+            //int.TryParse(Request.Form["quantity"] + "", out Qtty);
+            if (Session[Session.SessionID] == null)
+                Session[Session.SessionID] = new List<tbl_OrderDetail>();
+
+            List<tbl_OrderDetail> list = Session[Session.SessionID] as List<tbl_OrderDetail>;
+            if (list.Find(a => a.ItemID == ItemID) != null)
+                list.Remove(list.Find(a => a.ItemID == ItemID));
+
+            TempData[Session.SessionID] = list;
+            return RedirectToAction("Details", "Order");
+        }
+
+        [HttpPost]
+        public ActionResult OrderComplete(string name, string address, string email, string phone, string cardid)
+        {
+            tbl_Customers cus = db.tbl_Customers.Where(a => a.Email == email || a.Phone == phone).FirstOrDefault();
+            if (cus == null)
+            {
+                cus = new tbl_Customers();
+                cus.CustomerName = name;
+                cus.Address = address;
+                cus.Email = email;
+                cus.Phone = phone;
+                cus.CardID = cardid;
+
+                db.tbl_Customers.Add(cus);
+                db.SaveChanges();
+            }
+
+            tbl_Orders order = new tbl_Orders();
+            order.CustomerID = cus.CustomerID;
+            order.CreateDate = DateTime.Now;
+            order.Status = laca.Models.OrderStatus.Order;
+            db.tbl_Orders.Add(order);
+            db.SaveChanges();
+
+            List<tbl_OrderDetail> list = Session[Session.SessionID] as List<tbl_OrderDetail>;
+            foreach (var item in list)
+            {
+                item.tbl_Items = null;
+                item.OrderID = order.OrderID;
+                db.tbl_OrderDetail.Add(item);
+                db.SaveChanges();
+            }
+
+            return Json(new { url = Url.Action("ThankYou", new { id = order.OrderID }) });
+            //return View();
+        }
+        public ActionResult ThankYou(int id = 0)
+        {
+            tbl_Orders tbl_orders = db.tbl_Orders.Find(id);
+            if (tbl_orders == null)
+            {
+                if (tbl_orders == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            var cus = new laca.Models.lacashop_dbEntities().tbl_Customers.Find(tbl_orders.CustomerID);
+            ViewBag.cusName = cus.CustomerName;
+            Session[Session.SessionID] = null;
+
+            //return View(tbl_orders);
+            return View();
+        }
         //
         // GET: /Order/Create
 
@@ -44,6 +146,8 @@ namespace laca.Controllers
             ViewBag.CustomerID = new SelectList(db.tbl_Customers, "CustomerID", "CustomerName");
             return View();
         }
+
+
 
         //
         // POST: /Order/Create

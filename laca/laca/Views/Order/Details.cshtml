@@ -1,49 +1,247 @@
-﻿@model laca.Models.tbl_Orders
+﻿@model IEnumerable<laca.Models.tbl_OrderDetail>
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết giỏ hàng";
+    int groupid = 0;
+    if (Model.Count() > 0)
+    { groupid = Model.FirstOrDefault().tbl_Items.ItemGroupID.Value; }
 }
+<div class="main-container col1-layout">
+    <div class="main">
+        <div class="col-main">
+            <div class="cart">
+                <div class="page-title title-buttons">
+                    <h1>Giỏ hàng</h1>
 
-<h2>Details</h2>
+                </div>
 
-<fieldset>
-    <legend>tbl_Orders</legend>
+                <table id="shopping-cart-table" class="data-table cart-table">
+                    <thead>
+                        <tr class="first last">
+                            <th rowspan="1">&nbsp;</th>
+                            <th rowspan="1"><span class="nobr">Tên sản phẩm</span></th>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OrderID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OrderID)
-    </div>
+                            <th class="a-center" colspan="1"><span class="nobr">Giá</span></th>
+                            <th rowspan="1" class="a-center">Số lượng</th>
+                            <th class="a-center" colspan="1">Thành tiền</th>
+                            <th rowspan="1" class="a-center">Xóa sản phẩm</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr class="first last">
+                            <td colspan="50" class="a-right last">
+                                <button type="button" title="Tiếp tục chọn sản phẩm" class="button btn-continue left" onclick="window.location.href='../item/itembyitemgroup/@groupid'"><span><span>Tiếp tục chọn sản phẩm</span></span></button>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.tbl_Customers.CustomerName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.tbl_Customers.CustomerName)
-    </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                            <tr class="first last odd">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CreateDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CreateDate)
-    </div>
+                                <td class="a-center"><a href="~/item/details/@item.ItemID" title="Oversized  Jetset Tote" class="product-image">
+                                    <img src="~/images/uploads/@item.tbl_Items.Images" width="85" height="110" alt="Oversized  Jetset Tote"></a></td>
+                                <td class="a-center">
+                                    <h2 class="product-name">
+                                        <a href="~/item/details/@item.ItemID">@item.tbl_Items.ItemName</a>
+                                    </h2>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DeliveryDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DeliveryDate)
-    </div>
+                                </td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TotalValue)
+                                <td class="a-center">
+                                    <span class="cart-price">
+                                        <span class="price">@item.Price.Value.ToString("#,###")</span>
+                                    </span>
+                                </td>
+                                <td class="a-center">
+                                    <span>@item.Qty.Value.ToString("#,###") </span>
+                                </td>
+                                <td class="a-center">
+                                    <span class="cart-price">
+                                        <span class="price">@item.Amount.Value.ToString("#,###")</span>
+                                    </span>
+                                </td>
+                                <td class="a-center last">
+                                    <a href="~/order/RemoveItem?ItemID=@item.ItemID" title="Remove item" class="btn-remove btn-remove2">Xóa sản phẩm</a>
+
+                                </td>
+                            </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                <script type="text/javascript">
+                    //decorateTable('shopping-cart-table');
+                    function addItem(id, price) {
+                        var url = "../order/additem?itemid=" + id + "&price=" + price + "&qtty=1";
+                        //alert(url);
+                        window.location.href = url;
+                    }
+                    function order() {
+                        var cusname = $("name").value;
+                        if (cusname == "") { alert('Vui lòng nhập họ tên'); $("name").focus(); return; }
+
+                        var email = $("email").value;
+                        if (email == "") { alert('Vui lòng nhập họ tên'); $("email").focus(); return; }
+
+                        var address = $("address").value;
+                        if (address == "") { alert('Vui lòng nhập họ tên'); $("address").focus(); return; }
+
+                        var phone = $("phone").value;
+                        if (phone == "") { alert('Vui lòng nhập họ tên'); $("phone").focus(); return; }
+
+                        var cardid = $("phone").value;
+
+
+                        var orderUrl = "../order/OrderComplete";// window.location.href = orderUrl;
+                        jQuery.post(orderUrl, { name: cusname, address: address, email: email, phone: phone, carid: cardid })
+                        .done(function (data) {
+                            window.location.href = data.url;
+                        });
+                        //alert(url);
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: orderUrl,
+                        //    data: {name: cusname, email: email, address: address, phone: phone, carid: cardid},
+                        //    dataType: "html",
+                        //    success: function (evt) {
+                        //        alert("Dat hang thanh cong");
+                        //    },
+                        //    error: function (req, status, error) {
+                        //        alert("Error!Occured" + error);
+                        //    }
+                        //});
+                    }
+                </script>
+
+
+                <div class="cart-collaterals">
+                    <div class="col2-set">
+                        <div class="col-1">
+                            <div class="crosssell">
+                                <h2>Dựa vào các sản phẩm bạn đã chọn, có thể bạn sẽ thích những sản phẩm bên dưới:</h2>
+                                <ul id="crosssell-products-list">
+                                    @{
+                                        laca.Models.lacashop_dbEntities db = new laca.Models.lacashop_dbEntities();
+
+                                        var items = db.tbl_Items.Where(a => a.IsShow && a.ItemGroupID == groupid).OrderBy(t => Guid.NewGuid()).Take(2);
+                                        foreach (var item in items)
+                                        {
+                                        <li class="item odd">
+                                            <a class="product-image" href="~/item/details/@item.ItemID" title="@item.ItemName">
+                                                <img src="~/images/uploads/@item.Images" width="100" height="130" alt="@item.ItemName"></a>
+                                            <div class="product-details">
+                                                <h3 class="product-name"><a href="~/item/details/@item.ItemID">@item.ItemName</a></h3>
+                                                <div class="price-box">
+                                                    <span class="regular-price" id="product-price-27">
+                                                        @if (item.DiscountPrice.Value > 0)
+                                                        {
+                                                    <span class="price">@item.DiscountPrice.Value.ToString("#,###")</span>
+                                                        }
+                                                        else
+                                                        {
+                                                    <span class="price">@item.Price.ToString("#,###")</span>
+                                                        }
+
+                                                    </span>
+                                                </div>
+                                                <button type="button" title="Add to Cart" class="button btn-cart" onclick="addItem(@item.ItemID, @item.Price)"><span><span>Thêm vào giỏ hàng</span></span></button>
+
+                                            </div>
+                                        </li>
+                                        }
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="float: left; width: 20px">&nbsp;</div>
+                        <div class="col-1">
+                            <div class="crosssell">
+                                <h2>Thông tin khách hàng</h2>
+                            </div>
+                            <style>
+                                #cart .label {
+                                    padding: 5px 5px 5px 5px;
+                                    text-align: right;
+                                }
+
+                                #cart .field {
+                                    padding: 5px 5px 5px 5px;
+                                }
+                            </style>
+                            <div class="crosssell">
+                                <table id="cart">
+                                    <tr>
+                                        <td class="label">Họ tên(*):</td>
+                                        <td class="field">
+                                            <input type="text" id="name" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Email(*):</td>
+                                        <td class="field">
+                                            <input type="text" id="email" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Địa chỉ(*):</td>
+                                        <td class="field">
+                                            <input type="text" id="address" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Số điện thoại(*):</td>
+                                        <td class="field">
+                                            <input type="text" id="phone" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Số CMND:</td>
+                                        <td class="field">
+                                            <input type="text" id="cardid" /></td>
+                                    </tr>
+                                    @* <tr>
+                                        <td class="label">Ngày sinh:</td>
+                                        <td class="field">
+                                            <input type="text" id="birthday" /></td>
+                                    </tr>*@
+                                    <tr>
+                                        <td class="label"></td>
+                                        <td class="field">Lưu ý: <i>(*) là thông tin bắt buộc phải nhập</i></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="totals">
+                        <table id="shopping-cart-totals-table">
+                            <colgroup>
+                                <col>
+                                <col width="1">
+                            </colgroup>
+                            <tfoot>
+                                <tr>
+                                    <td style="" class="a-right" colspan="1">
+                                        <strong>Tổng cộng</strong>
+                                    </td>
+                                    <td style="" class="grndttl">
+                                        <strong><span class="price">@Model.Sum(a => a.Amount).Value.ToString("#,###")</span></strong>
+                                    </td>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                        <ul class="checkout-types">
+                            <li>
+                                <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout btn-checkout" onclick="order(); "><span><span>Đặt hàng</span></span></button>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TotalValue)
-    </div>
-</fieldset>
+</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")

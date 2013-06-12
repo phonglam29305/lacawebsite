@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabases>true</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,9 +38,35 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabases>false</PublishDatabases>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="DefaultConnection-Deployment" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=112.78.2.203%3bInitial Catalog=lacashop_live%3bIntegrated Security=False%3bUser ID=lacashop_laca%3bPassword=lacashop1a%40" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\DefaultConnection-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="lacashop_dbEntities-Deployment" Order="2">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=112.78.2.203%3bInitial Catalog=lacashop_live%3bUser ID=lacashop_laca%3bPassword=lacashop1a%40%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\lacashop_dbEntities-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Calabonga.Mvc.PagedListExt">
+      <HintPath>..\packages\PagedListExt.Mvc4.1.2.1\lib\net45\Calabonga.Mvc.PagedListExt.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.15.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -530,6 +557,7 @@
     <Content Include="ckeditor\skins\moono\images\close.png" />
     <Content Include="ckeditor\skins\moono\images\mini.png" />
     <Content Include="ckeditor\styles.js" />
+    <Content Include="Content\multizoom.css" />
     <Content Include="Content\print.css" />
     <Content Include="Content\styles.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -593,6 +621,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LacaShopEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\images\dot.png" />
+    <Content Include="Images\images\slider_btn_zoom_in.gif" />
+    <Content Include="Images\images\slider_btn_zoom_out.gif" />
     <Content Include="Models\LacaShopEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LacaShopEntity.edmx</DependentUpon>
@@ -617,6 +648,7 @@
     <Content Include="ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="ckeditor\samples\sample_posteddata.php" />
     <Content Include="ckeditor\skins\moono\readme.md" />
+    <None Include="Properties\PublishProfiles\lacashop.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\images\banner_sale.jpg" />
     <Content Include="Images\images\bg.jpg" />
@@ -692,12 +724,15 @@
     <Content Include="Scripts\siteScripts\jquery_002.js" />
     <Content Include="Scripts\siteScripts\js.js" />
     <Content Include="Scripts\siteScripts\menu.js" />
+    <Content Include="Scripts\siteScripts\multizoom.js" />
     <Content Include="Scripts\siteScripts\product.js" />
     <Content Include="Scripts\siteScripts\prototype.js" />
     <Content Include="Scripts\siteScripts\slider.js" />
     <Content Include="Scripts\siteScripts\translate.js" />
     <Content Include="Scripts\siteScripts\validation.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -760,6 +795,11 @@
     <Content Include="Views\SystemContent\Edit.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Item\ImageList.cshtml" />
+    <Content Include="Views\Shared\_Paging.cshtml" />
+    <Content Include="Views\Item\ItemByItemType.cshtml" />
+    <Content Include="Views\Item\ItemByItemGroup.cshtml" />
+    <Content Include="Views\Item\ItemByProperties.cshtml" />
+    <Content Include="Views\Order\ThankYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -787,7 +827,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>10880</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:10802/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

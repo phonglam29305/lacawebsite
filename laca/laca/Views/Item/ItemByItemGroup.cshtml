@@ -1,0 +1,64 @@
+﻿@model IEnumerable<laca.Models.tbl_Items>
+@{
+    ViewBag.Title = "Sản phẩm theo nhóm";
+}
+@{
+    if (Model.FirstOrDefault() != null)
+    {
+    <div class="main-container col1-layout">
+        <div class="main">
+            <div class="breadcrumbs">
+                <ul>
+                    <li class="product">
+                        <a href="~/" title="Trang chủ">Trang chủ</a>
+                        <span>&gt; </span>
+                    </li>
+
+                    <li class="product">
+                        <a href="~/Item/ItemByItemType/@Model.FirstOrDefault().tbl_ItemGroup.ItemTypeID" title="@Model.FirstOrDefault().tbl_ItemGroup.tbl_ItemType.ItemTypeName"><strong>@Model.FirstOrDefault().tbl_ItemGroup.tbl_ItemType.ItemTypeName</strong></a>
+                        <span>&gt; </span>
+                    </li>
+                    <li class="product">
+                        <a href="~/Item/ItemByItemGroup/@Model.FirstOrDefault().ItemGroupID" title="@Model.FirstOrDefault().tbl_ItemGroup.ItemGroupName"><strong>@Model.FirstOrDefault().tbl_ItemGroup.ItemGroupName</strong></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom_left">
+                <h2 class="title_popular">@Model.FirstOrDefault().tbl_ItemGroup.ItemGroupName</h2>
+                <div class="list_carousel">
+                    <div class="pagination_carousel" id="foo2_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
+                    <div style="position: relative; overflow: hidden; margin: 0px; width: 100%; height: 252px;" class="caroufredsel_wrapper">
+                        @{
+                                        
+        foreach (var item in Model)
+        {
+            if (item.DiscountPrice > 0)
+            {
+                            <div style="margin-right: 0px; float: left; padding: 5px 5px 5px 5px;">
+                                <div class="pop_price" style="float: left; text-decoration:line-through">@item.Price.ToString("#,###")</div>
+                                <div class="pop_price_discount">@item.DiscountPrice.Value.ToString("#,###")</div>
+                                <a href="~/item/details/@item.ItemID">
+                                    <img src="~/images/uploads/@item.Images" alt="@item.ItemName" style="width: 140px"></a><p><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
+                            </div>
+            }
+            else
+            {
+                                        
+                            <div style="margin-right: 0px; float: left; padding: 5px 5px 5px 5px;">
+                                <div class="pop_price">@item.Price.ToString("#,###")</div>
+                                <a href="~/item/details/@item.ItemID">
+                                    <img src="~/images/uploads/@item.Images" alt="@item.ItemName" style="width: 140px"></a><p><a href="~/item/details/@item.ItemID">@item.ItemName</a></p>
+                            </div>
+            }
+        }
+                        }
+                    </div>
+                </div>
+
+                @Html.Partial("_Paging")
+            </div>
+        </div>
+    </div>
+    }
+}
+

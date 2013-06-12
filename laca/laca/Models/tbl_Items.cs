@@ -27,15 +27,17 @@ namespace laca.Models
         public Nullable<int> OrderID { get; set; }
         public string Images { get; set; }
         public Nullable<decimal> ViewCount { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public decimal Price { get; set; }
         public Nullable<decimal> DiscountPrice { get; set; }
         public string SearchKey { get; set; }
         public string Color { get; set; }
         public string Material { get; set; }
         public string Style { get; set; }
-        public Nullable<bool> IsHot { get; set; }
+        public bool IsHot { get; set; }
         public bool IsShow { get; set; }
-        public Nullable<int> ItemCount { get; set; }
+        public int ItemCount { get; set; }
+        public bool IsNew { get; set; }
+        public bool IsHotDeal { get; set; }
     
         public virtual ICollection<tbl_ImportDetail> tbl_ImportDetail { get; set; }
         public virtual tbl_ItemGroup tbl_ItemGroup { get; set; }
