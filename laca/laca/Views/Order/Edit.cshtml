@@ -2,67 +2,155 @@
 
 @{
     ViewBag.Title = "Edit";
+
+    Layout = "../shared/_AdminLayout.cshtml";
+   
 }
 
-<h2>Edit</h2>
+<div class="main-container col2-right-layout">
+    <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>tbl_Orders</legend>
+        <fieldset>
+            <legend>tbl_Orders</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.OrderID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.OrderID)
-            @Html.ValidationMessageFor(model => model.OrderID)
-        </div>
+            <div class="editor-label">
+                Mã đơn hàng
+            </div>
+            <div class="editor-field">
+                @Html.HiddenFor(model => model.OrderID)
+                @Html.DisplayFor(model => model.OrderID)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CustomerID, "tbl_Customers")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("CustomerID", String.Empty)
-            @Html.ValidationMessageFor(model => model.CustomerID)
-        </div>
+            <div class="editor-label">
+                Khách Hàng
+            </div>
+            <div class="editor-field">
+                @Html.HiddenFor(model => model.CustomerID)
+                @ViewBag.Customer
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CreateDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CreateDate)
-            @Html.ValidationMessageFor(model => model.CreateDate)
-        </div>
+            <div class="editor-label">
+                Ngày đặt hàng
+            </div>
+            <div class="editor-field">
+                @Html.HiddenFor(model => model.CreateDate)
+                @Html.DisplayFor(model => model.CreateDate)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DeliveryDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DeliveryDate)
-            @Html.ValidationMessageFor(model => model.DeliveryDate)
-        </div>
+            <div class="editor-label">
+                Ngày giao hàng
+            </div>
+            <div class="editor-field">
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TotalValue)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TotalValue)
-            @Html.ValidationMessageFor(model => model.TotalValue)
-        </div>
+                <script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+                <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.js"></script>
+                <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+                <link type="text/css" href="@Url.Content("~/Content/datepicker/css/jquery-ui.css")" rel="stylesheet" />
+                <link type="text/css" href="@Url.Content("~/Content/datepicker/css/ui.theme.css")" rel="stylesheet" />
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery-ui.min.js")"></script>
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery.bgiframe-2.1.2.js")"></script>
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery-ui-i18n.min.js")"></script>
+                <input id="datepicker" name="datepicker" type="text" value='@ViewBag.DeliveryDate' />
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
+                <script>
+                    jQuery(document).ready(function ($) {
+                        //alert('@Convert.ToInt32(Model.Status)');
+                        //alert($.datepicker);
+                        $("#datepicker").datepicker();
+                        $.datepicker.setDefaults($.datepicker.regional['vi']);
+                        $("#Status").val(@Convert.ToInt32(Model.Status));
+                    });
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+                </script>
+                
+                                @Html.ValidationMessageFor(model => model.DeliveryDate)
+            </div>
+
+            <div class="editor-label">
+                Tổng giá trị
+            </div>
+            <div class="editor-field">
+                @ViewBag.Amount
+            </div>
+            <div class="editor-label">
+                Trạng thái
+            </div>
+            <div class="editor-field">
+
+                @*@Html.DropDownList("Status", "")*@
+                @Html.DropDownListFor(model => model.Status, Enum.GetValues(typeof(laca.Models.OrderStatus)).Cast<laca.Models.OrderStatus>().Select(v => new SelectListItem
+               {
+                   Text = v.ToString().Replace("_", " "),
+                   Value = ((int)v).ToString()
+               }))
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+            <h2>Sản phẩm trong giỏ hàng</h2>
+            <table id="shopping-cart-table" class="data-table cart-table">
+                <thead>
+                    <tr class="first last">
+                        <th rowspan="1">&nbsp;</th>
+                        <th rowspan="1"><span class="nobr">Tên sản phẩm</span></th>
+
+                        <th class="a-center" colspan="1"><span class="nobr">Giá</span></th>
+                        <th rowspan="1" class="a-center">Số lượng</th>
+                        <th class="a-center" colspan="1">Thành tiền</th>
+                        @*<th rowspan="1" class="a-center">Xóa sản phẩm</th>*@
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{
+        foreach (var item in Model.tbl_OrderDetail)
+        {
+                        <tr class="first last odd">
+
+                            <td class="a-center"><a href="~/item/details/@item.ItemID" title="Oversized  Jetset Tote" class="product-image">
+                                <img src="~/images/uploads/@item.tbl_Items.Images" width="85" height="110" alt="Oversized  Jetset Tote"></a></td>
+                            <td class="a-center">
+                                <h2 class="product-name">
+                                    <a href="~/item/details/@item.ItemID">@item.tbl_Items.ItemName</a>
+                                </h2>
+                            </td>
+
+                            <td class="a-center">
+                                <span class="cart-price">
+                                    <span class="price">@item.Price.Value.ToString("#,###")</span>
+                                </span>
+                            </td>
+                            <td class="a-center">
+                                <span>@item.Qty.Value.ToString("#,###") </span>
+                            </td>
+                            <td class="a-center">
+                                <span class="cart-price">
+                                    <span class="price">@item.Amount.Value.ToString("#,###")</span>
+                                </span>
+                            </td>
+                            @*                            <td class="a-center last">
+                                <a href="~/order/RemoveItem?ItemID=@item.ItemID" title="Remove item" class="btn-remove btn-remove2">Xóa sản phẩm</a>
+
+                            </td>*@
+                        </tr>
+        }
+                    }
+                </tbody>
+            </table>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

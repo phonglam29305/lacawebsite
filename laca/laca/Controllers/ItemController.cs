@@ -97,23 +97,35 @@ namespace laca.Controllers
             return View(tbl_items.ToPagedList(currentPage, maxRecords));
         }
 
-        public ActionResult ItemByProperties(string key, int ItemGroupID, int m0_s1_c2 = 0, int page = 1)
+        public ActionResult ItemByProperties(string key, int ItemGroupID, int m0_s1_c2_new3_km4_hot5 = 0, int page = 1)
         {
             IEnumerable<tbl_Items> tbl_items = db.tbl_Items.Where(a => a.IsShow && a.Material.Contains(key));
-            if(m0_s1_c2==1)
+            if (m0_s1_c2_new3_km4_hot5 == 1)
                 tbl_items = db.tbl_Items.Where(a => a.IsShow && a.ItemGroupID == ItemGroupID && a.Style.Contains(key));
             else
-                if (m0_s1_c2 == 2)
+                if (m0_s1_c2_new3_km4_hot5 == 2)
                     tbl_items = db.tbl_Items.Where(a => a.IsShow && a.Color.Contains(key));
+                else
+                    if (m0_s1_c2_new3_km4_hot5 == 3)
+                        tbl_items = db.tbl_Items.Where(a => a.IsShow && a.IsNew);
+                    else
+                        if (m0_s1_c2_new3_km4_hot5 == 4)
+                            tbl_items = db.tbl_Items.Where(a => a.IsShow && a.DiscountPrice > 0);
+                        else
+                            if (m0_s1_c2_new3_km4_hot5 == 5)
+                                tbl_items = db.tbl_Items.Where(a => a.IsShow && a.IsHotDeal);
             int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
-            tbl_items = tbl_items.OrderBy(a=>a.OrderID);
+            tbl_items = tbl_items.OrderBy(a => a.OrderID);
             int currentPage = page;
             ViewBag.CurrentPage = page;
-            switch (m0_s1_c2)
+            switch (m0_s1_c2_new3_km4_hot5)
             {
-                case 0: ViewBag.Title = "Sản phẩm theo chất liệu: "+key; break;
+                case 0: ViewBag.Title = "Sản phẩm theo chất liệu: " + key; break;
                 case 1: ViewBag.Title = "Sản phẩm theo kiểu dáng: " + key; break;
                 case 2: ViewBag.Title = "Sản phẩm theo màu sắc: " + key; break;
+                case 3: ViewBag.Title = "Sản phẩm mới"; break;
+                case 4: ViewBag.Title = "Sản phẩm khuyến mãi"; break;
+                case 5: ViewBag.Title = "Sản phẩm bán chạy nhất"; break;
             }
             return View(tbl_items.ToPagedList(currentPage, maxRecords));
         }

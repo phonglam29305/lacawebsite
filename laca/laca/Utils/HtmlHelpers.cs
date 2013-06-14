@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace System.Web.Mvc
 {
+
     public static partial class HtmlHelpers
     {
         public static MvcHtmlString ActionQueryLink(this HtmlHelper htmlHelper,

@@ -2137,6 +2137,7 @@ tr.summary-details-excluded {
 }
 .product-view .product-img-box .more-views ul {
     margin-left: -10px;
+    width: 500px;
 }
 .product-view .product-img-box .more-views li {
     float: left;
@@ -3142,12 +3143,12 @@ tr.summary-details-excluded {
 }
 .product-review .product-img-box {
     float: left;
-    width: 140px;
+    width: 500px;
 }
 .product-review .product-img-box .product-image {
     display: block;
     height: 125px;
-    width: 125px;
+    width: 500px;
 }
 .product-review .product-img-box .label {
     font-size: 11px;

@@ -1,50 +1,75 @@
 ﻿@model laca.Models.LoginModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Đăng nhập";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
+<div class="main-container col2-right-layout">
+    <hgroup class="title">
+        <h1>@ViewBag.Title.</h1>
+    </hgroup>
+    <br />
+    <br />
+    <br />
+    <style>
+        #login {
+            margin-left: auto;
+            margin-right: auto;
+            width: 30%;
+            height: 200px;
+            background: url("../../images/Images/totals.gif");
+        }
 
-<section id="loginForm">
-<h2>Use a local account to log in.</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+        .valuefield {
+            padding: 5px 5px 5px 5px;
+            min-height: 30px;
+        }
 
-    <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-        </ol>
-        <input type="submit" value="Log in" />
-    </fieldset>
-    <p>
+        .textfield {
+            padding: 5px 5px 5px 5px;
+            float: left;
+            width: 100px;
+            min-height: 30px;
+            text-align: right;
+        }
+    </style>
+    <section id="loginForm">
+        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+             
+            <div id="login">
+                <div class="textfield">
+                    Tên đăng nhập
+                </div>
+                <div class="valuefield">
+                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+
+                <div class="textfield">Mật khẩu</div>
+                <div>
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)<br /><br />
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    Lưu mật khẩu<br /><br />
+                    <input type="submit" value="Đăng nhập" />
+                </div>
+               
+            </div>
+@*<p>
         @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
-}
-</section>
+    </p>*@
+        }
+    </section>
 
-<section class="social" id="socialLoginForm">
+    @*<section class="social" id="socialLoginForm">
     <h2>Use another service to log in.</h2>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+</section>*@
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

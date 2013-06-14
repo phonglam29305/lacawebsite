@@ -478,7 +478,6 @@
           <Member Name="Order" Value="1" />
           <Member Name="Cancel" Value="2" />
           <Member Name="Delivery" Value="3" />
-          <Member Name="Creating" Value="4" />
         </EnumType>
         <EnumType Name="SytemContent">
           <Member Name="About" Value="1" />

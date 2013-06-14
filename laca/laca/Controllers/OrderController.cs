@@ -37,6 +37,9 @@ namespace laca.Controllers
                 List<tbl_OrderDetail> list = Session[Session.SessionID] as List<tbl_OrderDetail>;
                 return View(list);
             }
+
+            ViewBag.Style = "visibility: visible";
+            if (id > 0) { ViewBag.Style = "visibility: hidden;"; }
             return View(tbl_orders.tbl_OrderDetail.ToList());
         }
 
@@ -173,11 +176,19 @@ namespace laca.Controllers
         public ActionResult Edit(int id = 0)
         {
             tbl_Orders tbl_orders = db.tbl_Orders.Find(id);
+
             if (tbl_orders == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerID = new SelectList(db.tbl_Customers, "CustomerID", "CustomerName", tbl_orders.CustomerID);
+            //ViewBag.Status = Enum.GetValues(typeof(laca.Models.OrderStatus)).Cast<laca.Models.OrderStatus>().Select(v => new SelectListItem
+            //   {
+            //       Text = v.ToString().Replace("_", " "),
+            //       Value = ((int)v).ToString()
+            //   });
+            ViewBag.DeliveryDate = tbl_orders.DeliveryDate == null ? "" : tbl_orders.DeliveryDate.Value.ToString("dd/MM/yyyy");
+            ViewBag.Customer = db.tbl_Customers.Find(tbl_orders.CustomerID).CustomerName;
+            ViewBag.Amount = tbl_orders.tbl_OrderDetail.Sum(a => a.Amount).Value.ToString("#,###");      
             return View(tbl_orders);
         }
 
@@ -188,13 +199,26 @@ namespace laca.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(tbl_Orders tbl_orders)
         {
+            var date = DateTime.Now;
+            tbl_orders.DeliveryDate = null;
+            string[] s = (Request.Form["datepicker"] + "").Split('/');
+            try
+            {
+                date = new DateTime(Convert.ToInt16(s[2]), Convert.ToInt16(s[1]), Convert.ToInt16(s[0]));
+            tbl_orders.DeliveryDate = date;
+            }
+            catch (Exception e) { if(tbl_orders.Status == OrderStatus.Delivery)ModelState.AddModelError("DeliveryDate", "Ngày nhập hàng chưa đúng"); }
             if (ModelState.IsValid)
             {
+                
                 db.Entry(tbl_orders).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerID = new SelectList(db.tbl_Customers, "CustomerID", "CustomerName", tbl_orders.CustomerID);
+            tbl_orders = db.tbl_Orders.Find(tbl_orders.OrderID);
+            ViewBag.Customer = db.tbl_Customers.Find(tbl_orders.CustomerID).CustomerName;
+            ViewBag.DeliveryDate = tbl_orders.DeliveryDate == null ? "" : tbl_orders.DeliveryDate.Value.ToString("dd/MM/yyyy");
+            ViewBag.Amount = tbl_orders.tbl_OrderDetail.Sum(a=>a.Amount).Value.ToString("#,###");
             return View(tbl_orders);
         }
 
@@ -219,6 +243,9 @@ namespace laca.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tbl_Orders tbl_orders = db.tbl_Orders.Find(id);
+            List<tbl_OrderDetail> arr = tbl_orders.tbl_OrderDetail.ToList();
+            foreach(var item in arr)
+                db.tbl_OrderDetail.Remove(item);
             db.tbl_Orders.Remove(tbl_orders);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
-    <script src="~/Scripts/siteScripts/ga.js" async="" type="text/javascript"></script>
+    @* <script src="~/Scripts/siteScripts/ga.js" async="" type="text/javascript"></script>
     <script src="~/Scripts/siteScripts/cloudflare.js" async=""></script>
     <script type="text/javascript">
         //<![CDATA[
@@ -22,8 +22,8 @@
         //]]>
     </script>
     <script src="~/Scripts/siteScripts/jquery-1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/siteScripts/jquery.js" type="text/javascript" charset="utf-8"></script>*@
     <script src="~/Scripts/siteScripts/jquery_002.js" type="text/javascript" charset="utf-8"></script>
-    <script src="~/Scripts/siteScripts/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
         var J = jQuery.noConflict();
     </script>
@@ -164,26 +164,49 @@
         <div class="page">
             <div class="header-container">
                 <div class="header">
-                    <h1 class="logo"><strong>lacashopv.vn</strong><a href="~/" title="Magento Commerce"><img src="~/Images/images/logo.gif" alt="Magento Commerce"></a></h1>
+                    <h1 class="logo"><strong>lacashop.vn</strong><a href="~/" title="Magento Commerce"><img src="~/Images/images/logo.gif" alt="Magento Commerce"></a></h1>
                     <div class="quick-access">
                         <p class="welcome-msg">Chào mừng bạn đến với laca shop!</p>
-                            <div class="form-search">
-                                <label for="search">Tìm kiếm:</label>
-                                <input autocomplete="off" id="search" name="q" value="Tìm kiếm sản phẩm..." class="input-text" type="text">
-                                <button type="submit" title="Tìm kiếm" class="button"><span><span>Tìm kiếm</span></span></button>
-                                <div style="display: none;" id="search_autocomplete" class="search-autocomplete"></div>
-                                <script type="text/javascript">
-                                    //<![CDATA[
-                                    var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Tìm kiếm sản phẩm...');
-                                    searchForm.initAutocomplete('http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/ajax/suggest/', 'search_autocomplete');
-                                    //]]>
-                                </script>
-                            </div>
-                       
+                        <div class="form-search">
+                            <label for="search">Tìm kiếm:</label>
+                            <input autocomplete="off" id="search" name="q" value="Tìm kiếm sản phẩm..." class="input-text" type="text">
+                            <button type="submit" title="Tìm kiếm" class="button"><span><span>Tìm kiếm</span></span></button>
+                            <div style="display: none;" id="search_autocomplete" class="search-autocomplete"></div>
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Tìm kiếm sản phẩm...');
+                                searchForm.initAutocomplete('http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/ajax/suggest/', 'search_autocomplete');
+                                //]]>
+                            </script>
+                        </div>
+
                         <ul class="links">
-                            <li><a href="~/" title="My Cart" class="top-link-cart">Giỏ hàng</a></li>
-                            @*<li><a href="~/Account/Logout" title="Checkout" class="top-link-checkout">Thoát</a></li>*@
-                            <li class=" last"><a href="~/Account/Login" title="Log In">Đăng nhập</a></li>
+                            <li>
+                                <a href="http://www.facebook.com/pages/Lacashop/495701970499055?ref=hl" title="" target="_blank">
+                                    <img width="21" height="21" border="0" src="~/images/1371212232_facebook.png">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="ymsgr:SendIM?vu_phanuy" title="">
+                                    <img width="101" height="21" border="0" src="http://mail.opi.yahoo.com/online?u=vu_phanuy&m=g&t=2">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="skype:phonglam29305?chat" title="">
+                                    <img alt="Nick Skype status" src="~/images/skype.png" height="21">
+                                </a>
+                            </li>
+                            <li><a href="~/order/details" title="My Cart" class="top-link-cart">Giỏ hàng</a></li>
+                            @{
+                                if (!User.Identity.IsAuthenticated)
+                                { 
+                                <li class=" last"><a href="~/Account/Login" title="Log In">Đăng nhập</a></li>}
+                                else
+                                {
+                                <li class=" last"><a href="~/Account/LogOff" title="Log In">@User.Identity.Name&nbsp;(Thoát)</a></li> 
+                                }
+                              
+                            }
                         </ul>
                     </div>
                     <div class="nav-container">
@@ -218,27 +241,34 @@
                                 </li>
                                 }
                             }
-                            
+
                         </ul>
                     </div>
                 </div>
             </div>
-            
+
             @*main-container col1-layout<div class="main-container col2-right-layout">*@
-                @RenderBody()
-           
-            
+            @RenderBody()
+
+
             <div class="footer-container">
                 <div class="footer">
                     <ul>
                         <li><a href="~/home/systemcontent/1">Giới thiệu</a></li>
                         <li class="last"><a href="~/home/systemcontent/4">Dịch vụ khách hàng</a></li>
-                    </ul>
-                    <ul class="links">
                         <li class="first"><a href="~/home/systemcontent/3" title="Sơ đồ website">Thanh toán</a></li>
                         <li><a href="~/item/search" title="Tìm kiếm nâng cao">Tìm kiếm nâng cao</a></li>
                         <li class=" last"><a href="~/home/systemcontent/2" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
                     </ul>
+                    <div id="fb-root"></div>
+                    <script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+                    <div class="fb-like-box" data-href="http://www.facebook.com/pages/Lacashop/495701970499055?ref=hl" data-width="292" data-height="300" data-show-faces="true" data-stream="false" data-show-border="false" data-header="false"></div>
                     <div class="clear"></div>
                     <address>
                         © 2013 Bản quyền lacashop.vn<br>
@@ -248,6 +278,6 @@
         </div>
     </div>
 
-    
+
 </body>
 </html>

@@ -15,7 +15,6 @@ namespace laca.Models
     {
         Order = 1,
         Cancel = 2,
-        Delivery = 3,
-        Creating = 4
+        Delivery = 3
     }
 }

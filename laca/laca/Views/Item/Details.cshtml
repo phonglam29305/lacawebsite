@@ -93,7 +93,7 @@
                     </div>
                     <div class="product-img-box">
                         <p class="product-image">
-                            <img style="width: 265px; left: 0px; top: 0px;" id="image" src="~/Images/Uploads/@Model.Images" alt="kate spade" title="kate spade">
+                            <img style="width: 265px; left: 0px; top: 0px;" id="image" src="~/Images/Uploads/@Model.Images" alt="@Model.ItemName" title="@Model.ItemName">
                         </p>
 
                         @{
@@ -119,8 +119,8 @@
                                 <h2>Xem thêm</h2>
                                 <ul>
                                     <li>
-                                        <a href="#" onclick="$('image').src='@Model.Images'; resetImage('@Model.Images');return false;" title="">
-                                            <img src="@Model.Images" alt="" height="68" width="68"></a>
+                                        <a href="#" onclick="$('image').src='@Href("~/images/uploads/"+Model.Images)'; resetImage('@Model.Images');return false;" title="">
+                                            <img src="~/images/uploads/@Model.Images" alt="" height="68" width="68"></a>
                                     </li>
                                     @foreach (var image in list)
                                     {
@@ -156,15 +156,15 @@
                             <tbody>
                                 <tr class="first last odd">
                                     <th class="label">Kiểu dáng</th>
-                                    <td class="data last">@Html.ActionLink(Model.Style, "ItemByProperties", new { key = Model.Style, ItemGroupID = Model.ItemGroupID, m0_s1_c2 = 1 })</td>
+                                    <td class="data last">@Html.ActionLink(Model.Style, "ItemByProperties", new { key = Model.Style, ItemGroupID = Model.ItemGroupID, m0_s1_c2_new3_km4_hot5 = 1 })</td>
                                 </tr>
                                 <tr class="first last odd">
                                     <th class="label">Chất liệu</th>
-                                    <td class="data last">@Html.ActionLink(Model.Material, "ItemByProperties", new { key = Model.Material, ItemGroupID = Model.ItemGroupID, m0_s1_c2 = 0 })</td>
+                                    <td class="data last">@Html.ActionLink(Model.Material, "ItemByProperties", new { key = Model.Material, ItemGroupID = Model.ItemGroupID, m0_s1_c2_new3_km4_hot5 = 0 })</td>
                                 </tr>
                                 <tr class="first last odd">
                                     <th class="label">Màu sắc</th>
-                                    <td class="data last">@Html.ActionLink(Model.Color, "ItemByProperties", new { key = Model.Color, ItemGroupID = Model.ItemGroupID, m0_s1_c2 = 2 })</td>
+                                    <td class="data last">@Html.ActionLink(Model.Color, "ItemByProperties", new { key = Model.Color, ItemGroupID = Model.ItemGroupID, m0_s1_c2_new3_km4_hot5 = 2 })</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -289,82 +289,65 @@
                     //]]>
                 </script>
             </div>
-            @* <div class="block block-cart">
-                <div class="block-title">
-                    <strong><span>My Cart</span></strong>
-                </div>
-                <div class="block-content">
-                    <p class="empty">You have no items in your shopping cart.</p>
-                </div>
-            </div>*@
-            <div class="block block-cart">
-                <div class="block-title">
-                    <strong><span>Giỏ hàng</span></strong>
-                </div>
-                <div class="block-content">
-                    <div class="summary">
-                        <p class="amount">There are <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/">2 items</a> in your cart.</p>
-                        <p class="subtotal">
-                            <span class="label">Cart Subtotal:</span> <span class="price">$370.00</span>
-                        </p>
+            @{
+                if (Session[Session.SessionID] == null)
+                {
+                    Session[Session.SessionID] = new List<laca.Models.tbl_OrderDetail>();
+                }
+
+                List<laca.Models.tbl_OrderDetail> listItem = Session[Session.SessionID] as List<laca.Models.tbl_OrderDetail>;
+                if (listItem.Count == 0)
+                {
+                <div class="block block-cart">
+                    <div class="block-title">
+                        <strong><span>Giỏ hàng</span></strong>
                     </div>
-                    <div class="actions">
-                        <button type="button" title="Checkout" class="button" onclick="setLocation(&#39;http://livedemo00.template-help.com/magento_34403/index.php/checkout/onepage/&#39;)"><span><span>Checkout</span></span></button>
+                    <div class="block-content">
+                        <p class="empty">Bạn không có sản phẩm nào trong giỏ hàng.</p>
                     </div>
-                    <p class="block-subtitle">Recently added item(s)</p>
-                    <ol id="cart-sidebar" class="mini-products-list">
-                        <li class="item odd">
-                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/carhartt-thermal-lined-hooded-pullover-sweatshirt.html" title="Carhartt  Thermal - Lined Hooded Pullover Sweatshirt" class="product-image">
-                                <img src="./Accessories_files/file_1_17.jpg" width="100" height="130" alt="Carhartt  Thermal - Lined Hooded Pullover Sweatshirt"></a>
-                            <div class="product-details">
-                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/delete/id/998/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy9pbmRleC5waHAvYWNjZXNzb3JpZXM,/" title="Remove This Item" onclick="return confirm(&#39;Are you sure you would like to remove this item from the shopping cart?&#39;);" class="btn-remove">Remove This Item</a>
-                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/configure/id/998/" title="Edit item" class="btn-edit">Edit item</a>
-                                <p class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/carhartt-thermal-lined-hooded-pullover-sweatshirt.html">Carhartt Thermal - Lined Hooded Pullover Sweatshirt</a></p>
-                                <strong>1</strong> x
-                                            <span class="price">$120.00</span>
-                                <div class="truncated" id="">
-                                    <div class="truncated_full_value">
-                                        <dl class="item-options">
-                                            <dt>Color</dt>
-                                            <dd>black </dd>
-                                            <dt>Manufactures</dt>
-                                            <dd>Adidas </dd>
-                                            <dt>Size</dt>
-                                            <dd>Small </dd>
-                                        </dl>
-                                    </div>
-                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories#" onclick="return false;" class="details">Details</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="item last even">
-                            <a href="http://livedemo00.template-help.com/magento_34403/index.php/oversized-jetset-tote.html" title="Oversized  Jetset Tote" class="product-image">
-                                <img src="./Accessories_files/file_1_6(1).jpg" width="100" height="130" alt="Oversized  Jetset Tote"></a>
-                            <div class="product-details">
-                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/delete/id/997/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b18zNDQwMy9pbmRleC5waHAvYWNjZXNzb3JpZXM,/" title="Remove This Item" onclick="return confirm(&#39;Are you sure you would like to remove this item from the shopping cart?&#39;);" class="btn-remove">Remove This Item</a>
-                                <a href="http://livedemo00.template-help.com/magento_34403/index.php/checkout/cart/configure/id/997/" title="Edit item" class="btn-edit">Edit item</a>
-                                <p class="product-name"><a href="http://livedemo00.template-help.com/magento_34403/index.php/oversized-jetset-tote.html">Oversized Jetset Tote</a></p>
-                                <strong>1</strong> x
-                                            <span class="price">$250.00</span>
-                                <div class="truncated">
-                                    <div class="truncated_full_value">
-                                        <dl class="item-options">
-                                            <dt>Color</dt>
-                                            <dd>black </dd>
-                                            <dt>Manufactures</dt>
-                                            <dd>Adidas </dd>
-                                            <dt>Size </dt>
-                                            <dd>Large </dd>
-                                        </dl>
-                                    </div>
-                                    <a href="http://livedemo00.template-help.com/magento_34403/index.php/accessories#" onclick="return false;" class="details">Details</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ol>
-                    <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
                 </div>
-            </div>
+                }
+                else
+                {
+                <div class="block block-cart">
+                    <div class="block-title">
+                        <strong><span>Giỏ hàng</span></strong>
+                    </div>
+                    <div class="block-content">
+                        <div class="summary">
+                            <p class="amount">Có <a href="~/order/details">@listItem.Count sản phẩm</a> trong giỏ hàng.</p>
+                            <p class="subtotal">
+                                <span class="label">Tổng giá trị giỏ hàng:</span> <span class="price">@listItem.Sum(a=>a.Amount).Value.ToString("#,###")</span>
+                            </p>
+                        </div>
+                        <div class="actions">
+                            <button type="button" title="Checkout" class="button" onclick="~/order/details"><span><span>Đặt hàng</span></span></button>
+                        </div>
+                        <p class="block-subtitle">Sản phẩm trong giỏ hàng</p>
+                        <ol id="cart-sidebar" class="mini-products-list">
+                            @foreach (var item in listItem)
+                            {
+                                <li class="item odd">
+                                    <a href="~/item/details/@item.ItemID" title="@item.tbl_Items.ItemName" class="product-image">
+                                        <img src="~/images/uploads/@item.tbl_Items.Images" width="100" height="130" alt="@item.tbl_Items.ItemName"></a>
+                                    <div class="product-details">
+                                        <a href="~/order/RemoveItem?ItemID=@item.ItemID" title="Remove This Item" onclick="return confirm(&#39;Bạn có chắc là muốn xóa sản phẩm này khỏi giỏ hàng không?&#39;);" class="btn-remove">Remove This Item</a>
+                                        <a href="~/item/details/@item.ItemID" title="Edit item" class="btn-edit">Edit item</a>
+                                        <p class="product-name"><a href="~/item/details/@item.ItemID">@item.tbl_Items.ItemName</a></p>
+                                        <strong>@item.Qty</strong> x
+                                            <span class="price">@item.Price.Value.ToString("#,###")</span>
+
+                                    </div>
+                                </li>
+                            }
+                        </ol>
+                        <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
+                    </div>
+                </div>
+                }
+            }
+            @**@
+
         </div>
     </div>
 

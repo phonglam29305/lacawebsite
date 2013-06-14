@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "../shared/_AdminLayout.cshtml";
 }
 <div class="main-container col2-right-layout">
     <h2>Index</h2>
@@ -11,20 +12,17 @@
     </p>
     <table id="giohang">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderID)
+            <th>Mã đơn hàng
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tbl_Customers.CustomerName)
+            <th>Tên khách hàng
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
+            <th>Ngày đặt hàng
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeliveryDate)
+            <th>Ngày giao hàng
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalValue)
+            <th>Tổng giá trị
+            </th>
+            <th>Trạng thái
             </th>
             <th></th>
         </tr>
@@ -45,12 +43,15 @@
                     @Html.DisplayFor(modelItem => item.DeliveryDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TotalValue)
+                    @item.tbl_OrderDetail.Sum(a=>a.Amount).Value.ToString("#,###")
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new {  id=item.OrderID}) |
-            @Html.ActionLink("Details", "Details", new {  id=item.OrderID }) |
-            @Html.ActionLink("Delete", "Delete", new {  id=item.OrderID  })
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
+            @*@Html.ActionLink("Details", "Details", new {  id=item.OrderID }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.OrderID })
                 </td>
             </tr>
         }

@@ -5,6 +5,7 @@
     int groupid = 0;
     if (Model.Count() > 0)
     { groupid = Model.FirstOrDefault().tbl_Items.ItemGroupID.Value; }
+    
 }
 <div class="main-container col1-layout">
     <div class="main">
@@ -30,7 +31,7 @@
                     <tfoot>
                         <tr class="first last">
                             <td colspan="50" class="a-right last">
-                                <button type="button" title="Tiếp tục chọn sản phẩm" class="button btn-continue left" onclick="window.location.href='../item/itembyitemgroup/@groupid'"><span><span>Tiếp tục chọn sản phẩm</span></span></button>
+                                <button style="@ViewBag.Style" type="button" title="Tiếp tục chọn sản phẩm" class="button btn-continue left" onclick="window.location.href='../item/itembyitemgroup/@groupid'"><span><span>Tiếp tục chọn sản phẩm</span></span></button>
 
                             </td>
                         </tr>
@@ -75,11 +76,13 @@
                 <script type="text/javascript">
                     //decorateTable('shopping-cart-table');
                     function addItem(id, price) {
-                        var url = "../order/additem?itemid=" + id + "&price=" + price + "&qtty=1";
+                        var url = "/order/additem?itemid=" + id + "&price=" + price + "&qtty=1";
                         //alert(url);
                         window.location.href = url;
                     }
                     function order() {
+                        var count = @Model.Count();
+                        if(count==0){alert("Vui lòng chọn sản phẩm trước khi đặt hàng!");return;}
                         var cusname = $("name").value;
                         if (cusname == "") { alert('Vui lòng nhập họ tên'); $("name").focus(); return; }
 
@@ -117,7 +120,7 @@
                 </script>
 
 
-                <div class="cart-collaterals">
+                <div class="cart-collaterals"  style="@ViewBag.Style">
                     <div class="col2-set">
                         <div class="col-1">
                             <div class="crosssell">
@@ -147,7 +150,8 @@
 
                                                     </span>
                                                 </div>
-                                                <button type="button" title="Add to Cart" class="button btn-cart" onclick="addItem(@item.ItemID, @item.Price)"><span><span>Thêm vào giỏ hàng</span></span></button>
+                                                
+                                                <button style="@ViewBag.Style" type="button" title="Add to Cart" class="button btn-cart" onclick="addItem(@item.ItemID, @item.Price)"><span><span>Thêm vào giỏ hàng</span></span></button>
 
                                             </div>
                                         </li>

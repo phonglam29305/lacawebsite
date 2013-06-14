@@ -41,7 +41,7 @@ namespace laca.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("", "Sai thông tin đăng nhập.");
             return View(model);
         }
 
@@ -81,7 +81,7 @@ namespace laca.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Order");
                 }
                 catch (MembershipCreateUserException e)
                 {

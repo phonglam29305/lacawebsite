@@ -9,6 +9,7 @@ namespace laca.Controllers
 {
     public class HomeController : Controller
     {
+        private lacashop_dbEntities db = new lacashop_dbEntities();
 
         public ActionResult Index()
         {
@@ -29,6 +30,15 @@ namespace laca.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult systemcontent(laca.Models.SytemContent id = 0)
+        {
+            tbl_SystemContent tbl_SystemContent = db.tbl_SystemContent.Find(id);
+            if (tbl_SystemContent == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_SystemContent);
         }
         
     }

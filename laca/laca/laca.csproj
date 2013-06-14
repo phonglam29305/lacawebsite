@@ -221,6 +221,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Content Include="Content\datepicker\css\jquery-ui.css" />
+    <Content Include="Content\datepicker\css\ui.theme.css" />
+    <Content Include="Content\datepicker\js\caption.js" />
+    <Content Include="Content\datepicker\js\domready_fix.js" />
+    <Content Include="Content\datepicker\js\engine-mootools-11.js" />
+    <Content Include="Content\datepicker\js\gk.script.js" />
+    <Content Include="Content\datepicker\js\gk_image_show.js" />
+    <Content Include="Content\datepicker\js\jquery-ui-i18n.min.js" />
+    <Content Include="Content\datepicker\js\jquery-ui.min.js" />
+    <Content Include="Content\datepicker\js\jquery.bgiframe-2.1.2.js" />
+    <Content Include="Content\datepicker\js\k2.js" />
+    <Content Include="Content\datepicker\js\k2store.js" />
+    <Content Include="Content\datepicker\js\mega.js" />
+    <Content Include="Content\datepicker\js\modal.js" />
+    <Content Include="Content\datepicker\js\mootools.js" />
+    <Content Include="html\test.htm" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Data_Validation.cs" />
     <Compile Include="Models\LacaShopEntity.Context.cs">
@@ -621,9 +637,14 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LacaShopEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\1371212232_facebook.png" />
+    <Content Include="Images\images\button.gif" />
     <Content Include="Images\images\dot.png" />
+    <Content Include="Images\images\page-title.gif" />
+    <Content Include="Images\images\proceed.gif" />
     <Content Include="Images\images\slider_btn_zoom_in.gif" />
     <Content Include="Images\images\slider_btn_zoom_out.gif" />
+    <Content Include="Images\images\totals.gif" />
     <Content Include="Models\LacaShopEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LacaShopEntity.edmx</DependentUpon>
@@ -704,6 +725,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\eye.js" />
+    <Content Include="Scripts\js\jquery.js" />
+    <Content Include="Scripts\js\layout.js" />
+    <Content Include="Scripts\js\utils.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -715,6 +740,7 @@
     <Content Include="Scripts\siteScripts\configurable.js" />
     <Content Include="Scripts\siteScripts\controls.js" />
     <Content Include="Scripts\siteScripts\cookies.js" />
+    <Content Include="Scripts\js\datepicker.js" />
     <Content Include="Scripts\siteScripts\dragdrop.js" />
     <Content Include="Scripts\siteScripts\effects.js" />
     <Content Include="Scripts\siteScripts\form.js" />
@@ -800,6 +826,7 @@
     <Content Include="Views\Item\ItemByItemGroup.cshtml" />
     <Content Include="Views\Item\ItemByProperties.cshtml" />
     <Content Include="Views\Order\ThankYou.cshtml" />
+    <Content Include="Views\Home\systemcontent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
