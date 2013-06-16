@@ -1,0 +1,29 @@
+﻿<p>
+    @if (Model.HasPreviousPage)
+    {
+        @Ajax.ActionLink("<< Trang đầu", "ItemByItemGroup", new { page = 1, sortOrder = ViewBag.CurrentSortOrder, id = ViewBag.CurrentID }, new AjaxOptions { UpdateTargetId = "main" })
+        @Html.Raw("&nbsp;");
+        @Ajax.ActionLink("< Trang trước", "ItemByItemGroup", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSortOrder, id = ViewBag.CurrentID }, new AjaxOptions { UpdateTargetId = "main" })
+    }
+    else
+    {
+        @:<< Trang đầu
+        @Html.Raw("&nbsp;");
+        @:< Trang trước
+    }
+
+    &nbsp;&nbsp;
+    
+    @if (Model.HasNextPage)
+    {
+        @Ajax.ActionLink("Trang sau >", "ItemByItemGroup", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSortOrder, id = ViewBag.CurrentID }, new AjaxOptions { UpdateTargetId = "main" })
+        @Html.Raw("&nbsp;");
+        @Ajax.ActionLink("Trang cuối >>", "ItemByItemGroup", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSortOrder, id = ViewBag.CurrentID }, new AjaxOptions { UpdateTargetId = "main" })
+    }
+    else
+    {
+        @:Trang sau >
+        @Html.Raw("&nbsp;")
+        @:Trang cuối >>
+    }
+</p>

@@ -27,7 +27,7 @@
                 <h2 class="title_popular">@Model.FirstOrDefault().tbl_ItemGroup.ItemGroupName</h2>
                 <div class="list_carousel">
                     <div class="pagination_carousel" id="foo2_pag"><a class="" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a></div>
-                    <div style="position: relative; overflow: hidden; margin: 0px; width: 100%; height: 252px;" class="caroufredsel_wrapper">
+                    <div style="position: relative; overflow: hidden; margin: 0px; width: 100%; height: 470px;" class="caroufredsel_wrapper">
                         @{
                                         
         foreach (var item in Model)
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                @Html.Partial("_Paging")
+                @Html.Partial("_PagingGroup")
             </div>
         </div>
     </div>

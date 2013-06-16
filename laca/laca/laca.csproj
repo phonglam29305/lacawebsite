@@ -222,6 +222,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Content Include="Content\datepicker\css\jquery-ui.css" />
+    <Content Include="Content\datepicker\css\styles.css" />
     <Content Include="Content\datepicker\css\ui.theme.css" />
     <Content Include="Content\datepicker\js\caption.js" />
     <Content Include="Content\datepicker\js\domready_fix.js" />
@@ -725,10 +726,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\js\eye.js" />
-    <Content Include="Scripts\js\jquery.js" />
-    <Content Include="Scripts\js\layout.js" />
-    <Content Include="Scripts\js\utils.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -740,7 +737,6 @@
     <Content Include="Scripts\siteScripts\configurable.js" />
     <Content Include="Scripts\siteScripts\controls.js" />
     <Content Include="Scripts\siteScripts\cookies.js" />
-    <Content Include="Scripts\js\datepicker.js" />
     <Content Include="Scripts\siteScripts\dragdrop.js" />
     <Content Include="Scripts\siteScripts\effects.js" />
     <Content Include="Scripts\siteScripts\form.js" />
@@ -753,6 +749,7 @@
     <Content Include="Scripts\siteScripts\multizoom.js" />
     <Content Include="Scripts\siteScripts\product.js" />
     <Content Include="Scripts\siteScripts\prototype.js" />
+    <Content Include="Scripts\siteScripts\scripts.js" />
     <Content Include="Scripts\siteScripts\slider.js" />
     <Content Include="Scripts\siteScripts\translate.js" />
     <Content Include="Scripts\siteScripts\validation.js" />
@@ -827,6 +824,9 @@
     <Content Include="Views\Item\ItemByProperties.cshtml" />
     <Content Include="Views\Order\ThankYou.cshtml" />
     <Content Include="Views\Home\systemcontent.cshtml" />
+    <Content Include="Views\Shared\_PagingType.cshtml" />
+    <Content Include="Views\Shared\_PagingGroup.cshtml" />
+    <Content Include="Views\Shared\_PagingProperties.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

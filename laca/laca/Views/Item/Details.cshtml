@@ -350,9 +350,14 @@
 
         </div>
     </div>
-
+    @{
+        if(User.Identity.IsAuthenticated)
+        {
+            
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ItemID }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
+        }
+        }
 </div>

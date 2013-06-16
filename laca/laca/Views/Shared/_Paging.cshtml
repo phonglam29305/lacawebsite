@@ -1,9 +1,9 @@
 ﻿<p>
     @if (Model.HasPreviousPage)
     {
-        @Ajax.ActionLink("<< Trang đầu", "Index", new { page = 1, sortOrder = ViewBag.CurrentSortOrder, filter = ViewBag.CurrentFilter, Keyword = ViewBag.CurrentKeyword }, new AjaxOptions { UpdateTargetId = "main" })
+        @Ajax.ActionLink("<< Trang đầu", "Index", new { page = 1, sortOrder = ViewBag.CurrentSortOrder, Keyword = ViewBag.CurrentKeyword, ItemTypeID = ViewBag.TypeID, ItemGroupID = ViewBag.GroupID, IsHot = ViewBag.IsHot, IsDiscount = ViewBag.IsDiscount, IsNew = ViewBag.IsNew, IsHotDeal = ViewBag.IsHotDeal }, new AjaxOptions { UpdateTargetId = "main" })
         @Html.Raw("&nbsp;");
-        @Ajax.ActionLink("< Trang trước", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSortOrder, filter = ViewBag.CurrentFilter, Keyword = ViewBag.CurrentKeyword }, new AjaxOptions { UpdateTargetId = "main" })
+        @Ajax.ActionLink("< Trang trước", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSortOrder, Keyword = ViewBag.CurrentKeyword, ItemTypeID = ViewBag.TypeID, ItemGroupID = ViewBag.GroupID, IsHot = ViewBag.IsHot, IsDiscount = ViewBag.IsDiscount, IsNew = ViewBag.IsNew, IsHotDeal = ViewBag.IsHotDeal }, new AjaxOptions { UpdateTargetId = "main" })
     }
     else
     {
@@ -16,9 +16,9 @@
     
     @if (Model.HasNextPage)
     {
-        @Ajax.ActionLink("Trang sau >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSortOrder, filter = ViewBag.CurrentFilter, Keyword = ViewBag.CurrentKeyword }, new AjaxOptions { UpdateTargetId = "main" })
+        @Ajax.ActionLink("Trang sau >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSortOrder, Keyword = ViewBag.CurrentKeyword, ItemTypeID = ViewBag.TypeID, ItemGroupID = ViewBag.GroupID, IsHot = ViewBag.IsHot, IsDiscount = ViewBag.IsDiscount, IsNew = ViewBag.IsNew, IsHotDeal = ViewBag.IsHotDeal }, new AjaxOptions { UpdateTargetId = "main" })
         @Html.Raw("&nbsp;");
-        @Ajax.ActionLink("Trang cuối >>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSortOrder, filter = ViewBag.CurrentFilter, Keyword = ViewBag.CurrentKeyword }, new AjaxOptions { UpdateTargetId = "main" })
+        @Ajax.ActionLink("Trang cuối >>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSortOrder, Keyword = ViewBag.CurrentKeyword, ItemTypeID = ViewBag.TypeID, ItemGroupID = ViewBag.GroupID, IsHot = ViewBag.IsHot, IsDiscount = ViewBag.IsDiscount, IsNew = ViewBag.IsNew, IsHotDeal = ViewBag.IsHotDeal }, new AjaxOptions { UpdateTargetId = "main" })
     }
     else
     {

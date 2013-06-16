@@ -1,0 +1,29 @@
+﻿<p>
+    @if (Model.HasPreviousPage)
+    {
+        @Ajax.ActionLink("<< Trang đầu", "ItemByProperties", new { page = 1, sortOrder = ViewBag.CurrentSortOrder, key = ViewBag.CurrentKey, ItemGroupID = ViewBag.CurrentItemGroupID, m0_s1_c2_new3_km4_hot5 = ViewBag.Currentm0_s1_c2_new3_km4_hot5 }, new AjaxOptions { UpdateTargetId = "main" })
+        @Html.Raw("&nbsp;");
+        @Ajax.ActionLink("< Trang trước", "ItemByProperties", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSortOrder, key = ViewBag.CurrentKey, ItemGroupID = ViewBag.CurrentItemGroupID, m0_s1_c2_new3_km4_hot5 = ViewBag.Currentm0_s1_c2_new3_km4_hot5 }, new AjaxOptions { UpdateTargetId = "main" })
+    }
+    else
+    {
+        @:<< Trang đầu
+        @Html.Raw("&nbsp;");
+        @:< Trang trước
+    }
+
+    &nbsp;&nbsp;
+    
+    @if (Model.HasNextPage)
+    {
+        @Ajax.ActionLink("Trang sau >", "ItemByProperties", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSortOrder, key = ViewBag.CurrentKey, ItemGroupID = ViewBag.CurrentItemGroupID, m0_s1_c2_new3_km4_hot5 = ViewBag.Currentm0_s1_c2_new3_km4_hot5 }, new AjaxOptions { UpdateTargetId = "main" })
+        @Html.Raw("&nbsp;");
+        @Ajax.ActionLink("Trang cuối >>", "ItemByProperties", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSortOrder, key = ViewBag.CurrentKey, ItemGroupID = ViewBag.CurrentItemGroupID, m0_s1_c2_new3_km4_hot5 = ViewBag.Currentm0_s1_c2_new3_km4_hot5 }, new AjaxOptions { UpdateTargetId = "main" })
+    }
+    else
+    {
+        @:Trang sau >
+        @Html.Raw("&nbsp;")
+        @:Trang cuối >>
+    }
+</p>

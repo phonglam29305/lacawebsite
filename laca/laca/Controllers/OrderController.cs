@@ -17,6 +17,7 @@ namespace laca.Controllers
         //
         // GET: /Order/
 
+        [Authorize]
         public ActionResult Index()
         {
             var tbl_orders = db.tbl_Orders.Include(t => t.tbl_Customers);
@@ -144,6 +145,7 @@ namespace laca.Controllers
         //
         // GET: /Order/Create
 
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.CustomerID = new SelectList(db.tbl_Customers, "CustomerID", "CustomerName");
@@ -155,6 +157,7 @@ namespace laca.Controllers
         //
         // POST: /Order/Create
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(tbl_Orders tbl_orders)
@@ -173,6 +176,7 @@ namespace laca.Controllers
         //
         // GET: /Order/Edit/5
 
+        [Authorize]
         public ActionResult Edit(int id = 0)
         {
             tbl_Orders tbl_orders = db.tbl_Orders.Find(id);
@@ -195,6 +199,7 @@ namespace laca.Controllers
         //
         // POST: /Order/Edit/5
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(tbl_Orders tbl_orders)
@@ -225,6 +230,7 @@ namespace laca.Controllers
         //
         // GET: /Order/Delete/5
 
+        [Authorize]
         public ActionResult Delete(int id = 0)
         {
             tbl_Orders tbl_orders = db.tbl_Orders.Find(id);
@@ -238,6 +244,7 @@ namespace laca.Controllers
         //
         // POST: /Order/Delete/5
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

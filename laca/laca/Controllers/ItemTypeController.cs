@@ -16,6 +16,7 @@ namespace laca.Controllers
         //
         // GET: /ItemType/
 
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.tbl_ItemType.ToList());
@@ -25,6 +26,7 @@ namespace laca.Controllers
         //
         // GET: /ItemType/Details/5
 
+        [Authorize]
         public ActionResult Details(int id = 0)
         {
             tbl_ItemType tbl_itemtype = db.tbl_ItemType.Find(id);
@@ -38,6 +40,7 @@ namespace laca.Controllers
         //
         // GET: /ItemType/Create
 
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace laca.Controllers
         //
         // POST: /ItemType/Create
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(tbl_ItemType tbl_itemtype)
@@ -63,6 +67,7 @@ namespace laca.Controllers
         //
         // GET: /ItemType/Edit/5
 
+        [Authorize]
         public ActionResult Edit(int id = 0)
         {
             tbl_ItemType tbl_itemtype = db.tbl_ItemType.Find(id);
@@ -76,6 +81,7 @@ namespace laca.Controllers
         //
         // POST: /ItemType/Edit/5
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(tbl_ItemType tbl_itemtype)
@@ -92,6 +98,7 @@ namespace laca.Controllers
         //
         // GET: /ItemType/Delete/5
 
+        [Authorize]
         public ActionResult Delete(int id = 0)
         {
             tbl_ItemType tbl_itemtype = db.tbl_ItemType.Find(id);
@@ -105,6 +112,7 @@ namespace laca.Controllers
         //
         // POST: /ItemType/Delete/5
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

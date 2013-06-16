@@ -3201,15 +3201,17 @@ tr.summary-details-excluded {
     float: left;
 }
 .footer ul li {
-    display: inline;
-    padding: 0 17px 0 0;
+    display: block;
 }
 .footer ul li a {
-    color: #000000;
+    color: #888888;
+    display: inline-block;
+    font-family: 'Open Sans',sans-serif;
+    padding-bottom: 9px;
     text-decoration: none;
 }
 .footer ul li a:hover {
-    text-decoration: underline;
+    color: #3D3D3D;
 }
 .footer-container .bottom-container {
     text-align: center;
@@ -3479,4 +3481,37 @@ tr.summary-details-excluded {
 }
 #my-orders-table .last a {
     display: block;
+}
+#back-top {
+    bottom: 30px;
+    left: 50%;
+    margin-left: 520px;
+    position: fixed;
+    z-index: 9999;
+}
+#back-top a {
+    color: #BBBBBB;
+    display: block;
+    font: 11px/100% Arial,Helvetica,sans-serif;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 1s ease 0s;
+    width: 70px;
+}
+#back-top a:hover {
+    color: #79EC3E;
+}
+#back-top span {
+    background: url("../images/images/up-arrow.png") no-repeat scroll center 10px #3F3F3F;
+    border-radius: 10px 10px 10px 10px;
+    display: block;
+    height: 70px;
+    margin-bottom: 7px;
+    transition: all 1s ease 0s;
+    width: 70px;
+}
+#back-top a:hover span {
+    background-color: #FE7745;
+    background-position: center -63px;
 }

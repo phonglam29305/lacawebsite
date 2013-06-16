@@ -9,21 +9,10 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
-    @* <script src="~/Scripts/siteScripts/ga.js" async="" type="text/javascript"></script>
-    <script src="~/Scripts/siteScripts/cloudflare.js" async=""></script>
-    <script type="text/javascript">
-        //<![CDATA[
-        window.__CF = window.__CF || {}; window.__CF.AJS = { "ga_key": { "ua": "UA-7078796-5", "ga_bs": "2" } };
-        //]]>
-    </script>
-    <script type="text/javascript">
-        //<![CDATA[
-        try { if (!window.CloudFlare) { var CloudFlare = [{ verbose: 0, p: 0, byc: 0, owlid: "cf", mirage: { responsive: 0, lazy: 0 }, oracle: 0, paths: { cloudflare: "/cdn-cgi/nexp/abv=378448694/" }, atok: "22e6218c5a356bb1c6ed455649b6a8c2", zone: "template-help.com", rocket: "0", apps: { "ga_key": { "ua": "UA-7078796-5", "ga_bs": "2" } } }]; var a = document.createElement("script"), b = document.getElementsByTagName("script")[0]; a.async = !0; a.src = "//ajax.cloudflare.com/cdn-cgi/nexp/abv=4035706501/cloudflare.min.js"; b.parentNode.insertBefore(a, b); } } catch (e) { };
-        //]]>
-    </script>
     <script src="~/Scripts/siteScripts/jquery-1.js" type="text/javascript" charset="utf-8"></script>
-    <script src="~/Scripts/siteScripts/jquery.js" type="text/javascript" charset="utf-8"></script>*@
+    <script src="~/Scripts/siteScripts/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="~/Scripts/siteScripts/jquery_002.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="~/Scripts/SiteScripts/scripts.js"></script>
     <script type="text/javascript" charset="utf-8">
         var J = jQuery.noConflict();
     </script>
@@ -96,6 +85,7 @@
 <![endif]-->
     @* <link media="all" href="http://livedemo00.template-help.com/magento_34403/skin/frontend/default/theme042k/css/styles.css" type="text/css" rel="stylesheet">
  *@<link rel="stylesheet" type="text/css" href="~/content/styles.css" media="all">
+    @*<link rel="stylesheet" type="text/css" href="~/content/datepicker/css/styles.css" media="all">*@
     <link rel="stylesheet" type="text/css" href="~/content/widgets.css" media="all">
     <link rel="stylesheet" type="text/css" href="~/content/print.css" media="print">
     <script type="text/javascript" src="~/Scripts/SiteScripts/prototype.js"></script>
@@ -152,6 +142,11 @@
     </script>
 </head>
 <body class=" cms-index-index cms-home">
+    <p id="back-top" style="display: block;">
+        <a href="#top">
+            <span></span>
+        </a>
+    </p>
     <div class="wrapper">
         <noscript>
             <div class="noscript">
@@ -260,24 +255,23 @@
                         <li><a href="~/item/search" title="Tìm kiếm nâng cao">Tìm kiếm nâng cao</a></li>
                         <li class=" last"><a href="~/home/systemcontent/2" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
                     </ul>
-                    <div id="fb-root"></div>
-                    <script>(function (d, s, id) {
+                    <div>
+                        <div id="fb-root" style="float: left; border: 1px solid red"></div>
+                        <script>(function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-                    <div class="fb-like-box" data-href="http://www.facebook.com/pages/Lacashop/495701970499055?ref=hl" data-width="292" data-height="300" data-show-faces="true" data-stream="false" data-show-border="false" data-header="false"></div>
-                    <div class="clear"></div>
-                    <address>
-                        © 2013 Bản quyền lacashop.vn<br>
-                    </address>
+                        <div class="fb-like-box" data-href="http://www.facebook.com/pages/Lacashop/495701970499055?ref=hl" data-width="700" data-height="150" data-show-faces="true" data-stream="false" data-show-border="false" data-header="false"></div>
+                        <address>
+                            © 2013 Bản quyền lacashop.vn<br>
+                        </address>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 </html>

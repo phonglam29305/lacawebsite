@@ -20,7 +20,7 @@ namespace laca.Controllers
 
         //
         // GET: /Item/
-
+        [Authorize]
         public ActionResult Index(string sortOrder, string Keyword, int? ItemTypeID, int? ItemGroupID, bool? IsHot, bool? IsDiscount, bool? IsNew, bool? IsHotDeal, int page = 1)
         {
             ViewBag.ItemName = (sortOrder == "ItemName") ? "ItemName desc" : "ItemName";
@@ -84,6 +84,9 @@ namespace laca.Controllers
             int currentPage = page;
             ViewBag.CurrentPage = page;
             tbl_items = tbl_items.OrderBy("OrderID");
+            ViewBag.CurrentID = id;
+            ViewBag.CurrentPage = page;
+            ViewBag.CurrentSortOrder = "OrderID";
             return View(tbl_items.ToPagedList(currentPage, maxRecords));
         }
 
@@ -93,7 +96,9 @@ namespace laca.Controllers
             int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
             tbl_items = tbl_items.OrderBy("OrderID");
             int currentPage = page;
+            ViewBag.CurrentID = id;
             ViewBag.CurrentPage = page;
+            ViewBag.CurrentSortOrder = "OrderID";
             return View(tbl_items.ToPagedList(currentPage, maxRecords));
         }
 
@@ -114,6 +119,10 @@ namespace laca.Controllers
                         else
                             if (m0_s1_c2_new3_km4_hot5 == 5)
                                 tbl_items = db.tbl_Items.Where(a => a.IsShow && a.IsHotDeal);
+            ViewBag.CurrentKey = key;
+            ViewBag.CurrentItemGroupID = ItemGroupID;
+            ViewBag.Currentm0_s1_c2_new3_km4_hot5 = m0_s1_c2_new3_km4_hot5;
+            ViewBag.CurrentSortOrder = "OrderID";
             int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
             tbl_items = tbl_items.OrderBy(a => a.OrderID);
             int currentPage = page;
@@ -130,25 +139,6 @@ namespace laca.Controllers
             return View(tbl_items.ToPagedList(currentPage, maxRecords));
         }
 
-        public ActionResult ItemByStyle(string style, int page = 1)
-        {
-            var tbl_items = db.tbl_Items.Where(a => a.IsShow && a.Style.Contains(style));
-            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
-            tbl_items = tbl_items.OrderBy("OrderID");
-            int currentPage = page;
-            ViewBag.CurrentPage = page;
-            return View(tbl_items.ToPagedList(currentPage, maxRecords));
-        }
-
-        public ActionResult ItemByColor(string color, int page = 1)
-        {
-            var tbl_items = db.tbl_Items.Where(a => a.IsShow && a.Color.Contains(color));
-            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
-            tbl_items = tbl_items.OrderBy("OrderID");
-            int currentPage = page;
-            ViewBag.CurrentPage = page;
-            return View(tbl_items.ToPagedList(currentPage, maxRecords));
-        }
 
 
 
@@ -168,6 +158,7 @@ namespace laca.Controllers
         //
         // GET: /Item/Create
 
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.ItemGroupID = new SelectList(db.tbl_ItemGroup, "ItemGroupID", "ItemGroupName");
@@ -177,6 +168,7 @@ namespace laca.Controllers
         //
         // POST: /Item/Create
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(tbl_Items tbl_items, HttpPostedFileBase file)
@@ -213,6 +205,7 @@ namespace laca.Controllers
         //
         // GET: /Item/Edit/5
 
+        [Authorize]
         public ActionResult Edit(int id = 0)
         {
             tbl_Items tbl_items = db.tbl_Items.Find(id);
@@ -227,6 +220,7 @@ namespace laca.Controllers
         //
         // POST: /Item/Edit/5
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(tbl_Items tbl_items, HttpPostedFileBase file)
@@ -255,6 +249,7 @@ namespace laca.Controllers
         //
         // GET: /Item/Delete/5
 
+        [Authorize]
         public ActionResult Delete(int id = 0)
         {
             tbl_Items tbl_items = db.tbl_Items.Find(id);
@@ -268,6 +263,7 @@ namespace laca.Controllers
         //
         // POST: /Item/Delete/5
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
