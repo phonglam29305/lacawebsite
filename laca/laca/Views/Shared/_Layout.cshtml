@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title - lacashop.vn - trung tâm thời trang và phụ kiện</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta property="og:image" content="http://lacashop.vn/images/uploads/@ViewBag.Images"/>    
+    <meta property="og:title" content="@ViewBag.Title"/> 
+    <meta property="og:site_name" content="lacashop.vn"/> 
+    <meta property="og:url" content="@ViewBag.Link"/>
+     <meta property="og:description" content="@ViewBag.Description" /> 
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -159,7 +164,7 @@
         <div class="page">
             <div class="header-container">
                 <div class="header">
-                    <h1 class="logo"><strong>lacashop.vn</strong><a href="~/" title="Magento Commerce"><img src="~/Images/images/logo.gif" alt="Magento Commerce"></a></h1>
+                    <h1 class="logo"><strong>lacashop.vn</strong><a href="~/" title="lacashop.vn"><img src="~/Images/logo.png" width="280px" alt="lacashop.vn"></a></h1>
                     <div class="quick-access">
                         <p class="welcome-msg">Chào mừng bạn đến với laca shop!</p>
                         <div class="form-search">
@@ -256,7 +261,7 @@
                         <li class=" last"><a href="~/home/systemcontent/2" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
                     </ul>
                     <div>
-                        <div id="fb-root" style="float: left; border: 1px solid red"></div>
+                        <div id="fb-root" style="float: left;"></div>
                         <script>(function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;

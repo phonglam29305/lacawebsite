@@ -646,6 +646,9 @@
     <Content Include="Images\images\slider_btn_zoom_in.gif" />
     <Content Include="Images\images\slider_btn_zoom_out.gif" />
     <Content Include="Images\images\totals.gif" />
+    <Content Include="Images\images\up-arrow.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\skype.png" />
     <Content Include="Models\LacaShopEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LacaShopEntity.edmx</DependentUpon>

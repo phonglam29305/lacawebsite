@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = Model.ItemName;
+    ViewBag.Images = Model.Images;
+    ViewBag.Description = Model.Description;
     if (Model.DiscountPrice.Value > 0) { Model.Price = Model.DiscountPrice.Value; }
     if (User.Identity.IsAuthenticated)
     {
@@ -10,7 +12,6 @@
     laca.Models.lacashop_dbEntities db = new laca.Models.lacashop_dbEntities();
 }
 <link rel="stylesheet" href="~/Content/multizoom.css" type="text/css" />
-
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 
 <script type="text/javascript" src="~/Scripts/siteScripts/multizoom.js"></script>
@@ -72,7 +73,7 @@
                         <div class="product-name">
                             <h1>@Model.ItemName</h1>
                         </div>
-                        <p class="email-friend"><a href="">Chia sẽ trên Facebook</a></p>
+                        <p class="email-friend"><a target="_blank" href="http://www.facebook.com/sharer.php?u=@Server.UrlEncode(this.Request.Url.AbsoluteUri)"><img src="~/Images/1371212232_facebook.png" width="100px">Chia sẽ trên Facebook</a></p>
 
                         <div class="price-box">
                             <span class="regular-price" id="product-price-43">
