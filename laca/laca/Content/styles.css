@@ -1168,7 +1168,7 @@ tr.summary-details-excluded {
 #nav > li > a > span {
     background: url("../images/Images/icon_link.png") no-repeat scroll 7px 9px transparent;
     height: 35px;
-    padding: 15px 34px 0 37px;
+    padding: 15px 20px 0 37px;
 }
 #nav > li:hover > a {
     color: #1B1B1B;

@@ -212,6 +212,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ItemGroupController.cs" />
     <Compile Include="Controllers\ItemTypeController.cs" />
@@ -830,6 +831,11 @@
     <Content Include="Views\Shared\_PagingType.cshtml" />
     <Content Include="Views\Shared\_PagingGroup.cshtml" />
     <Content Include="Views\Shared\_PagingProperties.cshtml" />
+    <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\Import\Details.cshtml" />
+    <Content Include="Views\Import\Create.cshtml" />
+    <Content Include="Views\Import\Edit.cshtml" />
+    <Content Include="Views\Import\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

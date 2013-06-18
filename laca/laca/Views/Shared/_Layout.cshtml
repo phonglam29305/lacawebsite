@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title - lacashop.vn - trung tâm thời trang và phụ kiện</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta property="og:image" content="http://lacashop.vn/images/uploads/@ViewBag.Images"/>    
-    <meta property="og:title" content="@ViewBag.Title"/> 
-    <meta property="og:site_name" content="lacashop.vn"/> 
+    <meta property="og:image" content="http://lacashop.vn/images/uploads/@ViewBag.Images"/>
+    <meta property="og:title" content="@ViewBag.Title"/>
+    <meta property="og:site_name" content="lacashop.vn" />
     <meta property="og:url" content="@ViewBag.Link"/>
-     <meta property="og:description" content="@ViewBag.Description" /> 
+    <meta property="og:description" content="@ViewBag.Description" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -172,12 +172,7 @@
                             <input autocomplete="off" id="search" name="q" value="Tìm kiếm sản phẩm..." class="input-text" type="text">
                             <button type="submit" title="Tìm kiếm" class="button"><span><span>Tìm kiếm</span></span></button>
                             <div style="display: none;" id="search_autocomplete" class="search-autocomplete"></div>
-                            <script type="text/javascript">
-                                //<![CDATA[
-                                var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Tìm kiếm sản phẩm...');
-                                searchForm.initAutocomplete('http://livedemo00.template-help.com/magento_34403/index.php/catalogsearch/ajax/suggest/', 'search_autocomplete');
-                                //]]>
-                            </script>
+
                         </div>
 
                         <ul class="links">
@@ -196,13 +191,13 @@
                                     <img alt="Nick Skype status" src="~/images/skype.png" height="21">
                                 </a>
                             </li>
-                            <li><a href="~/order/details" title="My Cart" class="top-link-cart">Giỏ hàng</a></li>
+
                             @{
                                 if (!User.Identity.IsAuthenticated)
-                                { 
+                                { <li><a href="~/order/details" title="My Cart" class="top-link-cart">Giỏ hàng</a></li>
                                 <li class=" last"><a href="~/Account/Login" title="Log In">Đăng nhập</a></li>}
                                 else
-                                {
+                                {<li><a href="~/order" title="My Cart" class="top-link-cart">Giỏ hàng</a></li>
                                 <li class=" last"><a href="~/Account/LogOff" title="Log In">@User.Identity.Name&nbsp;(Thoát)</a></li> 
                                 }
                               
@@ -227,14 +222,20 @@
                                     </a>
                                     @{
                                     var itemgroup = db.tbl_ItemGroup.Where(a => a.IsShow && a.ItemTypeID == item.ItemTypeID).ToList();
-                                    foreach (var group in itemgroup)
+                                    if (itemgroup.Count > 0)
                                     {
                                         <ul class="level0">
-                                            <li id="" class="level1 nav-1-1 first">
-                                                <a href="~/Item/ItemByItemGroup/@group.ItemGroupID">
-                                                    <span>@group.ItemGroupName</span>
-                                                </a>
-                                            </li>
+                                            @foreach (var group in itemgroup)
+                                            {
+                                        
+                                                <li id="" class="level1 nav-1-1 first">
+                                                    <a href="~/Item/ItemByItemGroup/@group.ItemGroupID">
+                                                        <span>@group.ItemGroupName</span>
+                                                    </a>
+                                                </li>
+
+                                            }
+
                                         </ul>
                                     }
                                     }

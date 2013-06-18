@@ -212,7 +212,7 @@ namespace laca.Controllers
                 date = new DateTime(Convert.ToInt16(s[2]), Convert.ToInt16(s[1]), Convert.ToInt16(s[0]));
             tbl_orders.DeliveryDate = date;
             }
-            catch (Exception e) { if(tbl_orders.Status == OrderStatus.Delivery)ModelState.AddModelError("DeliveryDate", "Ngày nhập hàng chưa đúng"); }
+            catch (Exception e) { if(tbl_orders.Status == OrderStatus.Delivery)ModelState.AddModelError("DeliveryDate", "Ngày giao hàng chưa đúng"); }
             if (ModelState.IsValid)
             {
                 

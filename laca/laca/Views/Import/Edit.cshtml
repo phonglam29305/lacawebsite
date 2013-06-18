@@ -1,0 +1,125 @@
+﻿@model laca.Models.tbl_Imports
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "../shared/_AdminLayout.cshtml";
+}
+
+<div class="main-container col2-right-layout">
+    <h2>Edit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(a => a.ImportID)
+        @Html.HiddenFor(a => a.ImportUser)
+        <fieldset>
+            <legend>tbl_Imports</legend>
+
+
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Supplier)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Supplier)
+                @Html.ValidationMessageFor(model => model.Supplier)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ImportUser)
+            </div>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.ImportUser)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ImportDate)
+            </div>
+            <div class="editor-field">
+                <script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+                <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.js"></script>
+                <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+                <link type="text/css" href="@Url.Content("~/Content/datepicker/css/jquery-ui.css")" rel="stylesheet" />
+                <link type="text/css" href="@Url.Content("~/Content/datepicker/css/ui.theme.css")" rel="stylesheet" />
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery-ui.min.js")"></script>
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery.bgiframe-2.1.2.js")"></script>
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery-ui-i18n.min.js")"></script>
+                <input id="datepicker" name="datepicker" type="text" value='@ViewBag.ImportDate' />
+
+                <script>
+                    jQuery(document).ready(function ($) {
+                        $("#datepicker").datepicker();
+                        $.datepicker.setDefaults($.datepicker.regional['vi']);
+                    });
+
+                </script>
+                @Html.ValidationMessageFor(model => model.ImportDate)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Notes)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Notes)
+                @Html.ValidationMessageFor(model => model.Notes)
+            </div>
+            
+                <div class="editor-label">
+                    Chọn sản phẩm
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("ItemID", string.Empty)
+                    </div>
+                <div class="editor-label">
+                    Số lượng
+                </div>
+                <div class="editor-field">
+                    <input id="soluong" type="text" />
+                    <button type="button" title="Thêm sản phẩm" style="background-color: black" class="button btn-cart" onclick="addItem()"><span><span>Thêm vào giỏ hàng</span></span></button>
+                </div>
+           <script>
+               function addItem()
+               {
+                   
+          
+                   var itemId = $("ItemID").val();
+                   var qty = $("soluong").text();
+                   alert(itemId);
+                   alert(document.getElementById("soluong").text);
+               }
+
+           </script>
+            <table id="giohang">
+
+                <tr>
+                    <th></th>
+                    <th>Tên sản phảm</th>
+                    <th>Giá nhập</th>
+                    <th>Số lượng</th>
+                </tr>
+
+
+                <tr>
+                    <td>sdfds</td>
+                    <td>sdfsd</td>
+                    <td>sdfsd</td>
+                    <td>sdfsdf</td>
+                </tr>
+
+            </table>
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

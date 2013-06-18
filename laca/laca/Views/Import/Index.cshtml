@@ -1,0 +1,60 @@
+﻿@model IEnumerable<laca.Models.tbl_Imports>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "../shared/_AdminLayout.cshtml";
+}
+
+<div class="main-container col2-right-layout">
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="giohang">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImportID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supplier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImportUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImportDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImportID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supplier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImportUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImportDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ImportID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ImportID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ImportID })
+        </td>
+    </tr>
+}
+
+</table>
+</div>

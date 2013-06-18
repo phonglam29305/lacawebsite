@@ -1,0 +1,75 @@
+﻿@model laca.Models.tbl_Imports
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "../shared/_AdminLayout.cshtml";
+}
+
+<div class="main-container col2-right-layout">
+    <h2>Create</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>tbl_Imports</legend>
+
+
+
+
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Supplier)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Supplier)
+                @Html.ValidationMessageFor(model => model.Supplier)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ImportDate)
+            </div>
+            <div class="editor-field">
+                
+                <script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+                <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.js"></script>
+                <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+                <link type="text/css" href="@Url.Content("~/Content/datepicker/css/jquery-ui.css")" rel="stylesheet" />
+                <link type="text/css" href="@Url.Content("~/Content/datepicker/css/ui.theme.css")" rel="stylesheet" />
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery-ui.min.js")"></script>
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery.bgiframe-2.1.2.js")"></script>
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery-ui-i18n.min.js")"></script>
+                <input id="datepicker" name="datepicker" type="text" value='@ViewBag.ImportDate' />
+
+                <script>
+                    jQuery(document).ready(function ($) {
+                        $("#datepicker").datepicker();
+                        $.datepicker.setDefaults($.datepicker.regional['vi']);
+                    });
+
+                </script>
+                @Html.ValidationMessageFor(model => model.ImportDate)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Notes)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Notes)
+                @Html.ValidationMessageFor(model => model.Notes)
+            </div>
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

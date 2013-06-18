@@ -20,7 +20,7 @@
 
         
         <div class="editor-label">
-            @Html.LabelFor(model => model.ItemName)
+            Tên sản phẩm
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.ItemName)
@@ -28,7 +28,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
+            Mô tả
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Description)
@@ -36,7 +36,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ItemGroupID, "tbl_ItemGroup")
+            Nhóm sản phẩm
         </div>
         <div class="editor-field">
             @Html.DropDownList("ItemGroupID", String.Empty)
@@ -44,7 +44,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.OrderID)
+            Thứ tự hiển thị
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.OrderID)
@@ -52,7 +52,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Images)
+            Hình ảnh
         </div>
         <div class="editor-field">
             <input type="file" name="file" />
@@ -60,7 +60,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Price)
+            Giá bán
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Price)
@@ -68,7 +68,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.DiscountPrice)
+            Giá khuyến mãi
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.DiscountPrice)
@@ -76,7 +76,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SearchKey)
+            Từ khóa tìm kiếm
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.SearchKey)
@@ -84,7 +84,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Color)
+            Màu sắc
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Color)
@@ -92,7 +92,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Material)
+            Chất liệu
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Material)
@@ -100,7 +100,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Style)
+            Kiểu dáng
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Style)
@@ -130,7 +130,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IsShow)
+            Hiển thị
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.IsShow)

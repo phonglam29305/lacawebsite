@@ -4,11 +4,13 @@
     ViewBag.Title = "Edit";
 }
 
+<div class="main-container col2-right-layout">
 <h2>Edit</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    @Html.HiddenFor(a=>a.PropertyID)
     @Html.TextAreaFor(model => model.PropertyContent, new { @id = "PropertyContent" })
     <script type="text/javascript">
         CKEDITOR.replace("PropertyContent");
@@ -21,3 +23,4 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+    </div>
