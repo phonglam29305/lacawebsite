@@ -16,20 +16,18 @@
             margin-left: auto;
             margin-right: auto;
             width: 30%;
-            height: 200px;
+            height: 120px;
             background: url("../../images/Images/totals.gif");
         }
 
         .valuefield {
             padding: 5px 5px 5px 5px;
-            min-height: 30px;
         }
 
         .textfield {
             padding: 5px 5px 5px 5px;
             float: left;
             width: 100px;
-            min-height: 30px;
             text-align: right;
         }
     </style>
@@ -39,25 +37,36 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
              
-            <div id="login">
-                <div class="textfield">
-                    Tên đăng nhập
-                </div>
-                <div class="valuefield">
-                    @Html.TextBoxFor(m => m.UserName)
-                    @Html.ValidationMessageFor(m => m.UserName)
-                </div>
+            <table id="login">
+                <tr>
+                    <td class="textfield">Tên đăng nhập
+                    </td>
+                    <td class="valuefield">
+                        @Html.TextBoxFor(m => m.UserName)
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="textfield">Mật khẩu</td>
+                    <td>
+                        @Html.PasswordFor(m => m.Password)
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="textfield">Lưu mật khẩu</td>
+                    <td class="valuefield">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        
+                    </td>
+                </tr>
 
-                <div class="textfield">Mật khẩu</div>
-                <div>
-                    @Html.PasswordFor(m => m.Password)
-                    @Html.ValidationMessageFor(m => m.Password)<br /><br />
-                    @Html.CheckBoxFor(m => m.RememberMe)
-                    Lưu mật khẩu<br /><br />
-                    <input type="submit" value="Đăng nhập" />
-                </div>
-               
-            </div>
+                <tr>
+                    <td class="textfield"></td>
+                    <td class="valuefield">
+                        <input type="submit" value="Đăng nhập" /></td>
+                </tr>
+            </table>
 @*<p>
         @Html.ActionLink("Register", "Register") if you don't have an account.
     </p>*@

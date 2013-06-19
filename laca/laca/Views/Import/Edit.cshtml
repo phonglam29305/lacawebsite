@@ -65,56 +65,151 @@
                 @Html.EditorFor(model => model.Notes)
                 @Html.ValidationMessageFor(model => model.Notes)
             </div>
-            
-                <div class="editor-label">
-                    Chọn sản phẩm
-                </div>
-                <div class="editor-field">
-                    @Html.DropDownList("ItemID", string.Empty)
-                    </div>
-                <div class="editor-label">
-                    Số lượng
-                </div>
-                <div class="editor-field">
-                    <input id="soluong" type="text" />
-                    <button type="button" title="Thêm sản phẩm" style="background-color: black" class="button btn-cart" onclick="addItem()"><span><span>Thêm vào giỏ hàng</span></span></button>
-                </div>
-           <script>
-               function addItem()
-               {
-                   
-          
-                   var itemId = $("ItemID").val();
-                   var qty = $("soluong").text();
-                   alert(itemId);
-                   alert(document.getElementById("soluong").text);
-               }
 
-           </script>
+            <div class="editor-label">
+                Chọn sản phẩm
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("ItemID", string.Empty)
+            </div>
+            <div class="editor-label">
+                Số lượng
+            </div>
+            <div class="editor-field">
+                <input id="soluong" type="text" />
+            </div>
+            <div class="editor-label">
+                Giá nhập
+            </div>
+            <div class="editor-field">
+                <input id="gia" type="text" />
+                <button type="button" title="Thêm sản phẩm" style="background-color: black" class="button btn-cart" onclick="addItem()"><span><span>Thêm vào giỏ hàng</span></span></button>
+            </div>
+            <script>
+                function addItem() {
+                    var itemId = $('select[id = ItemID]').val();
+                    var qty = $("input[id = soluong]").val();
+                    var price = $("input[id = gia]").val();
+
+                    if (itemId != "") {
+                        var value = itemId.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+                        var intRegex = /^\d+$/;
+                        if (!intRegex.test(value)) {
+                            alert("Bạn chưa chọn sản phẩm.");
+                            return;
+                        }
+                    } else {
+                        alert("Bạn chưa chọn sản phẩm.");
+                        return;
+                    }
+                    if (qty != "") {
+                        var value = qty.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+                        var intRegex = /^\d+$/;
+                        if (!intRegex.test(value)) {
+                            alert("Số lượng không hợp lệ.");
+                            return;
+                        }
+                    } else {
+                        alert("Bạn chưa nhập số lượng.");
+                        return;
+                    }
+                    if (price != "") {
+                        var value = price.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+                        var intRegex = /^\d+$/;
+                        if (!intRegex.test(value)) {
+                            alert("Giá không hợp lệ.");
+                            return;
+                        }
+                    } else {
+                        alert("Bạn chưa nhập giá.");
+                        return;
+                    }
+                    //if (qty.match('^(0|[1-9][0-9]*)$')) {
+                    //    alert( "Số lượng không hợp lệ.<br/>");
+                    //    return;
+                    //}
+                    //if (price.match('^(0|[1-9][0-9]*)$')) {
+                    //    alert("Giá nhập không hợp lệ.<br/>");
+                    //    return;
+                    //}
+
+                    var url = "../AddDetail?ImportID=@Model.ImportID&ItemID=" + itemId + "&Qty=" + qty + "&Price=" + price;
+                    window.location.href = url;
+                }
+
+            </script>
             <table id="giohang">
 
                 <tr>
-                    <th></th>
                     <th>Tên sản phảm</th>
                     <th>Giá nhập</th>
                     <th>Số lượng</th>
+                    <th>#</th>
                 </tr>
 
-
-                <tr>
-                    <td>sdfds</td>
-                    <td>sdfsd</td>
-                    <td>sdfsd</td>
-                    <td>sdfsdf</td>
-                </tr>
-
+                @foreach (var item in Model.tbl_ImportDetail)
+                {
+                    <tr>
+                        <td>
+                            <div id="content_container" class="grid_13">
+                                <div id="content_wrapper" class="tooltips">
+                                    <h4 class="nsp_header tleft fleft">
+                                        <a href="#" target=_blank>@Html.Substring(item.tbl_Items.ItemName, 25)</a></h4>
+                                    <span class="tooltip-style2">
+                                        <img  src="~/images/uploads/@item.tbl_Items.Images" width="180px" alt="@item.tbl_Items.ItemName" style="margin: 0 3px 3px 0;" />
+                                    </span>
+                                </div>
+                            </div>
+                            @*<img src="~/images/uploads/@item.tbl_Items.Images" width="100px" />*@</td>
+                        <td>@item.Qty.Value.ToString("#,###")</td>
+                        <td>@item.Price.Value.ToString("#,###")</td>
+                        <td><a href=@Href(string.Format("~/import/RemoveDetail?importid={0}&itemid={1}",Model.ImportID,item.ItemID))>Xóa</a></td>
+                    </tr>
+                }
             </table>
             <p>
                 <input type="submit" value="Save" />
             </p>
         </fieldset>
     }
+    <style type="text/css">
+    .tooltip-style2
+    {
+        display: none;
+        position: absolute;
+        z-index: 1000;
+        -moz-border-radius: 1px;
+        -webkit-border-radius: 1px;
+    }
+    .tooltip-style2
+    {
+        background: green;
+        padding: 3px 3px 3px 3px;
+        color: white;
+        text-align: center;
+    }
+    
+    pre
+    {
+        font-size: 10px;
+    }
+</style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".tooltips").hover(
+                function () { $(this).contents("span:last-child").css({ display: "block" }); },
+                function () { $(this).contents("span:last-child").css({ display: "none" }); }
+            );
+
+            $(".tooltips").mousemove(function (e) {
+                var mousex = e.pageX + 10;
+                var mousey = e.pageY + 5;
+                $(this).contents("span:last-child").css({ top: mousey, left: mousex });
+            });
+        });
+    </script>
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>

@@ -49,9 +49,9 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
-            @*@Html.ActionLink("Details", "Details", new {  id=item.OrderID }) |*@
-                    @Html.ActionLink("Delete", "Delete", new { id = item.OrderID })
+                    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.OrderID }) |
+            @*@Html.ActionLink("Chi tiết", "Details", new {  id=item.OrderID }) |*@
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.OrderID })
                 </td>
             </tr>
         }

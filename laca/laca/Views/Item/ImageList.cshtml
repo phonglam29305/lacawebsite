@@ -20,7 +20,7 @@
         @Html.ActionLink("Trở về danh sách", "Index")
     </div>
 
-    <table width="100%" style="background-color: Gray">
+    <table width="100%" style="">
         @foreach (var item in from i in List.Select((value, index) => new { value, index }) group i.value by i.index / 3 into g select g)
         {
             <tr>

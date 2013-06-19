@@ -72,18 +72,48 @@ namespace laca.Controllers
         }
 
         [Authorize]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddDetail(int id = 0, int ItemID = 0)
+        public ActionResult AddDetail(int ImportID = 0, int ItemID = 0, int Qty = 0, decimal Price = 0)
         {
-            var date = DateTime.Now;
+            var import = db.tbl_Imports.Find(ImportID);
+            tbl_ImportDetail detail = import.tbl_ImportDetail.Where(a => a.ItemID == ItemID).FirstOrDefault();
+            if (detail != null)
+            {
+                detail.Qty += Qty;
+                db.Entry(detail).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                detail = new tbl_ImportDetail();
+                detail.ItemID = ItemID;
+                detail.ImportID = ImportID;
+                detail.Qty = Qty;
+                detail.Price = Price;
 
-            tbl_Imports tbl_imports = db.tbl_Imports.Find(id);
-
-            tbl_imports.ImportUser = User.Identity.Name;
-            db.tbl_Imports.Add(tbl_imports);
+                db.tbl_ImportDetail.Add(detail);
+                db.SaveChanges();
+            }
+            tbl_Items item = db.tbl_Items.Find(ItemID);
+            item.ItemCount += Qty;
+            db.Entry(item).State = EntityState.Modified;
             db.SaveChanges();
-            return View("Edit");
+
+            return RedirectToAction("Edit", new { id = ImportID });
+        }
+        [Authorize]
+        public RedirectToRouteResult RemoveDetail(int ImportID, int ItemID)
+        {
+            var import = db.tbl_Imports.Find(ImportID);
+            tbl_ImportDetail detail = import.tbl_ImportDetail.Where(a => a.ItemID == ItemID).FirstOrDefault();
+            if (detail != null)
+            {
+                db.tbl_ImportDetail.Remove(detail);
+                tbl_Items item = db.tbl_Items.Find(ItemID);
+                item.ItemCount -= detail.Qty.Value;
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Edit", new { id = ImportID });
         }
 
         //

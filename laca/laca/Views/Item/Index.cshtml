@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<laca.Models.tbl_Items>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh mục sản phẩm";
     Layout = "../shared/_AdminLayout.cshtml";
 }
 
 <div class="main-container col2-right-layout">
-    <h2>Index</h2>
+    <h2>Danh mục sản phẩm</h2>
 
     <p>
         @Html.ActionLink("Create New", "Create")
@@ -127,12 +127,12 @@
                     @Html.DisplayFor(modelItem => item.ItemCount)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
+                    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.ItemID })
                     <br />
-                    @Html.ActionLink("Details", "Details", new { id = item.ItemID })
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.ItemID })
                     <br />
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })<br />
-                    @Html.ActionLink("Images", "ImageList", new { id = item.ItemID })
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.ItemID })<br />
+                    @Html.ActionLink("Hình ảnh", "ImageList", new { id = item.ItemID })
                 </td>
             </tr>
         }
