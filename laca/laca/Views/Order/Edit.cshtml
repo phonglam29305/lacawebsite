@@ -10,7 +10,7 @@
 <div class="main-container col2-right-layout">
     <h2>Edit</h2>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(new { currStatus=Model.Status }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -59,16 +59,24 @@
 
                 <script>
                     jQuery(document).ready(function ($) {
-                        //alert('@Convert.ToInt32(Model.Status)');
-                        //alert($.datepicker);
+
                         $("#datepicker").datepicker();
                         $.datepicker.setDefaults($.datepicker.regional['vi']);
                         $("#Status").val(@Convert.ToInt32(Model.Status));
+
+
+
                     });
 
                 </script>
-                
-                                @Html.ValidationMessageFor(model => model.DeliveryDate)
+                @if (Model.Status.Value != laca.Models.OrderStatus.Order)
+                {
+                    <script>
+                        $("#Status").prop("disabled", true);
+                        $("#datepicker").prop("disabled", true);
+                    </script>
+                }
+                @Html.ValidationMessageFor(model => model.DeliveryDate)
             </div>
 
             <div class="editor-label">
@@ -109,8 +117,8 @@
 
                 <tbody>
                     @{
-        foreach (var item in Model.tbl_OrderDetail)
-        {
+                foreach (var item in Model.tbl_OrderDetail)
+                {
                         <tr class="first last odd">
 
                             <td class="a-center"><a href="~/item/details/@item.ItemID" title="Oversized  Jetset Tote" class="product-image">
@@ -139,7 +147,7 @@
 
                             </td>*@
                         </tr>
-        }
+                }
                     }
                 </tbody>
             </table>

@@ -152,6 +152,9 @@ namespace laca.Controllers
             {
                 return HttpNotFound();
             }
+            tbl_items.ViewCount += 1;
+            db.Entry(tbl_items).State = EntityState.Modified;
+            db.SaveChanges();
             return View(tbl_items);
         }
 

@@ -192,7 +192,8 @@ namespace laca.Controllers
             //   });
             ViewBag.DeliveryDate = tbl_orders.DeliveryDate == null ? "" : tbl_orders.DeliveryDate.Value.ToString("dd/MM/yyyy");
             ViewBag.Customer = db.tbl_Customers.Find(tbl_orders.CustomerID).CustomerName;
-            ViewBag.Amount = tbl_orders.tbl_OrderDetail.Sum(a => a.Amount).Value.ToString("#,###");      
+            ViewBag.Amount = tbl_orders.tbl_OrderDetail.Sum(a => a.Amount).Value.ToString("#,###");
+            //ViewBag.currStatus = tbl_orders.Status;
             return View(tbl_orders);
         }
 
@@ -202,7 +203,7 @@ namespace laca.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(tbl_Orders tbl_orders)
+        public ActionResult Edit(tbl_Orders tbl_orders, OrderStatus currStatus)
         {
             var date = DateTime.Now;
             tbl_orders.DeliveryDate = null;
@@ -215,6 +216,16 @@ namespace laca.Controllers
             catch (Exception e) { if(tbl_orders.Status == OrderStatus.Delivery)ModelState.AddModelError("DeliveryDate", "Ngày giao hàng chưa đúng"); }
             if (ModelState.IsValid)
             {
+                //tbl_Orders currOrder = db.tbl_Orders.Find(tbl_orders.OrderID);
+                if (tbl_orders.Status == OrderStatus.Delivery && currStatus == OrderStatus.Order)
+                {
+                    foreach (var item in tbl_orders.tbl_OrderDetail)
+                    {
+                        tbl_Items sp = db.tbl_Items.Find(item.ItemID);
+                        sp.ItemCount -= item.Qty.Value;
+                        db.Entry(sp).State = EntityState.Modified;
+                    }
+                }
                 
                 db.Entry(tbl_orders).State = EntityState.Modified;
                 db.SaveChanges();
