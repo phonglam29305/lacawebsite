@@ -139,9 +139,6 @@ namespace laca.Controllers
             return View(tbl_items.ToPagedList(currentPage, maxRecords));
         }
 
-
-
-
         //
         // GET: /Item/Details/5
 

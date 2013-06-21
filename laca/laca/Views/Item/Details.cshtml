@@ -39,10 +39,6 @@
             largeimage: $('#image').src
         });
     });
-    function addItem(id, price) {
-        var url = "../../order/additem?itemid=" + id + "&price=" + price + "&qtty=" + $("quantity").value;
-        window.location.href = url;
-    }
 </script>
 <div class="main-container col2-right-layout">
     <div class="main">
@@ -73,7 +69,8 @@
                         <div class="product-name">
                             <h1>@Model.ItemName</h1>
                         </div>
-                        <p class="email-friend"><a target="_blank" href="http://www.facebook.com/sharer.php?u=@Server.UrlEncode(this.Request.Url.AbsoluteUri)"><img src="~/Images/1371212232_facebook.png" width="100px">Chia sẽ trên Facebook</a></p>
+                        <p class="email-friend"><a target="_blank" href="http://www.facebook.com/sharer.php?u=@Server.UrlEncode(this.Request.Url.AbsoluteUri)">
+                            <img src="~/Images/1371212232_facebook.png" width="100px">Chia sẽ trên Facebook</a></p>
 
                         <div class="price-box">
                             <span class="regular-price" id="product-price-43">
@@ -94,7 +91,7 @@
                     </div>
                     <div class="product-img-box">
                         <p class="product-image">
-                            <img style="width: 265px; left: 0px; top: 0px;" id="image" src="~/Images/Uploads/@Model.Images" alt="@Model.ItemName" title="@Model.ItemName">
+                            <img style="width: 265px; left: 0px; top: 0px;" id="image" src="http://lacashop.vn/images/uploads/@ViewBag.Images" alt="@Model.ItemName" title="@Model.ItemName">
                         </p>
 
                         @{
@@ -120,7 +117,7 @@
                                 <h2>Xem thêm</h2>
                                 <ul>
                                     <li>
-                                        <a href="#" onclick="$('image').src='@Href("~/images/uploads/"+Model.Images)'; resetImage('@Model.Images');return false;" title="">
+                                        <a href="#" onclick="$('image').src='@Href("~/images/uploads/" + Model.Images)'; resetImage('@Model.Images');return false;" title="">
                                             <img src="~/images/uploads/@Model.Images" alt="" height="68" width="68"></a>
                                     </li>
                                     @foreach (var image in list)
@@ -194,10 +191,18 @@
                         </ul>
                         <script type="text/javascript">
                             function addItem(id, price) {
-                                var url = "../../order/additem?itemid=" + id + "&price=" + price + "&qtty=1";
+                                var qty = jQuery('#quantity').val();//alert(qty);
+                                var url = "../../order/additem?itemid=" + id + "&price=" + price + "&qtty="+qty;
                                 //alert(url);
                                 window.location.href = url;
                             }
+                        
+                            //function addItem(id, price) {
+                            //    var qty = $("quantity").val();
+                            //    alert(qty);
+                            //    var url = "../../order/additem?itemid=" + id + "&price=" + price + "&Qtty=" + qty;
+                            //    window.location.href = url;
+                            //}
 
                         </script>
                     </div>
@@ -318,7 +323,7 @@
                         <div class="summary">
                             <p class="amount">Có <a href="~/order/details">@listItem.Count sản phẩm</a> trong giỏ hàng.</p>
                             <p class="subtotal">
-                                <span class="label">Tổng giá trị giỏ hàng:</span> <span class="price">@listItem.Sum(a=>a.Amount).Value.ToString("#,###")</span>
+                                <span class="label">Tổng giá trị giỏ hàng:</span> <span class="price">@listItem.Sum(a => a.Amount).Value.ToString("#,###")</span>
                             </p>
                         </div>
                         <div class="actions">
@@ -352,13 +357,13 @@
         </div>
     </div>
     @{
-        if(User.Identity.IsAuthenticated)
+        if (User.Identity.IsAuthenticated)
         {
             
-    <p>
-        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ItemID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+        <p>
+            @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ItemID }) |
+        @Html.ActionLink("Trở về danh sách", "Index")
+        </p>
         }
-        }
+    }
 </div>

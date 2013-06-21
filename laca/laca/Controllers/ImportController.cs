@@ -180,6 +180,21 @@ namespace laca.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tbl_Imports tbl_imports = db.tbl_Imports.Find(id);
+            List<tbl_ImportDetail> arr = tbl_imports.tbl_ImportDetail.ToList();
+            foreach (var item in arr)
+                {
+                    tbl_Items sp = db.tbl_Items.Find(item.ItemID);
+                    if (sp != null)
+                    {
+                        sp.ItemCount -= item.Qty.Value;
+                        db.Entry(sp).State = EntityState.Modified;
+                    }
+                }
+            
+
+            foreach (var item in arr)
+                db.tbl_ImportDetail.Remove(item);
+
             db.tbl_Imports.Remove(tbl_imports);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -72,8 +72,9 @@
                 @if (Model.Status.Value != laca.Models.OrderStatus.Order)
                 {
                     <script>
-                        $("#Status").prop("disabled", true);
-                        $("#datepicker").prop("disabled", true);
+                        $('#Status').prop('disabled', 'disabled');
+                       // $("#Status").prop("disabled", 'disabled');
+                        $("#datepicker").prop("disabled", true );
                     </script>
                 }
                 @Html.ValidationMessageFor(model => model.DeliveryDate)
@@ -155,7 +156,7 @@
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Trở về danh sách", "Index")
     </div>
 
     @section Scripts {
