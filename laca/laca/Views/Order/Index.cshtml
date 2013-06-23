@@ -7,9 +7,60 @@
 <div class="main-container col2-right-layout">
     <h2>Index</h2>
 
+     <script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+                <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.js"></script>
+                <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+                <link type="text/css" href="@Url.Content("~/Content/datepicker/css/jquery-ui.css")" rel="stylesheet" />
+                <link type="text/css" href="@Url.Content("~/Content/datepicker/css/ui.theme.css")" rel="stylesheet" />
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery-ui.min.js")"></script>
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery.bgiframe-2.1.2.js")"></script>
+                <script type="text/javascript" src="@Url.Content("~/Content/datepicker/js/jquery-ui-i18n.min.js")"></script>
+
+                <script>
+                    jQuery(document).ready(function ($) {
+                        $("#fDate").datepicker();
+                        $("#tDate").datepicker();
+                        $.datepicker.setDefaults($.datepicker.regional['vi']);
+                        $("#Status").val(@Convert.ToInt32(ViewBag.OrderStatus));
+                    });
+
+                </script>
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
+    @using (Ajax.BeginForm("Index", new
+    {
+        page = ViewBag.CurrentPage,
+        fDate = ViewBag.FromDate,
+        tDate = ViewBag.ToDate,
+        status = ViewBag.OrderStatus
+    }, new AjaxOptions { UpdateTargetId = "main" }))
+    {
+       
+        <table id="giohang">
+            <tr>
+                <td style="text-align: right">Từ ngày:
+                </td>
+                <td>@Html.TextBox("fDate", (string)ViewBag.FromDate, new { id = "fDate" })
+                </td>
+                <td style="text-align: right">Đến ngày:
+                </td>
+                <td>@Html.TextBox("tDate", (string)ViewBag.ToDate, new { id = "tDate" })
+                </td>
+                 <td style="text-align: right">Trạng thái:
+                </td>
+                <td>@Html.DropDownList("Status", Enum.GetValues(typeof(laca.Models.OrderStatus)).Cast<laca.Models.OrderStatus>().Select(v => new SelectListItem
+               {
+                   Text = v.ToString().Replace("_", " "),
+                   Value = ((int)v).ToString()
+               }),"Tất cả")
+                </td>
+                <td style="text-align: right"><input type="submit" value="Tìm kiếm" />
+                </td>
+            </tr>
+        </table>
+    }
+    @Html.Partial("_Paging")
     <table id="giohang">
         <tr>
             <th>Mã đơn hàng

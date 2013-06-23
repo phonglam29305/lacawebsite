@@ -65,3 +65,7 @@
     min-height: 30px;
     width: 80%;
 }
+#giohang input
+{
+    width: auto;
+}

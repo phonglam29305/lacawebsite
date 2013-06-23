@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Web;
 using System.Web.Mvc;
 using laca.Models;
+using PagedList;
 
 namespace laca.Controllers
 {
@@ -18,10 +21,33 @@ namespace laca.Controllers
         // GET: /Order/
 
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string fDate = "", string tDate = "", OrderStatus? status = null, int page = 1)
         {
-            var tbl_orders = db.tbl_Orders.Include(t => t.tbl_Customers);
-            return View(tbl_orders.ToList());
+            var result = from b in db.tbl_Orders select b;
+            DateTime fromDate = DateTime.Now.Date;
+            string[] temp = fDate.Split('/');
+            if (temp.Length == 3)
+            {
+                fromDate = new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]));
+                result = result.Where(a => a.DeliveryDate >= fromDate);
+            }
+            temp = tDate.Split('/');
+            if (temp.Length == 3)
+            {
+                fromDate = new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]));
+                result = result.Where(a => a.DeliveryDate <= fromDate);
+            }
+            if (status != null)
+                result = result.Where(a=>a.Status == status);
+            ViewBag.FromDate = fDate;
+            ViewBag.ToDate = tDate;
+            ViewBag.OrderStatus = status;
+            result = result.OrderBy("DeliveryDate");
+            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["ListItemCount"]);
+            int currentPage = page;
+            ViewBag.CurrentPage = page;
+
+            return View(result.ToPagedList(currentPage, maxRecords));
         }
 
         //

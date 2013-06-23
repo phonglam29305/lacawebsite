@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Linq.Dynamic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using laca.Models;
+using PagedList;
 
 namespace laca.Controllers
 {
@@ -16,9 +19,30 @@ namespace laca.Controllers
         //
         // GET: /Import/
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index( string fDate="", string tDate="", int page = 1)
         {
-            return View(db.tbl_Imports.ToList());
+            var result = from b in db.tbl_Imports select b;
+            DateTime fromDate = DateTime.Now.Date;
+            string[] temp=fDate.Split('/');
+            if(temp.Length==3)
+            {
+                fromDate = new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]));
+                result = result.Where(a => a.ImportDate >= fromDate);
+            }
+            temp = tDate.Split('/');
+            if (temp.Length == 3)
+            {
+                fromDate = new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]));
+                result = result.Where(a => a.ImportDate <= fromDate);
+            }
+            ViewBag.FromDate = fDate;
+            ViewBag.ToDate = tDate;
+            result = result.OrderBy("ImportDate");
+            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["ListItemCount"]);
+            int currentPage = page;
+            ViewBag.CurrentPage = page;
+
+            return View(result.ToPagedList(currentPage, maxRecords));
         }
 
         //
