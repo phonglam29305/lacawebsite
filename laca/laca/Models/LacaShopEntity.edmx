@@ -479,11 +479,12 @@
           <Member Name="Cancel" Value="2" />
           <Member Name="Delivery" Value="3" />
         </EnumType>
-        <EnumType Name="SytemContent">
+        <EnumType Name="SytemContent" IsFlags="true">
           <Member Name="About" Value="1" />
           <Member Name="Contact" Value="2" />
           <Member Name="DeliveryAndPayment" Value="3" />
           <Member Name="CustomerServices" Value="4" />
+          <Member Name="Banner" Value="5" />
         </EnumType>
         <EntityType Name="tbl_SystemContent">
           <Key>

@@ -122,6 +122,11 @@ namespace laca.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tbl_ItemGroup tbl_itemgroup = db.tbl_ItemGroup.Find(id);
+            if (db.tbl_Items.Where(a => a.ItemGroupID == id).Count() > 0)
+            {
+                ModelState.AddModelError("ItemGroupName", "Đã tồn tại sản phẩm thuộc nhóm sản phẩm này, bạn không thể xóa!");
+                return View(tbl_itemgroup);
+            }
             db.tbl_ItemGroup.Remove(tbl_itemgroup);
             db.SaveChanges();
             return RedirectToAction("Index");

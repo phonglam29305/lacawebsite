@@ -1,0 +1,21 @@
+﻿@model laca.Models.tbl_SystemContent
+@{
+    ViewBag.Title = "AddBanner";
+}
+
+<div class="main-container col2-right-layout">
+    <h2>Thêm banner</h2>
+    @using (Html.BeginForm("AddBanner", "SystemContent", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(a => a.PropertyID)
+        <div class="editor-label">
+            Chọn banner(80x500)
+        </div>
+        <div class="editor-field">
+            <input type="file" name="file" />
+            <input type="submit" value="Save" />
+        </div>
+    }
+</div>

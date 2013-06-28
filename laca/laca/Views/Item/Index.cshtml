@@ -108,10 +108,10 @@
                     @Html.DisplayFor(modelItem => item.ViewCount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    @item.Price.ToString("#,###")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DiscountPrice)
+                    @item.DiscountPrice.Value.ToString("#,###")
                 </td>
 
                 <td>
@@ -128,10 +128,10 @@
                 </td>
                 <td>
                     @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.ItemID })
-                    <br />
+                    <br /><br />
                     @Html.ActionLink("Chi tiết", "Details", new { id = item.ItemID })
-                    <br />
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.ItemID })<br />
+                    <br /><br />
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.ItemID })<br /><br />
                     @Html.ActionLink("Hình ảnh", "ImageList", new { id = item.ItemID })
                 </td>
             </tr>

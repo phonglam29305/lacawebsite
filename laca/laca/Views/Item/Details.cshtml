@@ -69,8 +69,10 @@
                         <div class="product-name">
                             <h1>@Model.ItemName</h1>
                         </div>
-                        <p class="email-friend"><a target="_blank" href="http://www.facebook.com/sharer.php?u=@Server.UrlEncode(this.Request.Url.AbsoluteUri)">
-                            <img src="~/Images/1371212232_facebook.png" width="100px">Chia sẽ trên Facebook</a></p>
+                        <p class="email-friend">
+                            <a target="_blank" href="http://www.facebook.com/sharer.php?u=@Server.UrlEncode(this.Request.Url.AbsoluteUri)">
+                                <img src="~/Images/1371212232_facebook.png" width="100px">Chia sẽ trên Facebook</a>
+                        </p>
 
                         <div class="price-box">
                             <span class="regular-price" id="product-price-43">
@@ -81,7 +83,7 @@
                         <div class="add-to-box">
                             <div class="add-to-cart">
                                 <label for="qty">Số lượng:</label>
-                                <input name="qty" id="quantity" maxlength="12" value="1" title="Qty" class="input-text qty" type="text">
+                                <input name="qty" id="quantity" maxlength="12" value="1" title="Qty" class="input-text qty" type="text"  data-pattern="^(?:R\$)?\s*(\d+)(?:[,\.](\d)(\d)?)?\d*$">
                                 <button type="button" title="Thêm vào giỏ hàng" style="background-color: black" class="button btn-cart" onclick="addItem(@Model.ItemID, @Model.Price)"><span><span>Thêm vào giỏ hàng</span></span></button>
 
                             </div>
@@ -152,18 +154,27 @@
                                 <col>
                             </colgroup>
                             <tbody>
-                                <tr class="first last odd">
-                                    <th class="label">Kiểu dáng</th>
-                                    <td class="data last">@Html.ActionLink(Model.Style, "ItemByProperties", new { key = Model.Style, ItemGroupID = Model.ItemGroupID, m0_s1_c2_new3_km4_hot5 = 1 })</td>
-                                </tr>
-                                <tr class="first last odd">
-                                    <th class="label">Chất liệu</th>
-                                    <td class="data last">@Html.ActionLink(Model.Material, "ItemByProperties", new { key = Model.Material, ItemGroupID = Model.ItemGroupID, m0_s1_c2_new3_km4_hot5 = 0 })</td>
-                                </tr>
-                                <tr class="first last odd">
-                                    <th class="label">Màu sắc</th>
-                                    <td class="data last">@Html.ActionLink(Model.Color, "ItemByProperties", new { key = Model.Color, ItemGroupID = Model.ItemGroupID, m0_s1_c2_new3_km4_hot5 = 2 })</td>
-                                </tr>
+                                @if (Model.Style + "" != "")
+                                {
+                                    <tr class="first last odd">
+                                        <th class="label">Kiểu dáng</th>
+                                        <td class="data last">@Html.ActionLink(Model.Style, "ItemByProperties", new { key = Model.Style, ItemGroupID = Model.ItemGroupID, m0_s1_c2_new3_km4_hot5 = 1 })</td>
+                                    </tr>
+                                }
+                                @if (Model.Material + "" != "")
+                                {
+                                    <tr class="first last odd">
+                                        <th class="label">Chất liệu</th>
+                                        <td class="data last">@Html.ActionLink(Model.Material, "ItemByProperties", new { key = Model.Material, ItemGroupID = Model.ItemGroupID, m0_s1_c2_new3_km4_hot5 = 0 })</td>
+                                    </tr>
+                                }
+                                @if (Model.Color + "" != "")
+                                {
+                                    <tr class="first last odd">
+                                        <th class="label">Màu sắc</th>
+                                        <td class="data last">@Html.ActionLink(Model.Color, "ItemByProperties", new { key = Model.Color, ItemGroupID = Model.ItemGroupID, m0_s1_c2_new3_km4_hot5 = 2 })</td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                         <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
@@ -192,11 +203,11 @@
                         <script type="text/javascript">
                             function addItem(id, price) {
                                 var qty = jQuery('#quantity').val();//alert(qty);
-                                var url = "../../order/additem?itemid=" + id + "&price=" + price + "&qtty="+qty;
+                                var url = "../../order/additem?itemid=" + id + "&price=" + price + "&qtty=" + qty;
                                 //alert(url);
                                 window.location.href = url;
                             }
-                        
+
                             //function addItem(id, price) {
                             //    var qty = $("quantity").val();
                             //    alert(qty);

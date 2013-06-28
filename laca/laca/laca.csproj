@@ -837,6 +837,9 @@
     <Content Include="Views\Import\Edit.cshtml" />
     <Content Include="Views\Import\Delete.cshtml" />
     <Content Include="Views\Import\_Paging.cshtml" />
+    <Content Include="Views\SystemContent\AddBanner.cshtml" />
+    <Content Include="Views\Item\Search.cshtml" />
+    <Content Include="Views\Shared\_PagingSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -83,7 +83,7 @@
             </div>
             <div class="editor-field">
                 <input id="gia" type="text" />
-                <button type="button" title="Thêm sản phẩm" style="background-color: black" class="button btn-cart" onclick="addItem()"><span><span>Thêm vào giỏ hàng</span></span></button>
+                <button type="button" title="Thêm sản phẩm" style="background-color: black" class="button btn-cart" onclick="addItem()"><span><span>Thêm sản phẩm</span></span></button>
             </div>
             <script>
                 function addItem() {
@@ -139,7 +139,6 @@
 
             </script>
             <table id="giohang">
-
                 <tr>
                     <th>Tên sản phảm</th>
                     <th>Giá nhập</th>
@@ -154,16 +153,16 @@
                             <div id="content_container" class="grid_13">
                                 <div id="content_wrapper" class="tooltips">
                                     <h4 class="nsp_header tleft fleft">
-                                        <a href="#" target=_blank>@Html.Substring(item.tbl_Items.ItemName, 25)</a></h4>
+                                        <a href="#" target="_blank">@Html.Substring(item.tbl_Items.ItemName, 25)</a></h4>
                                     <span class="tooltip-style2">
                                         <img  src="~/images/uploads/@item.tbl_Items.Images" width="180px" alt="@item.tbl_Items.ItemName" style="margin: 0 3px 3px 0;" />
                                     </span>
                                 </div>
                             </div>
                             @*<img src="~/images/uploads/@item.tbl_Items.Images" width="100px" />*@</td>
-                        <td>@item.Qty.Value.ToString("#,###")</td>
                         <td>@item.Price.Value.ToString("#,###")</td>
-                        <td><a href=@Href(string.Format("~/import/RemoveDetail?importid={0}&itemid={1}",Model.ImportID,item.ItemID))>Xóa</a></td>
+                        <td>@item.Qty.Value.ToString("#,###")</td>
+                        <td><a href=@Href(string.Format("~/import/RemoveDetail?importid={0}&itemid={1}", Model.ImportID, item.ItemID))>Xóa</a></td>
                     </tr>
                 }
             </table>
@@ -173,28 +172,26 @@
         </fieldset>
     }
     <style type="text/css">
-    .tooltip-style2
-    {
-        display: none;
-        position: absolute;
-        z-index: 1000;
-        -moz-border-radius: 1px;
-        -webkit-border-radius: 1px;
-    }
-    .tooltip-style2
-    {
-        background: green;
-        padding: 3px 3px 3px 3px;
-        color: white;
-        text-align: center;
-    }
-    
-    pre
-    {
-        font-size: 10px;
-    }
-</style>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        .tooltip-style2 {
+            display: none;
+            position: absolute;
+            z-index: 1000;
+            -moz-border-radius: 1px;
+            -webkit-border-radius: 1px;
+        }
+
+        .tooltip-style2 {
+            background: green;
+            padding: 3px 3px 3px 3px;
+            color: white;
+            text-align: center;
+        }
+
+        pre {
+            font-size: 10px;
+        }
+    </style>
+    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>*@
 
     <script type="text/javascript">
         $(document).ready(function () {

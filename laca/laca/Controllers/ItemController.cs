@@ -139,6 +139,19 @@ namespace laca.Controllers
             return View(tbl_items.ToPagedList(currentPage, maxRecords));
         }
 
+        public ActionResult Search(string key, int page = 1)
+        {
+            IEnumerable<tbl_Items> tbl_items = db.tbl_Items.Where(a => a.IsShow && (a.ItemName.Contains(key) || a.Description.Contains(key) || a.Material.Contains(key) || a.Color.Contains(key) || a.Style.Contains(key)));
+            
+            ViewBag.CurrentKeyword = key;
+            ViewBag.CurrentSortOrder = "OrderID";
+            int maxRecords = Convert.ToInt32(ConfigurationManager.AppSettings["PageItemCount"]);
+            tbl_items = tbl_items.OrderBy(a => a.OrderID);
+            int currentPage = page;
+            ViewBag.CurrentPage = page;
+            return View(tbl_items.ToPagedList(currentPage, maxRecords));
+        }
+
         //
         // GET: /Item/Details/5
 
@@ -269,6 +282,22 @@ namespace laca.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tbl_Items tbl_items = db.tbl_Items.Find(id);
+            if (db.tbl_OrderDetail.Where(a => a.ItemID == id).Count() > 0)
+            {
+                ModelState.AddModelError("ItemName", "Sản phẩn này đã được đặt hàng, bạn không thể xóa!");
+                return View(tbl_items);
+            }
+            if (db.tbl_ImportDetail.Where(a => a.ItemID == id).Count() > 0)
+            {
+                ModelState.AddModelError("ItemName", "Sản phẩn này đã được nhập hàng, bạn không thể xóa!");
+                return View(tbl_items);
+            }
+
+            string FilesPath = ConfigurationManager.AppSettings["ItemImages"];
+            string full_path = Server.MapPath(FilesPath).Replace("Item", "").Replace("Edit", "");
+            if (tbl_items.Images + "" != "")
+                FileUpload.DeleteFile(tbl_items.Images, full_path);
+
             db.tbl_Items.Remove(tbl_items);
             db.SaveChanges();
             return RedirectToAction("Index");

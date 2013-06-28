@@ -11,11 +11,13 @@ namespace laca.Models
 {
     using System;
     
+    [Flags]
     public enum SytemContent : int
     {
         About = 1,
         Contact = 2,
         DeliveryAndPayment = 3,
-        CustomerServices = 4
+        CustomerServices = 4,
+        Banner = 5
     }
 }
